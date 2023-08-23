@@ -8,8 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "eslint": "eslint src --ext .js,.astro",
-    "format": "prettier --write .",
+    "eslint": "eslint src --ext .js,.ts,.astro --fix",
+    "format": "prettier \"src/**/*.{js,ts,astro}\" --write",
     "lint-staged": "lint-staged",
     "prepare": "git config --local core.hooksPath .githooks"
   },
@@ -31,7 +31,7 @@
   },
   "lint-staged": {
     "*.{js,ts,cjs,mjs,astro}": [
-      "eslint",
+      "eslint --fix",
       "prettier --write"
     ]
   }
