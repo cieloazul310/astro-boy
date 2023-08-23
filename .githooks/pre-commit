@@ -1,2 +1,2 @@
 #!/bin/sh
-echo "it is hooks!"
+npm run lint-staged
