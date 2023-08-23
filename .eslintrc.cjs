@@ -1,12 +1,8 @@
 module.exports = {
-  extends: [
-    "airbnb-base",
-    "airbnb-typescript/base",
-    "prettier"
-  ],
+  extends: ["airbnb-base", "airbnb-typescript/base", "prettier"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: "./tsconfig.json"
+    project: "./tsconfig.json",
   },
   env: {
     node: true,
@@ -18,8 +14,8 @@ module.exports = {
       files: ["*.astro"],
       parser: "astro-eslint-parser",
       parserOptions: {
-        parser: '@typescript-eslint/parser',
-        extraFileExtensions: ['.astro'],
+        parser: "@typescript-eslint/parser",
+        extraFileExtensions: [".astro"],
       },
     },
   ],
