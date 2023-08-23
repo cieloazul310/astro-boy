@@ -1,0 +1,23 @@
+---
+import Layout from "../layout/index.astro";
+import Jumbotron from "../components/Jumbotron.astro";
+import Paper from "../components/Paper.astro";
+
+interface Props {
+  frontmatter: {
+    title: string | null;
+    date: string | null;
+  } | null;
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title="Post">
+  <Jumbotron>
+    <h1>{frontmatter?.title}</h1>
+  </Jumbotron>
+  <Paper>
+    <slot />
+  </Paper>
+</Layout>

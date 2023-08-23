@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/MarkdownPost.astro
 title: This is Astro
 date: 2023-08-23
 author: cieloazul310
