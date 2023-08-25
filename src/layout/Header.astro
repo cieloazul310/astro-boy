@@ -1,6 +1,4 @@
 ---
-import Hamburger from "../components/Hamburger.astro";
-
 interface Props {
   siteTitle: string;
 }
@@ -9,8 +7,7 @@ const { siteTitle } = Astro.props;
 ---
 
 <header>
-  <Hamburger />
-  <h1>{siteTitle}</h1>
+  <h1><a href="/" class="header-link">{siteTitle}</a></h1>
 </header>
 
 <style>
@@ -18,7 +15,7 @@ const { siteTitle } = Astro.props;
     position: sticky;
     top: 0;
     height: var(--header-height);
-    padding: 0px 8px;
+    padding: 0px 16px;
     display: flex;
     align-items: center;
     background-image: linear-gradient(
@@ -26,10 +23,21 @@ const { siteTitle } = Astro.props;
       rgb(var(--primary)),
       rgba(var(--secondary), 0.4)
     );
+    color: rgb(var(--text-white));
+    backdrop-filter: blur(2px);
   }
-  h1 {
+  header > h1 {
     font-size: 1.25rem;
     font-weight: bold;
     margin: auto;
+    flex-grow: 1;
+  }
+  .header-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .header-link:hover {
+    color: inherit;
+    text-decoration: underline;
   }
 </style>

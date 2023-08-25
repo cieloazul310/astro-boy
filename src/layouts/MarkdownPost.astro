@@ -1,7 +1,8 @@
 ---
 import Layout from "../layout/index.astro";
-import Jumbotron from "../components/Jumbotron.astro";
 import Paper from "../components/Paper.astro";
+
+const allPosts = await Astro.glob("../pages/posts/*.md");
 
 interface Props {
   frontmatter: {
@@ -14,10 +15,21 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title="Post">
-  <Jumbotron>
-    <h1>{frontmatter?.title}</h1>
-  </Jumbotron>
+  <h1 slot="jumbotron">{frontmatter?.title}</h1>
   <Paper>
     <slot />
   </Paper>
+  <Paper slot="sidebar">
+    <p>記事一覧</p>
+    <ul>
+      {
+        allPosts.map((post) => (
+          <li>
+            <a href={post.url}>{post.frontmatter.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </Paper>
 </Layout>
+<style></style>
