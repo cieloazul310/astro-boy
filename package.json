@@ -14,7 +14,8 @@
     "prepare": "git config --local core.hooksPath .githooks"
   },
   "dependencies": {
-    "astro": "^2.10.12"
+    "astro": "^2.10.12",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.4.1",
