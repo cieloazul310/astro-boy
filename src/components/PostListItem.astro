@@ -1,0 +1,48 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+  title?: string;
+  author?: string;
+  date?: string;
+}
+
+const { href, title, author, date } = Astro.props;
+---
+
+<li class="post-list-item">
+  <a class="post-list-item-link" href={href}>
+    <article class="post-list-item-article">
+      <h1>{title}</h1>
+      <div>
+        <span>{date}</span>
+        <span>{author}</span>
+      </div>
+    </article>
+  </a>
+</li>
+<style>
+  .post-list-item {
+    border: 1px;
+    border-color: var(--primary);
+    border-radius: 16px;
+    background: rgba(var(--primary), 0.12);
+    list-style-type: none;
+  }
+  .post-list-item:hover {
+    background: rgba(var(--primary), 0.2);
+  }
+  .post-list-item-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .post-list-item-article {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing);
+  }
+  .post-list-item-article h1 {
+    font-size: 1.2rem;
+    margin-top: 0;
+  }
+</style>

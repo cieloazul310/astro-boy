@@ -1,8 +1,11 @@
 ---
 import "normalize.css/normalize.css";
 import Header from "./Header.astro";
+import Sidebar from "./Sidebar/index.astro";
 import Footer from "./Footer.astro";
 import Jumbotron from "./Jumbotron.astro";
+import Fab from "./Fab.astro";
+import PaperLink from "../components/PaperLink.astro";
 
 interface Props {
   title?: string;
@@ -34,14 +37,19 @@ const siteTitle = "Astro Boy";
         <div class="wrapper">
           <div class="content">
             <slot />
+            <PaperLink href="/">Top</PaperLink>
           </div>
           <aside class="sidebar">
-            <slot name="sidebar" />
+            <Sidebar>
+              <slot slot="sidebar-top" name="sidebar-top" />
+              <slot slot="sidebar-bottom" name="sidebar-bottom" />
+            </Sidebar>
           </aside>
         </div>
       </article>
     </main>
     <Footer siteTitle={siteTitle} />
+    <Fab />
   </body>
 </html>
 <style is:global>
@@ -60,6 +68,9 @@ const siteTitle = "Astro Boy";
     --breakpoint-md: 960px;
     --breakpoint-lg: 1280px;
     --spacing: 16px;
+    --spacing-half: 8px;
+    --z-indexes-fab: 100;
+    --z-indexes-drawer: 200;
   }
   html {
     font-family: system-ui, sans-serif;

@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a">;
+
+const { href, ...attrs } = Astro.props;
+---
+
+<a class="paper-link" href={href} {...attrs}>
+  <slot />
+</a>
+<style>
+  .paper-link {
+    background-color: rgba(var(--primary), 0.12);
+    border-radius: 16px;
+    padding: 16px;
+    line-height: 1.6;
+    text-decoration: none;
+    color: rgb(var(--text-black));
+    font-weight: bold;
+    text-align: center;
+  }
+  .paper-link:hover {
+    background-color: rgba(var(--primary), 0.2);
+  }
+</style>
