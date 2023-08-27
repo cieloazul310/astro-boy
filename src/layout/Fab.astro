@@ -1,0 +1,27 @@
+---
+
+---
+
+<div class="fab-container">
+  <button class="fab"> B</button>
+</div>
+<style>
+  .fab-container {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: var(--z-indexes-fab);
+  }
+  .fab {
+    background: rgba(var(--secondary), 0.8);
+    border: none;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.25s linear;
+  }
+  .fab:hover {
+    background: rgba(var(--secondary), 1);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  }
+</style>

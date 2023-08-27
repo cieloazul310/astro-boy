@@ -1,0 +1,21 @@
+---
+import PaperLink from "../../components/PaperLink.astro";
+
+const menu = [
+  { name: "Top", path: "/" },
+  { name: "Posts", path: "/posts/" },
+];
+---
+
+<slot name="sidebar-top" />
+<nav class="menu">
+  {menu.map(({ name, path }) => <PaperLink href={path}>{name}</PaperLink>)}
+</nav>
+<slot name="sidebar-bottom" />
+<style>
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-half);
+  }
+</style>
