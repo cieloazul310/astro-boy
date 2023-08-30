@@ -1,22 +1,30 @@
 ---
 import Layout from "../../layout/index.astro";
 import PostListItem from "../../components/PostListItem.astro";
+import parseDate from "../../utils/parseDate";
+import type { MarkdownFrontmatter } from "../../types";
 
-const allPosts = await Astro.glob("./*.md");
+const allPosts = await Astro.glob<MarkdownFrontmatter>("./*.md");
 ---
 
 <Layout title="Posts">
   <h1 slot="jumbotron">Posts</h1>
   <ul class="post-list">
     {
-      allPosts.map((post) => (
-        <PostListItem
-          href={post.url}
-          title={post.frontmatter?.title}
-          author={post.frontmatter?.author}
-          date={post.frontmatter?.date}
-        />
-      ))
+      allPosts
+        .sort(
+          (a, b) =>
+            new Date(b.frontmatter?.date ?? 0).getTime() -
+            new Date(a.frontmatter?.date ?? 0).getTime(),
+        )
+        .map((post) => (
+          <PostListItem
+            href={post.url}
+            title={post.frontmatter?.title}
+            author={post.frontmatter?.author}
+            date={parseDate(post.frontmatter?.date)}
+          />
+        ))
     }
   </ul>
 </Layout>

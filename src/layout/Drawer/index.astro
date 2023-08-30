@@ -1,0 +1,46 @@
+---
+
+---
+
+<div class="drawer">
+  <div class="drawer-backdrop drawer-handler"></div>
+  <div class="drawer-container">
+    <slot />
+  </div>
+</div>
+<script>
+  import "../../scripts/drawer.ts";
+</script>
+<style>
+  .drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(var(--bg-dark), 0.8);
+    opacity: 0;
+    z-index: calc(var(--z-indexes-drawer) - 1);
+    width: 100%;
+    height: 100%;
+    display: none;
+    transition: opacity var(--duration) linear;
+  }
+  .open .drawer-backdrop {
+    display: block;
+    opacity: 1;
+  }
+  .drawer-container {
+    position: fixed;
+    bottom: -80vh;
+    left: 0;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    z-index: var(--z-indexes-drawer);
+    background: rgb(var(--bg-light));
+    width: 100%;
+    height: 80vh;
+    box-shadow: var(--shadow-hover);
+    transition: bottom var(--duration) linear;
+  }
+  .open .drawer-container {
+    bottom: 0;
+  }
+</style>

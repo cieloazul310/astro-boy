@@ -1,35 +1,51 @@
 ---
 import Layout from "../layout/index.astro";
 import Paper from "../components/Paper.astro";
+import parseDate from "../utils/parseDate";
+import type { MarkdownFrontmatter } from "../types";
 
-const allPosts = await Astro.glob("../pages/posts/*.md");
+const allPosts = await Astro.glob<MarkdownFrontmatter>("../pages/posts/*.md");
 
 interface Props {
-  frontmatter: {
-    title: string | null;
-    date: string | null;
-  } | null;
+  frontmatter?: MarkdownFrontmatter;
 }
 
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title="Post">
-  <h1 slot="jumbotron">{frontmatter?.title}</h1>
+<Layout title={frontmatter?.title ?? "Post"}>
+  <hgroup slot="jumbotron">
+    <h1>{frontmatter?.title}</h1>
+    <p>{parseDate(frontmatter?.date)}</p>
+  </hgroup>
   <Paper>
     <slot />
   </Paper>
   <Paper slot="sidebar-bottom">
     <p>記事一覧</p>
-    <ul>
+    <ul class="sidebar-post-list">
       {
-        allPosts.map((post) => (
-          <li>
-            <a href={post.url}>{post.frontmatter.title}</a>
-          </li>
-        ))
+        allPosts
+          .sort(
+            (a, b) =>
+              new Date(b.frontmatter?.date ?? 0).getTime() -
+              new Date(a.frontmatter?.date ?? 0).getTime(),
+          )
+          .map((post) => (
+            <li class="sidebar-post-list-item">
+              <a href={post.url}>{post.frontmatter.title}</a>
+            </li>
+          ))
       }
     </ul>
   </Paper>
 </Layout>
-<style></style>
+<style>
+  .sidebar-post-list {
+    margin: 0;
+    padding: 0;
+  }
+  .sidebar-post-list-item {
+    list-style-type: none;
+  }
+</style>

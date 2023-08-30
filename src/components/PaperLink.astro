@@ -11,8 +11,8 @@ const { href, ...attrs } = Astro.props;
 </a>
 <style>
   .paper-link {
-    background-color: rgba(var(--primary), 0.12);
-    border-radius: 16px;
+    background-color: rgba(var(--primary), var(--alpha));
+    border-radius: var(--border-radius);
     padding: 16px;
     line-height: 1.6;
     text-decoration: none;
@@ -21,6 +21,6 @@ const { href, ...attrs } = Astro.props;
     text-align: center;
   }
   .paper-link:hover {
-    background-color: rgba(var(--primary), 0.2);
+    background-color: rgba(var(--primary), var(--alpha-double));
   }
 </style>
