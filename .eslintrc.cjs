@@ -18,5 +18,11 @@ module.exports = {
         extraFileExtensions: [".astro"],
       },
     },
+    {
+      files: ["astro.config.mjs", "panda.config.ts"],
+      rules: {
+        "import/no-extraneous-dependencies": "off",
+      },
+    },
   ],
 };

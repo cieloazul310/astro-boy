@@ -1,26 +1,28 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { css } from "../../styled-system/css";
 
 type Props = HTMLAttributes<"a">;
 
 const { href, ...attrs } = Astro.props;
 ---
 
-<a class="paper-link" href={href} {...attrs}>
+<a
+  class={css({
+    p: [4, 8],
+    background: "blue.50",
+    rounded: "xl",
+    minHeight: "48px",
+    fontWeight: "bold",
+    textAlign: "center",
+    _hover: {
+      background: "blue.100",
+      textDecoration: "none",
+    },
+  })}
+  role="button"
+  href={href}
+  {...attrs}
+>
   <slot />
 </a>
-<style>
-  .paper-link {
-    background-color: rgba(var(--primary), var(--alpha));
-    border-radius: var(--border-radius);
-    padding: 16px;
-    line-height: 1.6;
-    text-decoration: none;
-    color: rgb(var(--text-black));
-    font-weight: bold;
-    text-align: center;
-  }
-  .paper-link:hover {
-    background-color: rgba(var(--primary), var(--alpha-double));
-  }
-</style>

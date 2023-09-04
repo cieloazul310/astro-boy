@@ -1,15 +1,13 @@
 ---
-
+import { css } from "../../styled-system/css";
 ---
 
-<div class="paper">
+<div
+  class={css({
+    background: "blue.50",
+    p: [4, 8],
+    rounded: "xl",
+  })}
+>
   <slot />
 </div>
-<style>
-  .paper {
-    background-color: rgba(var(--primary), var(--alpha));
-    border-radius: var(--border-radius);
-    padding: 16px;
-    line-height: 1.6;
-  }
-</style>

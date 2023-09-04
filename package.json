@@ -11,13 +11,15 @@
     "eslint": "eslint src --ext .js,.ts,.astro --fix",
     "format": "prettier \"src/**/*.{js,ts,astro}\" --write",
     "lint-staged": "lint-staged",
-    "prepare": "git config --local core.hooksPath .githooks"
+    "prepare": "git config --local core.hooksPath .githooks & panda codegen",
+    "css:dev": "panda -w"
   },
   "dependencies": {
-    "astro": "^2.10.12",
-    "normalize.css": "^8.0.1"
+    "astro": "^2.10.12"
   },
   "devDependencies": {
+    "@pandacss/astro": "^0.13.1",
+    "@pandacss/dev": "^0.13.1",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "eslint": "^8.47.0",
