@@ -1,34 +1,41 @@
 ---
+import { css } from "../../styled-system/css";
+import { gradientBox, container } from "../../styled-system/patterns";
 
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
 ---
 
-<div class="jumbotron">
-  <div class="jumbotron-inner">
-    <slot />
+<header
+  class={gradientBox({
+    p: [4, 8],
+    height: "480px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+  })}
+>
+  <div
+    class={container({
+      maxWidth: "contentMaxWidth",
+      display: "flex",
+      flexDirection: "column",
+    })}
+  >
+    <slot>
+      <h1
+        class={css({
+          fontSize: ["xl", "2xl", "4xl", "6xl"],
+        })}
+      >
+        {title}
+      </h1>
+      <p class={css({ fontSize: ["sm", "md"] })}>{description}</p>
+    </slot>
   </div>
-</div>
-<style>
-  .jumbotron {
-    height: 480px;
-    padding: 8px 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(
-      90deg,
-      rgb(var(--primary)),
-      rgba(var(--secondary), 0.4)
-    );
-    color: rgb(var(--text-white));
-  }
-  @media screen and (max-width: 480px) {
-    .jumbotron {
-      height: calc(50vh - var(--header-height));
-    }
-  }
-  .jumbotron-inner {
-    margin: 0 auto;
-    padding: 16px;
-    max-width: var(--content-max-width);
-  }
-</style>
+</header>

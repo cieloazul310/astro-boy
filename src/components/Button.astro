@@ -1,0 +1,19 @@
+---
+import { css } from "../../styled-system/css";
+import type { SystemStyleObject } from "../../styled-system/types";
+
+interface Props {
+  colorPalette: SystemStyleObject["colorPalette"];
+}
+const { colorPalette } = Astro.props;
+---
+
+<button
+  class={css({
+    colorPalette,
+    bg: { base: "colorPalette.600", _hover: "colorPalette.700" },
+    color: "white",
+  })}
+>
+  <slot />
+</button>

@@ -1,9 +1,35 @@
 ---
-
+import { css, cx } from "../../styled-system/css";
 ---
 
-<div class="fab-container">
-  <button class="fab drawer-handler">
+<div
+  class={css({
+    display: ["block", "block", "none"],
+    position: "fixed",
+    bottom: 4,
+    right: 4,
+    zIndex: "fab",
+  })}
+>
+  <button
+    class={cx(
+      css({
+        width: "56px",
+        height: "56px",
+        background: {
+          base: "primary.400",
+          _hover: "primary.500",
+          _dark: "primary.700",
+        },
+        border: "none",
+        rounded: "xl",
+        shadow: { base: "md", _hover: "lg" },
+        p: 8,
+        transition: "background .25s",
+      }),
+      "drawer-handler",
+    )}
+  >
     <div class="hamburger">
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
@@ -12,33 +38,6 @@
   </button>
 </div>
 <style>
-  .fab-container {
-    display: block;
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    z-index: var(--z-indexes-fab);
-  }
-  @media screen and (min-width: 480px) {
-    .fab-container {
-      display: none;
-    }
-  }
-  .fab {
-    background: rgba(var(--primary), 0.8);
-    border: none;
-    border-radius: var(--border-radius);
-    padding: 8px;
-    width: 56px;
-    height: 56px;
-    box-shadow: var(--shadow-default);
-    transition: all 0.25s linear;
-  }
-  .fab:hover {
-    background: rgba(var(--primary), 1);
-    box-shadow: var(--shadow-hover);
-  }
-
   .hamburger {
     display: flex;
     flex-direction: column;

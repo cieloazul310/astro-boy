@@ -1,5 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { css } from "../../styled-system/css";
+import { linkBox, linkOverlay } from "../../styled-system/patterns";
 
 interface Props extends HTMLAttributes<"a"> {
   title?: string;
@@ -10,39 +12,24 @@ interface Props extends HTMLAttributes<"a"> {
 const { href, title, author, date } = Astro.props;
 ---
 
-<li class="post-list-item">
-  <a class="post-list-item-link" href={href}>
-    <article class="post-list-item-article">
-      <h1>{title}</h1>
-      <div>
-        <span>{date}</span>
-        <span>{author}</span>
-      </div>
-    </article>
-  </a>
+<li
+  class={css({
+    p: 4,
+    borderWidth: "1px",
+    borderColor: { base: "primary.200", _dark: "primary.900" },
+    rounded: "xl",
+    listStyleType: "none",
+    background: { base: "bg", _hover: "primary.50" },
+    _dark: { background: { base: "primary.950", _hover: "primary.900" } },
+  })}
+>
+  <article class={linkBox({ display: "flex", flexDirection: "column", p: 2 })}>
+    <a class={linkOverlay()} href={href}>
+      <h1 class={css({ fontSize: "lg" })}>{title}</h1>
+    </a>
+    <div>
+      <span>{date}</span>
+      <span>{author}</span>
+    </div>
+  </article>
 </li>
-<style>
-  .post-list-item {
-    border: 1px;
-    border-color: var(--primary);
-    border-radius: var(--border-radius);
-    background: rgba(var(--primary), 0.12);
-    list-style-type: none;
-  }
-  .post-list-item:hover {
-    background: rgba(var(--primary), 0.2);
-  }
-  .post-list-item-link {
-    text-decoration: none;
-    color: inherit;
-  }
-  .post-list-item-article {
-    display: flex;
-    flex-direction: column;
-    padding: var(--spacing);
-  }
-  .post-list-item-article h1 {
-    font-size: 1.2rem;
-    margin-top: 0;
-  }
-</style>

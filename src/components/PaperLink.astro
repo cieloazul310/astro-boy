@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { css } from "../../styled-system/css";
+import { paper } from "../../styled-system/patterns";
 
 type Props = HTMLAttributes<"a">;
 
@@ -8,17 +8,14 @@ const { href, ...attrs } = Astro.props;
 ---
 
 <a
-  class={css({
-    p: [4, 8],
-    background: "blue.50",
-    rounded: "xl",
+  class={paper({
+    hover: true,
+    display: "inline-flex",
     minHeight: "48px",
     fontWeight: "bold",
-    textAlign: "center",
-    _hover: {
-      background: "blue.100",
-      textDecoration: "none",
-    },
+    justifyContent: "center",
+    alignItems: "center",
+    height: 10,
   })}
   role="button"
   href={href}

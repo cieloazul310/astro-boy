@@ -1,13 +1,7 @@
 ---
-import { css } from "../../styled-system/css";
+import { paper } from "../../styled-system/patterns";
 ---
 
-<div
-  class={css({
-    background: "blue.50",
-    p: [4, 8],
-    rounded: "xl",
-  })}
->
+<div class={paper()}>
   <slot />
 </div>

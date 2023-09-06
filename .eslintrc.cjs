@@ -24,5 +24,13 @@ module.exports = {
         "import/no-extraneous-dependencies": "off",
       },
     },
+    {
+      files: ["src/styles/**/*"],
+      rules: {
+        "import/no-extraneous-dependencies": "off",
+        "no-underscore-dangle": "warn",
+        "@typescript-eslint/naming-convention": "warn",
+      },
+    },
   ],
 };
