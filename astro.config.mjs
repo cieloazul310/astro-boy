@@ -7,7 +7,6 @@ import rehypeClassNamesOptions from './src/styles/rehypeClassNames';
 export default defineConfig({
   integrations: [pandacss()],
   markdown: {
-    syntaxHighlight: "prism",
     rehypePlugins: [[rehypeClassNames, rehypeClassNamesOptions]]
   },
 });
