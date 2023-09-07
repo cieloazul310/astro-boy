@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { css } from "../../styled-system/css";
-import { linkBox, linkOverlay } from "../../styled-system/patterns";
+import { linkBox, linkOverlay, hstack } from "../../styled-system/patterns";
 
 interface Props extends HTMLAttributes<"a"> {
   title?: string;
@@ -13,23 +13,23 @@ const { href, title, author, date } = Astro.props;
 ---
 
 <li
-  class={css({
-    p: 4,
+  class={linkBox({
+    p: [4, 8],
     borderWidth: "1px",
     borderColor: { base: "primary.200", _dark: "primary.900" },
     rounded: "xl",
     listStyleType: "none",
     background: { base: "bg", _hover: "primary.50" },
-    _dark: { background: { base: "primary.950", _hover: "primary.900" } },
+    _dark: { background: { base: "bg.dark", _hover: "primary.950" } },
   })}
 >
-  <article class={linkBox({ display: "flex", flexDirection: "column", p: 2 })}>
+  <article class={css({ display: "flex", flexDirection: "column" })}>
     <a class={linkOverlay()} href={href}>
       <h1 class={css({ fontSize: "lg" })}>{title}</h1>
     </a>
-    <div>
-      <span>{date}</span>
-      <span>{author}</span>
+    <div class={hstack({ gap: 2 })}>
+      <span><time datetime={date}>{date}</time></span>
+      <span>by {author}</span>
     </div>
   </article>
 </li>

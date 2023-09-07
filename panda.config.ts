@@ -1,5 +1,5 @@
 import { defineConfig } from "@pandacss/dev";
-import { gradientBox, paper, backgroundColorTransparentize, definePalette, bg, heading } from './src/styles';
+import { patterns, backgroundColorTransparentize, definePalette, bg, globalCss, textStyles } from './src/styles';
 
 export default defineConfig({
   // Whether to use css reset
@@ -15,24 +15,11 @@ export default defineConfig({
     light: "[data-color-mode=light] &",
     dark: "[data-color-mode=dark] &",
   },
-
-  globalCss: {
-    body: {
-      backgroundColor: "bg",
-      color: "black",
-      _dark: {
-        backgroundColor: "bg.dark",
-        color: "white",
-      },
-    },
-    ...heading,
-    p: {
-      lineHeight: 1.6,
-    },
-  },
+  globalCss,
   // Useful for theme customization
   theme: {
     extend: {
+      textStyles,
       tokens: {
         sizes: {
           headerHeight: { value: "56px" },
@@ -43,11 +30,12 @@ export default defineConfig({
           fab: { value: 100 },
           drawer: { value: 200 },
           drawerBackdrop: { value: 199 },
+          header: { value: 10 },
         },
       },
       semanticTokens: {
         fontWeights: {
-          heading: { value: "{fontWeights.bold}"}
+          heading: { value: "{fontWeights.bold}" },
         },
         colors: {
           bg,
@@ -57,10 +45,9 @@ export default defineConfig({
     },
   },
   patterns: {
+    /* @ts-ignore */
     extend: {
-      /* @ts-ignore */
-      paper,
-      gradientBox,
+      ...patterns,
     },
   },
 

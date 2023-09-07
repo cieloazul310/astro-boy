@@ -81,7 +81,7 @@ const siteTitle = "Astro Boy";
     const theme = (() => {
       if (typeof localStorage === "undefined") return "light";
 
-      const localStorageItem = localStorage.getItem("theme");
+      const localStorageItem = localStorage.getItem("astro-color-mode");
       if (
         localStorageItem &&
         (localStorageItem === "light" || localStorageItem === "dark")
@@ -96,26 +96,6 @@ const siteTitle = "Astro Boy";
 
     document.documentElement?.setAttribute("data-color-mode", theme);
 
-    window.localStorage.setItem("theme", theme);
+    window.localStorage.setItem("astro-color-mode", theme);
   </script>
 </html>
-<style is:global>
-  :root {
-    --duration: 0.25s;
-    --alpha: 0.12;
-    --alpha-half: 0.06;
-    --alpha-double: 0.24;
-  }
-  .sidebar {
-    flex-shrink: 0;
-    width: var(--sidebar-width);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing);
-  }
-  @media screen and (max-width: 480px) {
-    .sidebar {
-      display: none;
-    }
-  }
-</style>

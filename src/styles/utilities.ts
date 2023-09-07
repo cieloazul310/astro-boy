@@ -1,4 +1,4 @@
-/* eslint import/prefer-default-export: warn */
+/* eslint import/prefer-default-export: off */
 import { defineUtility } from "@pandacss/dev";
 
 /**

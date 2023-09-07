@@ -1,7 +1,14 @@
 ---
+import { cx } from "../../styled-system/css";
 import { paper } from "../../styled-system/patterns";
+
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
 ---
 
-<div class={paper()}>
+<div class={cx(paper(), className)}>
   <slot />
 </div>

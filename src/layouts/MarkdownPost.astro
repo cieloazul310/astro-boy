@@ -22,8 +22,8 @@ const { frontmatter } = Astro.props;
     <slot />
   </Paper>
   <Paper slot="sidebar-bottom">
-    <p>記事一覧</p>
-    <ul class="sidebar-post-list">
+    <h6>記事一覧</h6>
+    <ul>
       {
         allPosts
           .sort(
@@ -32,7 +32,7 @@ const { frontmatter } = Astro.props;
               new Date(a.frontmatter?.date ?? 0).getTime(),
           )
           .map((post) => (
-            <li class="sidebar-post-list-item">
+            <li>
               <a href={post.url}>{post.frontmatter.title}</a>
             </li>
           ))
@@ -40,12 +40,3 @@ const { frontmatter } = Astro.props;
     </ul>
   </Paper>
 </Layout>
-<style>
-  .sidebar-post-list {
-    margin: 0;
-    padding: 0;
-  }
-  .sidebar-post-list-item {
-    list-style-type: none;
-  }
-</style>

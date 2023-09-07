@@ -1,32 +1,42 @@
-/* eslint import/prefer-default-export: warn */
+import { defineGlobalStyles } from "@pandacss/dev";
 
-const headingStyle = {
-  fontWeight: "heading",
-  mb: 2,
+const body = {
+  backgroundColor: "bg",
+  color: "black",
+  _dark: {
+    backgroundColor: "bg.dark",
+    color: "white",
+  },
 };
 
-export const heading = {
+const headingStyle = {
+  textStyle: "heading",
+};
+
+const heading = {
   h1: {
-    fontSize: "4xl",
     ...headingStyle,
   },
   h2: {
-    fontSize: "2xl",
     ...headingStyle,
   },
   h3: {
-    fontSize: "xl",
     ...headingStyle,
   },
   h4: {
-    fontSize: "lg",
     ...headingStyle,
   },
   h5: {
-    fontSize: "lg",
     ...headingStyle,
   },
   h6: {
     ...headingStyle,
   },
 };
+
+const globalCss = defineGlobalStyles({
+  body,
+  ...heading,
+});
+
+export default globalCss;

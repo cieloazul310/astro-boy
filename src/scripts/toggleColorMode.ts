@@ -6,7 +6,7 @@ document.querySelectorAll(".toggle-color-mode")?.forEach((element) => {
       colorMode === "dark" ? "light" : "dark",
     );
     window.localStorage.setItem(
-      "theme",
+      "astro-color-mode",
       colorMode === "dark" ? "light" : "dark",
     );
   });

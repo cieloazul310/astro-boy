@@ -30,5 +30,5 @@ export function definePalette(
 
 export const bg = {
   DEFAULT: { value: "white" },
-  dark: { value: "{colors.slate.900}" },
+  dark: { value: "{colors.slate.950}" },
 };

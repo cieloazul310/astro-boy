@@ -1,5 +1,6 @@
 ---
 import { css, cx } from "../../styled-system/css";
+import { square } from "../../styled-system/patterns";
 ---
 
 <div
@@ -13,19 +14,16 @@ import { css, cx } from "../../styled-system/css";
 >
   <button
     class={cx(
-      css({
-        width: "56px",
-        height: "56px",
-        background: {
-          base: "primary.400",
-          _hover: "primary.500",
-          _dark: "primary.700",
-        },
+      square({
+        size: 12,
+        bg: { base: "primary.600", _hover: "primary.700" },
+        color: "white",
         border: "none",
         rounded: "xl",
         shadow: { base: "md", _hover: "lg" },
         p: 8,
         transition: "background .25s",
+        _dark: { bg: { base: "primary.700", _hover: "primary.600" } },
       }),
       "drawer-handler",
     )}
