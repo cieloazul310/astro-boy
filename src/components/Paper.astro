@@ -1,15 +1,14 @@
 ---
+import { cx } from "../../styled-system/css";
+import { paper } from "../../styled-system/patterns";
 
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
 ---
 
-<div class="paper">
+<div class={cx(paper(), className)}>
   <slot />
 </div>
-<style>
-  .paper {
-    background-color: rgba(var(--primary), 0.12);
-    border-radius: 16px;
-    padding: 16px;
-    line-height: 1.6;
-  }
-</style>

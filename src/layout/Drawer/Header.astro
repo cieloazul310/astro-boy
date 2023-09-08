@@ -1,0 +1,16 @@
+---
+import { css } from "../../../styled-system/css";
+import { container } from "../../../styled-system/patterns";
+
+interface Props {
+  siteTitle?: string;
+}
+
+const { siteTitle } = Astro.props;
+---
+
+<header class={css({ height: 12 })}>
+  <div class={container({})}>
+    <h1>{siteTitle ?? "Drawer"}</h1>
+  </div>
+</header>

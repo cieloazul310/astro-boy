@@ -1,27 +1,51 @@
 ---
-
+import { css, cx } from "../../styled-system/css";
+import { square } from "../../styled-system/patterns";
 ---
 
-<div class="fab-container">
-  <button class="fab"> B</button>
+<div
+  class={css({
+    display: ["block", "block", "none"],
+    position: "fixed",
+    bottom: 4,
+    right: 4,
+    zIndex: "fab",
+  })}
+>
+  <button
+    class={cx(
+      square({
+        size: 12,
+        bg: { base: "primary.600", _hover: "primary.700" },
+        color: "white",
+        border: "none",
+        rounded: "xl",
+        shadow: { base: "md", _hover: "lg" },
+        p: 8,
+        transition: "background .25s",
+        _dark: { bg: { base: "primary.700", _hover: "primary.600" } },
+      }),
+      "drawer-handler",
+    )}
+  >
+    <div class="hamburger">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </div>
+  </button>
 </div>
 <style>
-  .fab-container {
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    z-index: var(--z-indexes-fab);
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
   }
-  .fab {
-    background: rgba(var(--secondary), 0.8);
-    border: none;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-    transition: all 0.25s linear;
-  }
-  .fab:hover {
-    background: rgba(var(--secondary), 1);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  .hamburger .hamburger-line {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: rgb(var(--text-white));
   }
 </style>
