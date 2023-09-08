@@ -13,11 +13,10 @@ interface Props {
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter?.title ?? "Post"}>
-  <hgroup slot="jumbotron">
-    <h1>{frontmatter?.title}</h1>
-    <p>{parseDate(frontmatter?.date)}</p>
-  </hgroup>
+<Layout
+  title={frontmatter?.title ?? "Post"}
+  description={parseDate(frontmatter?.date)}
+>
   <Paper>
     <slot />
   </Paper>

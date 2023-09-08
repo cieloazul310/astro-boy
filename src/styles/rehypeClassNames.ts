@@ -20,17 +20,17 @@ const rehypeClassNamesOptions = {
   }),
   h2: css({
     ...common,
-    fontSize: ["xl", "2xl", "4xl"],
+    fontSize: ["xl", "2xl", "3xl"],
     mb: 6,
   }),
   h3: css({
     ...common,
-    fontSize: ["lg", "lg", "xl"],
+    fontSize: ["lg", "lg", "2xl"],
     mb: 4,
   }),
   h4: css({
     ...common,
-    fontSize: ["md", "lg"],
+    fontSize: ["md", "lg", "xl"],
     mb: 4,
   }),
   h5: css({
@@ -42,6 +42,7 @@ const rehypeClassNamesOptions = {
     ...common,
     fontSize: ["sm", "md"],
     my: 2,
+    overflowWrap: "break-word",
   }),
   a: css({
     color: { base: "primary.600", _hover: "primary.500" },
@@ -78,14 +79,20 @@ const rehypeClassNamesOptions = {
     my: 8,
   }),
   ul: css({
+    ...common,
     my: 4,
     listStyleType: "disc",
     paddingInlineStart: 4,
   }),
   ol: css({
+    ...common,
     my: 4,
     listStyleType: "decimal",
     paddingInlineStart: 4,
+  }),
+  img: css({
+    my: 4,
+    maxWidth: "100%",
   }),
 };
 

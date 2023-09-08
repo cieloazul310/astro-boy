@@ -37,6 +37,11 @@ const heading = {
 const globalCss = defineGlobalStyles({
   body,
   ...heading,
+  ".astro-code": {
+    p: 4,
+    my: 4,
+    rounded: "xl",
+  },
 });
 
 export default globalCss;
