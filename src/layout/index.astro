@@ -1,11 +1,11 @@
 ---
 import { container, vstack } from "../../styled-system/patterns";
 import Header from "./Header.astro";
-import Sidebar from "./Sidebar/index.astro";
 import Drawer from "./Drawer/index.astro";
 import Footer from "./Footer.astro";
 import Jumbotron from "./Jumbotron.astro";
 import Fab from "./Fab.astro";
+import Menu from "./Menu.astro";
 import PaperLink from "../components/PaperLink.astro";
 
 interface Props {
@@ -64,17 +64,18 @@ const siteTitle = "Astro Boy";
               alignItems: "stretch",
             })}
           >
-            <Sidebar>
-              <slot slot="sidebar-top" name="sidebar-top" />
-              <slot slot="sidebar-bottom" name="sidebar-bottom" />
-            </Sidebar>
+            <slot name="sidebar-top" />
+            <Menu />
+            <slot name="sidebar-bottom" />
           </div>
         </div>
       </article>
     </main>
     <Footer siteTitle={siteTitle} />
     <Fab />
-    <Drawer />
+    <Drawer siteTitle={siteTitle}>
+      <Menu />
+    </Drawer>
   </body>
   <script>
     import "../scripts/toggleColorMode.ts";

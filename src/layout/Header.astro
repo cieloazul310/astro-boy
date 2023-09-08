@@ -35,9 +35,11 @@ const { siteTitle } = Astro.props;
     >
       <h1 class={css({ fontSize: "xl" })}>{siteTitle}</h1>
     </a>
-    <div class={css({ flexGrow: 1 })}></div>
-    <Button className="toggle-color-mode" size="md" colorPalette="primary">
-      color
-    </Button>
+    <div class={css({ flexGrow: 1, display: ["none", "none", "block"] })}></div>
+    <div class={css({ display: ["none", "none", "block"] })}>
+      <Button className="toggle-color-mode" size="md" colorPalette="primary">
+        color
+      </Button>
+    </div>
   </slot>
 </header>

@@ -3,7 +3,6 @@ import { paper, divider } from "../../styled-system/patterns";
 import type { SystemStyleObject } from "../../styled-system/types";
 
 const common: SystemStyleObject = {
-  mt: 8,
   _first: {
     mt: 0,
   },
@@ -16,38 +15,43 @@ const rehypeClassNamesOptions = {
   h1: css({
     ...common,
     fontSize: ["xl", "2xl", "4xl"],
+    mt: 8,
     mb: 6,
   }),
   h2: css({
     ...common,
     fontSize: ["xl", "2xl", "3xl"],
-    mb: 6,
+    mt: 8,
+    mb: 4,
   }),
   h3: css({
     ...common,
     fontSize: ["lg", "lg", "2xl"],
+    mt: 8,
     mb: 4,
   }),
   h4: css({
     ...common,
     fontSize: ["md", "lg", "xl"],
+    mt: 8,
     mb: 4,
   }),
   h5: css({
     ...common,
     fontSize: ["md", "md", "lg"],
+    mt: 4,
     mb: 2,
   }),
   p: css({
     ...common,
-    fontSize: ["sm", "md"],
+    fontSize: "md",
     my: 2,
     overflowWrap: "break-word",
   }),
   a: css({
-    color: { base: "primary.600", _hover: "primary.500" },
+    color: { base: "primary.700", _hover: "primary.500" },
     textDecoration: { _hover: "underline" },
-    _dark: { color: { base: "primary.400", _hover: "primary.300" } },
+    _dark: { color: { base: "primary.300", _hover: "primary.200" } },
   }),
   blockquote: paper({
     my: 4,
@@ -93,6 +97,14 @@ const rehypeClassNamesOptions = {
   img: css({
     my: 4,
     maxWidth: "100%",
+  }),
+  code: css({
+    "p &": {
+      color: { base: "secondary.800", _dark: "secondary.400" },
+      bgct: "secondary.600/92",
+      px: 1,
+      rounded: "md",
+    },
   }),
 };
 

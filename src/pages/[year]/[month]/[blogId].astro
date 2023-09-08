@@ -1,0 +1,31 @@
+---
+import Layout from "../../../layout/index.astro";
+import Paper from "../../../components/Paper.astro";
+import { getBlogs, getBlogDetail } from "../../../scripts/microcms";
+
+// 詳細記事ページの全パスを取得
+export async function getStaticPaths() {
+  const response = await getBlogs({ fields: ["id", "publishedAt"] });
+  return response.contents.map((content) => {
+    const { id, publishedAt } = content;
+    const pubDate = new Date(publishedAt);
+    const year = pubDate.getFullYear().toString();
+    const month = (pubDate.getMonth() + 1).toString().padStart(2, "0");
+
+    return {
+      params: {
+        year,
+        month,
+        blogId: id,
+      },
+    };
+  });
+}
+
+const { blogId } = Astro.params;
+const blog = await getBlogDetail(blogId as string);
+---
+
+<Layout title={blog.title}>
+  <Paper set:html={blog.content} />
+</Layout>

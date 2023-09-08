@@ -17,6 +17,9 @@ module.exports = {
         parser: "@typescript-eslint/parser",
         extraFileExtensions: [".astro"],
       },
+      rules: {
+        "import/prefer-default-export": "off",
+      },
     },
     {
       files: ["astro.config.mjs", "panda.config.ts"],

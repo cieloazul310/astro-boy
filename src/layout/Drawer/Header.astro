@@ -1,6 +1,6 @@
 ---
 import { css } from "../../../styled-system/css";
-import { container } from "../../../styled-system/patterns";
+import { flex } from "../../../styled-system/patterns";
 
 interface Props {
   siteTitle?: string;
@@ -9,8 +9,16 @@ interface Props {
 const { siteTitle } = Astro.props;
 ---
 
-<header class={css({ height: 12 })}>
-  <div class={container({})}>
-    <h1>{siteTitle ?? "Drawer"}</h1>
-  </div>
+<header
+  class={flex({
+    height: 14,
+    flexShrink: 0,
+    direction: "row",
+    alignItems: "center",
+    px: 4,
+  })}
+>
+  <a href="/">
+    <h1 class={css({ fontSize: "lg" })}>{siteTitle ?? "Drawer"}</h1>
+  </a>
 </header>

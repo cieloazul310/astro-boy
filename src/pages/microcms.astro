@@ -1,0 +1,21 @@
+---
+import Layout from "../layout/index.astro";
+import Paper from "../components/Paper.astro";
+import { getBlogs } from "../scripts/microcms";
+
+const response = await getBlogs({ fields: ["id", "title"] });
+---
+
+<Layout title="My first blog with Astro">
+  <Paper>
+    <ul>
+      {
+        response.contents.map((content) => (
+          <li>
+            <a href={content.blogsId}>{content.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </Paper>
+</Layout>
