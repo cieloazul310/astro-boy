@@ -2,6 +2,7 @@
 import { css } from "../../styled-system/css";
 import { gradientBox } from "../../styled-system/patterns";
 import Button from "../components/Button.astro";
+import Link from "../components/Link.astro";
 
 interface Props {
   siteTitle: string;
@@ -23,9 +24,9 @@ const { siteTitle } = Astro.props;
   })}
 >
   <slot>
-    <a
+    <Link
       href="/"
-      class={css({
+      className={css({
         color: "white",
         _hover: {
           color: "primary.200",
@@ -34,7 +35,7 @@ const { siteTitle } = Astro.props;
       })}
     >
       <h1 class={css({ fontSize: "xl" })}>{siteTitle}</h1>
-    </a>
+    </Link>
     <div class={css({ flexGrow: 1, display: ["none", "none", "block"] })}></div>
     <div class={css({ display: ["none", "none", "block"] })}>
       <Button className="toggle-color-mode" size="md" colorPalette="primary">

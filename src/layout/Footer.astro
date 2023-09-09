@@ -1,5 +1,6 @@
 ---
 import { css } from "../../styled-system/css";
+import Link from "../components/Link.astro";
 
 interface Props {
   siteTitle: string;
@@ -22,9 +23,9 @@ const year = new Date().getFullYear().toString();
   })}
 >
   <slot>
-    <a href="/">
+    <Link href="/">
       <h6 class={css({ fontSize: "md" })}>{siteTitle}</h6>
-    </a>
+    </Link>
     <p>© {year} {siteTitle} All rights reserved.</p>
   </slot>
 </footer>
