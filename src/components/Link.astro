@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import useLink from "../utils/useLink";
+
+interface Props extends HTMLAttributes<"a"> {
+  className?: string;
+}
+
+const { href, className, ...props } = Astro.props;
+const link = useLink(href);
+---
+
+<a class={className} {...link} {...props}>
+  <slot />
+</a>

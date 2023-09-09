@@ -1,6 +1,7 @@
 ---
 import { hstack, flex } from "../../../styled-system/patterns";
 import Button from "../../components/Button.astro";
+import Link from "../../components/Link.astro";
 ---
 
 <footer
@@ -15,9 +16,9 @@ import Button from "../../components/Button.astro";
 >
   <Button colorPalette="primary" className="toggle-color-mode">Color</Button>
   <div class={hstack({ gap: 2 })}>
-    <a href="/">
+    <Link href="/">
       <Button colorPalette="primary">Top</Button>
-    </a>
+    </Link>
     <Button className="drawer-handler" colorPalette="slate">Close</Button>
   </div>
 </footer>

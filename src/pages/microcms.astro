@@ -9,7 +9,7 @@ import { vstack } from "../../styled-system/patterns";
 const response = await getBlogs({ fields: ["id", "title", "publishedAt"] });
 ---
 
-<Layout title="MicroCMS Posts">
+<Layout title="microCMS Posts">
   <ul class={vstack({ m: 0, p: 0, gap: 2, alignItems: "stretch" })}>
     {
       response.contents

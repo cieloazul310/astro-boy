@@ -1,10 +1,12 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { paper } from "../../styled-system/patterns";
+import useLink from "../utils/useLink";
 
 type Props = HTMLAttributes<"a">;
 
 const { href, ...attrs } = Astro.props;
+const link = useLink(href);
 ---
 
 <a
@@ -18,7 +20,7 @@ const { href, ...attrs } = Astro.props;
     height: 10,
   })}
   role="button"
-  href={href}
+  {...link}
   {...attrs}
 >
   <slot />

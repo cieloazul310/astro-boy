@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import Link from "./Link.astro";
 import { css } from "../../styled-system/css";
 import { linkBox, linkOverlay, hstack } from "../../styled-system/patterns";
 
@@ -24,9 +25,9 @@ const { href, title, author, date } = Astro.props;
   })}
 >
   <article class={css({ display: "flex", flexDirection: "column" })}>
-    <a class={linkOverlay()} href={href}>
+    <Link className={linkOverlay()} href={href}>
       <h1 class={css({ fontSize: "lg" })}>{title}</h1>
-    </a>
+    </Link>
     <div class={hstack({ gap: 2 })}>
       <span><time datetime={date}>{date}</time></span>
       <span>by {author}</span>
