@@ -98,6 +98,11 @@ const rehypeClassNamesOptions = {
     my: 4,
     maxWidth: "100%",
   }),
+  pre: paper({
+    my: 4,
+    overflowX: "auto",
+    maxWidth: "100%",
+  }),
   code: css({
     "p &": {
       color: { base: "secondary.800", _dark: "secondary.400" },
