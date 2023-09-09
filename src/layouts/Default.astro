@@ -1,0 +1,19 @@
+---
+import Layout from "../layout/index.astro";
+import Paper from "../components/Paper.astro";
+
+interface Props {
+  frontmatter?: {
+    title?: string;
+    description?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter?.title} description={frontmatter?.description}>
+  <Paper>
+    <slot />
+  </Paper>
+</Layout>

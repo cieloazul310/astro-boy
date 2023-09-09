@@ -1,6 +1,7 @@
 ---
 import Layout from "../layout/index.astro";
 import Paper from "../components/Paper.astro";
+import PaperLink from "../components/PaperLink.astro";
 import parseDate from "../utils/parseDate";
 import type { MarkdownFrontmatter } from "../types";
 
@@ -38,4 +39,5 @@ const { frontmatter } = Astro.props;
       }
     </ul>
   </Paper>
+  <PaperLink href="/posts/">Markdown Posts Top</PaperLink>
 </Layout>

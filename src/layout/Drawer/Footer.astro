@@ -1,0 +1,23 @@
+---
+import { hstack, flex } from "../../../styled-system/patterns";
+import Button from "../../components/Button.astro";
+---
+
+<footer
+  class={flex({
+    height: 14,
+    flexShrink: 0,
+    direction: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    px: 4,
+  })}
+>
+  <Button colorPalette="primary" className="toggle-color-mode">Color</Button>
+  <div class={hstack({ gap: 2 })}>
+    <a href="/">
+      <Button colorPalette="primary">Top</Button>
+    </a>
+    <Button className="drawer-handler" colorPalette="slate">Close</Button>
+  </div>
+</footer>
