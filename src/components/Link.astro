@@ -4,11 +4,11 @@ import useLink from "../utils/useLink";
 
 interface Props extends HTMLAttributes<"a"> {
   className?: string;
-  pathPrefix?: boolean;
+  disablePrefix?: boolean;
 }
 
-const { href, className, pathPrefix, ...props } = Astro.props;
-const link = useLink(href, { prefix: pathPrefix });
+const { href, className, disablePrefix, ...props } = Astro.props;
+const link = useLink(href, { disablePrefix });
 ---
 
 <a class={className} {...link} {...props}>

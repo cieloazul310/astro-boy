@@ -4,11 +4,11 @@ import { paper } from "../../styled-system/patterns";
 import useLink from "../utils/useLink";
 
 interface Props extends HTMLAttributes<"a"> {
-  pathPrefix?: boolean;
+  disablePrefix?: boolean;
 }
 
-const { href, pathPrefix, ...attrs } = Astro.props;
-const link = useLink(href, { prefix: pathPrefix });
+const { href, disablePrefix, ...attrs } = Astro.props;
+const link = useLink(href, { disablePrefix });
 ---
 
 <a
