@@ -1,6 +1,8 @@
 import { createClient, type MicroCMSQueries } from "microcms-js-sdk";
-import "dotenv/config";
+import * as dotenv from "dotenv";
 import type { MicrocmsBlogs } from "../types";
+
+dotenv.config();
 
 const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
 const apiKey = process.env.MICROCMS_API_KEY;
