@@ -1,4 +1,7 @@
-function useLink(href: string | URL | undefined | null): {
+function useLink(
+  href: string | URL | undefined | null,
+  options: { disablePrefix?: boolean } = { disablePrefix: false },
+): {
   href: string | URL | null;
   target?: "_blank";
   rel?: "noreferrer noopener";
@@ -11,6 +14,7 @@ function useLink(href: string | URL | undefined | null): {
   if (!internal) return { href, target: "_blank", rel: "noreferrer noopener" };
 
   if (baseUrl === "/") return { href };
+  if (options?.disablePrefix) return { href };
 
   return { href: `${baseUrl}${href}` };
 }

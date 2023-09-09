@@ -3,10 +3,12 @@ import type { HTMLAttributes } from "astro/types";
 import { paper } from "../../styled-system/patterns";
 import useLink from "../utils/useLink";
 
-type Props = HTMLAttributes<"a">;
+interface Props extends HTMLAttributes<"a"> {
+  disablePrefix?: boolean;
+}
 
-const { href, ...attrs } = Astro.props;
-const link = useLink(href);
+const { href, disablePrefix, ...attrs } = Astro.props;
+const link = useLink(href, { disablePrefix });
 ---
 
 <a

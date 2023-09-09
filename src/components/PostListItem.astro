@@ -8,9 +8,10 @@ interface Props extends HTMLAttributes<"a"> {
   title?: string;
   author?: string;
   date?: string;
+  disablePrefix?: boolean;
 }
 
-const { href, title, author, date } = Astro.props;
+const { href, title, author, date, disablePrefix } = Astro.props;
 ---
 
 <li
@@ -25,7 +26,7 @@ const { href, title, author, date } = Astro.props;
   })}
 >
   <article class={css({ display: "flex", flexDirection: "column" })}>
-    <Link className={linkOverlay()} href={href}>
+    <Link className={linkOverlay()} href={href} disablePrefix={disablePrefix}>
       <h1 class={css({ fontSize: "lg" })}>{title}</h1>
     </Link>
     <div class={hstack({ gap: 2 })}>
