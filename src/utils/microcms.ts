@@ -22,7 +22,10 @@ export type BlogResponse = {
 
 // APIの呼び出し
 export const getBlogs = async (queries?: MicroCMSQueries) => {
-  if (!client) throw new Error();
+  if (!client)
+    throw new Error(
+      "There is no client object. Please set MICROCMS_SERVICE_DOMAIN and MICROCMS_API_KEY.",
+    );
   const get = await client.get<BlogResponse>({ endpoint: "blogs", queries });
   return get;
 };
@@ -31,7 +34,10 @@ export const getBlogDetail = async (
   contentId: string,
   queries?: MicroCMSQueries,
 ) => {
-  if (!client) throw new Error();
+  if (!client)
+    throw new Error(
+      "There is no client object. Please set MICROCMS_SERVICE_DOMAIN and MICROCMS_API_KEY.",
+    );
   const get = await client.getListDetail<MicrocmsBlogs>({
     endpoint: "blogs",
     contentId,
