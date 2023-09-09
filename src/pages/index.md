@@ -4,7 +4,7 @@ title: Astro Boy
 author: cieloazul310
 ---
 
-このページはAstroとPanda CSSによって作成されています。
+このページはAstro, Panda CSS, そしてmicroCMSによって作成されています。
 
 ## Astro
 
@@ -14,5 +14,10 @@ author: cieloazul310
 
 [Panda CSS]はCSS-in-JSの新たなフレームワークです。
 
+## microCMS
+
+[microCMS]は日本製のヘッドレスCMSです。
+
 [Astro]: https://astro.build/
 [Panda CSS]: https://panda-css.com/
+[microCMS]: https://microcms.io/

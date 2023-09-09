@@ -106,6 +106,9 @@ const rehypeClassNamesOptions = {
       rounded: "md",
     },
   }),
+  iframe: css({
+    maxWidth: "100%",
+  }),
 };
 
 export default rehypeClassNamesOptions;

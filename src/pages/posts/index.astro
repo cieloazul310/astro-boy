@@ -8,8 +8,7 @@ import type { MarkdownFrontmatter } from "../../types";
 const allPosts = await Astro.glob<MarkdownFrontmatter>("./*.md");
 ---
 
-<Layout title="Posts">
-  <h1 slot="jumbotron">Posts</h1>
+<Layout title="Markdown Posts">
   <ul class={vstack({ m: 0, p: 0, gap: 2, alignItems: "stretch" })}>
     {
       allPosts
