@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "panda": "panda",
     "eslint": "eslint src --ext .js,.ts,.astro --fix",
     "format": "prettier \"src/**/*.{js,ts,astro}\" --write",
     "lint-staged": "lint-staged",
