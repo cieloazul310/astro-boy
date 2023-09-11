@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon";
 import type { HTMLAttributes } from "astro/types";
 import { css, cva, cx, type RecipeVariantProps } from "../../styled-system/css";
 import type { PropertyTypes } from "../../styled-system/types/prop-type";
@@ -7,10 +8,14 @@ const buttonStyle = cva({
   base: {
     rounded: "md",
     display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     shadow: "sm",
+    width: "fit-content",
     py: 2,
     px: 3,
     cursor: "pointer",
+    gap: 1,
   },
   variants: {
     visual: {
@@ -21,19 +26,27 @@ const buttonStyle = cva({
       },
       outline: {
         borderWidth: "1px",
-        borderColor: { base: "colorPalette.700", _dark: "colorPalette.100" },
-        color: { base: "colorPalette.700", _dark: "colorPalette.100" },
+        borderColor: { base: "colorPalette.700", _dark: "colorPalette.200" },
+        color: { base: "colorPalette.700", _dark: "colorPalette.200" },
+        _hover: {
+          color: { base: "colorPalette.500", _dark: "colorPalette.50" },
+        },
       },
     },
     size: {
-      sm: { fontSize: "sm" },
+      sm: { fontSize: "xs" },
       md: { fontSize: "md" },
-      lg: { fontSize: "lg" },
+      lg: { fontSize: "xl" },
+      xl: { fontSize: "4xl" },
+    },
+    iconPlace: {
+      start: { flexDirection: "row", pr: 4 },
+      end: { flexDirection: "row-reverse", pl: 4 },
     },
   },
   defaultVariants: {
     visual: "solid",
-    size: "sm",
+    size: "md",
   },
 });
 export type ButtonVariants = RecipeVariantProps<typeof buttonStyle>;
@@ -42,19 +55,31 @@ type Props = ButtonVariants &
   HTMLAttributes<"button"> & {
     className?: string;
     colorPalette?: PropertyTypes["colorPalette"];
+    icon?: string;
   };
 const {
   visual,
   size,
+  iconPlace,
   className,
+  icon,
   colorPalette = "neutral",
   ...buttonProps
 } = Astro.props;
 ---
 
 <button
-  class={cx(css({ colorPalette }), buttonStyle({ visual, size }), className)}
+  class={cx(
+    css({ colorPalette }),
+    buttonStyle({ visual, size, iconPlace }),
+    className,
+  )}
   {...buttonProps}
 >
+  {
+    icon ? (
+      <Icon name={icon} class={css({ width: "1.2em", height: "1.2em" })} />
+    ) : null
+  }
   <slot />
 </button>

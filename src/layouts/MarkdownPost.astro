@@ -34,7 +34,9 @@ const { frontmatter } = Astro.props;
           )
           .map((post) => (
             <li>
-              <Link href={post.url}>{post.frontmatter.title}</Link>
+              <Link href={post.url} disablePrefix>
+                {post.frontmatter.title}
+              </Link>
             </li>
           ))
       }

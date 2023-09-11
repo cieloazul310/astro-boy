@@ -1,5 +1,12 @@
 import { defineConfig } from "@pandacss/dev";
-import { patterns, backgroundColorTransparentize, definePalette, bg, globalCss, textStyles } from './src/styles';
+import {
+  patterns,
+  backgroundColorTransparentize,
+  definePalette,
+  bg,
+  globalCss,
+  textStyles,
+} from "./src/styles";
 
 export default defineConfig({
   // Whether to use css reset

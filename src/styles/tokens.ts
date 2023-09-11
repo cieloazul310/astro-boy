@@ -2,7 +2,7 @@
 // import { defineSemanticTokens } from "@pandacss/dev";
 import type { PropertyTypes } from "../../styled-system/types/prop-type";
 
-const shadow = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
 
 export function definePalette(
   props: Record<string, PropertyTypes["colorPalette"]>,
@@ -14,7 +14,7 @@ export function definePalette(
   }>(
     (accum, [key, color]) => ({
       ...accum,
-      [key]: shadow.reduce<{
+      [key]: shades.reduce<{
         [key: string]: { value: string };
       }>(
         (previousValue, curr) => ({

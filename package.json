@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "panda": "panda",
     "eslint": "eslint src --ext .js,.ts,.astro --fix",
     "format": "prettier \"src/**/*.{js,ts,astro}\" --write",
     "lint-staged": "lint-staged",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "astro": "^3.0.8",
+    "astro-icon": "^0.8.1",
     "microcms-js-sdk": "^2.5.0",
     "rehype": "^13.0.1",
     "rehype-class-names": "^1.0.14"
