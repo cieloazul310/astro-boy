@@ -1,0 +1,81 @@
+---
+import Layout from "../layout/index.astro";
+import Paper from "../components/Paper.astro";
+import PaperLink from "../components/PaperLink.astro";
+import Button from "../components/Button.astro";
+import { vstack } from "../../styled-system/patterns";
+import rehypeClassNamesOptions from "../styles/rehypeClassNames";
+
+const viewerStyle = vstack({
+  bg: { base: "bg", _dark: "bg.dark" },
+  shadow: "inner",
+  gap: 4,
+  p: 4,
+  alignItems: "stretch",
+});
+---
+
+<Layout title="Components">
+  <Paper>
+    <h2 class={rehypeClassNamesOptions.h2}>Paper</h2>
+    <div class={viewerStyle}>
+      <Paper>
+        <p>Paper</p>
+      </Paper>
+      <Paper>
+        <Paper><p>Nested</p></Paper>
+      </Paper>
+    </div>
+  </Paper>
+  <Paper>
+    <h2 class={rehypeClassNamesOptions.h2}>PaperLink</h2>
+    <div class={viewerStyle}>
+      <PaperLink href="/components/">PaperLink</PaperLink>
+    </div>
+  </Paper>
+  <Paper>
+    <h2 class={rehypeClassNamesOptions.h2}>Button</h2>
+    <div class={viewerStyle}>
+      <div class={vstack({ gap: 2, alignItems: "start" })}>
+        <h3 class={rehypeClassNamesOptions.h3}>Button</h3>
+        <Button size="sm" colorPalette="primary">Button sm</Button>
+        <Button size="md" colorPalette="secondary">Button md</Button>
+        <Button size="lg">Button lg</Button>
+        <Button size="xl" colorPalette="primary">Button xl</Button>
+      </div>
+      <div class={vstack({ gap: 2, alignItems: "start" })}>
+        <h3 class={rehypeClassNamesOptions.h3}>Outline</h3>
+        <Button size="sm" colorPalette="primary" visual="outline">
+          Button sm
+        </Button>
+        <Button size="md" colorPalette="secondary" visual="outline">
+          Button md
+        </Button>
+        <Button size="lg" visual="outline">Button lg</Button>
+        <Button size="xl" colorPalette="primary" visual="outline">
+          Button xl
+        </Button>
+      </div>
+      <div class={vstack({ gap: 2, alignItems: "start" })}>
+        <h3 class={rehypeClassNamesOptions.h3}>With Icon</h3>
+        <Button size="sm" colorPalette="primary" icon="mdi:plus-circle">
+          Button sm
+        </Button>
+        <Button
+          size="md"
+          colorPalette="secondary"
+          visual="outline"
+          icon="mdi:download"
+        >
+          Button md
+        </Button>
+        <Button size="lg" icon="mdi:arrow-right-bold-circle" iconPlace="end">
+          Button lg
+        </Button>
+        <Button size="xl" colorPalette="primary" icon="mdi:alert-circle">
+          Button xl
+        </Button>
+      </div>
+    </div>
+  </Paper>
+</Layout>

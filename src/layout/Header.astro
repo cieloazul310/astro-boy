@@ -1,7 +1,7 @@
 ---
 import { css } from "../../styled-system/css";
 import { gradientBox } from "../../styled-system/patterns";
-import Button from "../components/Button.astro";
+import ColorModeButton from "../components/ColorModeButton.astro";
 import Link from "../components/Link.astro";
 
 interface Props {
@@ -38,9 +38,7 @@ const { siteTitle } = Astro.props;
     </Link>
     <div class={css({ flexGrow: 1, display: ["none", "none", "block"] })}></div>
     <div class={css({ display: ["none", "none", "block"] })}>
-      <Button className="toggle-color-mode" size="md" colorPalette="primary">
-        color
-      </Button>
+      <ColorModeButton />
     </div>
   </slot>
 </header>
