@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPost.astro
+layout: ../../templates/MarkdownPost.astro
 title: 送れ夏の風
 date: 2023-08-24
 author: cieloazul310

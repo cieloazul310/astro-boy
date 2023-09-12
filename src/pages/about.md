@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/Default.astro
+layout: ../templates/Default.astro
 title: About
 author: cieloazul310
 ---

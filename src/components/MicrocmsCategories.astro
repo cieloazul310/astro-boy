@@ -1,0 +1,15 @@
+---
+import PaperLink from "./PaperLink.astro";
+import { vstack } from "../../styled-system/patterns";
+import { getCategories } from "../utils/microcms";
+
+const categories = await getCategories({ fields: ["id", "name"] });
+---
+
+<nav class={vstack({ gap: 2, alignItems: "stretch" })}>
+  {
+    categories.contents.map(({ id, name }) => (
+      <PaperLink href={`/microcms/categories/${id}`}>{name}</PaperLink>
+    ))
+  }
+</nav>

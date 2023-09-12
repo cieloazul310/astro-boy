@@ -7,6 +7,7 @@ import Jumbotron from "./Jumbotron.astro";
 import Fab from "./Fab.astro";
 import Menu from "./Menu.astro";
 import PaperLink from "../components/PaperLink.astro";
+import Divider from "../components/Divider.astro";
 
 interface Props {
   title?: string;
@@ -65,7 +66,9 @@ const siteTitle = "Astro Boy";
             })}
           >
             <slot name="sidebar-top" />
+            {Astro.slots.has("sidebar-top") ? <Divider /> : null}
             <Menu />
+            {Astro.slots.has("sidebar-bottom") ? <Divider /> : null}
             <slot name="sidebar-bottom" />
           </div>
         </div>
@@ -74,7 +77,9 @@ const siteTitle = "Astro Boy";
     <Footer siteTitle={siteTitle} />
     <Fab />
     <Drawer siteTitle={siteTitle}>
+      <slot name="drawer-top" slot="drawer-top" />
       <Menu />
+      <slot name="drawer-bottom" slot="drawer-bottom" />
     </Drawer>
   </body>
   <script>

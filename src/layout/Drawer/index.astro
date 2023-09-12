@@ -3,6 +3,7 @@ import { css, cx } from "../../../styled-system/css";
 import { flex, vstack } from "../../../styled-system/patterns";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
+import Divider from "../../components/Divider.astro";
 
 interface Props {
   siteTitle?: string;
@@ -54,9 +55,12 @@ const { siteTitle } = Astro.props;
   >
     <Header siteTitle={siteTitle} />
     <div class={css({ flexGrow: 1, overflowY: "auto", px: 4 })}>
-      <div class={vstack({ gap: 2, alignItems: "stretch" })}>
+      <div class={vstack({ gap: 4, alignItems: "stretch" })}>
+        <slot name="drawer-top" />
+        {Astro.slots.has("drawer-top") ? <Divider /> : null}
         <slot />
-        <slot name="drawer-contents" />
+        {Astro.slots.has("drawer-bottom") ? <Divider /> : null}
+        <slot name="drawer-bottom" />
       </div>
     </div>
     <Footer />

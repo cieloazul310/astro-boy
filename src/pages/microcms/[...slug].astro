@@ -1,11 +1,12 @@
 ---
-import Layout from "../layout/index.astro";
-import Paper from "../components/Paper.astro";
-import PaperLink from "../components/PaperLink.astro";
-import { getBlogs, getBlogDetail } from "../utils/microcms";
-import parseDate from "../utils/parseDate";
-import { rehypeIt } from "../utils/rehype";
-import { slugify, pubDateToYYMM } from "../utils/slugify";
+import Layout from "../../layout/index.astro";
+import Paper from "../../components/Paper.astro";
+import PaperLink from "../../components/PaperLink.astro";
+import MicrocmsCategories from "../../components/MicrocmsCategories.astro";
+import { getBlogs, getBlogDetail } from "../../utils/microcms";
+import parseDate from "../../utils/parseDate";
+import { rehypeIt } from "../../utils/rehype";
+import { slugify, pubDateToYYMM } from "../../utils/slugify";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
@@ -62,4 +63,6 @@ const html = await rehypeIt(content);
 <Layout title={title} description={parseDate(publishedAt)}>
   <Paper set:html={String(html)} />
   <PaperLink href="/microcms/">CMS Posts Top</PaperLink>
+  <MicrocmsCategories slot="sidebar-top" />
+  <MicrocmsCategories slot="drawer-top" />
 </Layout>

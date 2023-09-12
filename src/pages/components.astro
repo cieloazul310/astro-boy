@@ -26,12 +26,21 @@ const viewerStyle = vstack({
       <Paper>
         <Paper><p>Nested</p></Paper>
       </Paper>
+      <Paper colorPalette="secondary">
+        <p>Secondary</p>
+      </Paper>
+      <Paper colorPalette="teal">
+        <p>Teal</p>
+      </Paper>
     </div>
   </Paper>
   <Paper>
     <h2 class={rehypeClassNamesOptions.h2}>PaperLink</h2>
     <div class={viewerStyle}>
       <PaperLink href="/components/">PaperLink</PaperLink>
+      <PaperLink href="/components/" colorPalette="secondary">
+        Secondary
+      </PaperLink>
     </div>
   </Paper>
   <Paper>

@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPost.astro
+layout: ../../templates/MarkdownPost.astro
 title: 毎年恒例おなじみ納涼
 date: 2023-07-10
 author: cieloazul310
