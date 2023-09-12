@@ -1,7 +1,6 @@
 ---
-import { Icon } from "astro-icon";
-import { css, cx } from "../../styled-system/css";
-import { square } from "../../styled-system/patterns";
+import { css } from "../../styled-system/css";
+import IconButton from "../components/IconButton.astro";
 ---
 
 <div
@@ -13,23 +12,10 @@ import { square } from "../../styled-system/patterns";
     zIndex: "fab",
   })}
 >
-  <button
-    class={cx(
-      square({
-        size: 14,
-        bg: { base: "primary.600", _hover: "primary.700" },
-        color: "white",
-        border: "none",
-        rounded: "xl",
-        cursor: "pointer",
-        shadow: { base: "md", _hover: "lg" },
-        transition: "background .25s",
-        _dark: { bg: { base: "primary.700", _hover: "primary.600" } },
-      }),
-      "drawer-handler",
-    )}
+  <IconButton
+    className="drawer-handler"
+    colorPalette="primary"
+    icon="mdi:menu"
     aria-label="Open drawer"
-  >
-    <Icon name="mdi:menu" class={square({ size: 10 })} />
-  </button>
+  />
 </div>
