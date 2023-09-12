@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPost.astro
+layout: ../../templates/MarkdownPost.astro
 title: アストラット・太平洋ベルト
 date: 2023-06-30
 author: cieloazul310

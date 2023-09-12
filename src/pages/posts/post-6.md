@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPost.astro
+layout: ../../templates/MarkdownPost.astro
 title: リハが始まりミックスが終わる
 date: 2023-07-12
 author: cieloazul310

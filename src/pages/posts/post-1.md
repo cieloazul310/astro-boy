@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPost.astro
+layout: ../../templates/MarkdownPost.astro
 title: アストロへようこそ
 date: 2023-05-23
 author: cieloazul310

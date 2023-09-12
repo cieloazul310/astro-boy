@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPost.astro
+layout: ../../templates/MarkdownPost.astro
 title: 名古屋市の沢山
 date: 2023-07-30
 author: cieloazul310

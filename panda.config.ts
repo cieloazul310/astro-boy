@@ -1,6 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
 import {
-  patterns,
+  gradientBox,
+  paper,
   backgroundColorTransparentize,
   definePalette,
   bg,
@@ -49,12 +50,21 @@ export default defineConfig({
           ...definePalette({ primary: "sky", secondary: "orange" }),
         },
       },
+      /**
+       * @todo
+       */
+      /*
+      recipes: {
+        buttonBase: buttonBaseRecipe,
+      },
+      */
     },
   },
   patterns: {
-    /* @ts-ignore */
     extend: {
-      ...patterns,
+      gradientBox,
+      /* @ts-ignore */
+      paper,
     },
   },
 

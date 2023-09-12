@@ -21,8 +21,9 @@ export const paper = definePattern({
   transform({ hover, ...props }) {
     return {
       bgct: {
-        base: "primary.600/92",
-        _hover: hover ? "primary.600/84" : undefined,
+        base: "colorPalette.600/92",
+        _dark: "colorPalette.600/90",
+        _hover: hover ? "colorPalette.600/84" : undefined,
       },
       p: [4, 8],
       rounded: "xl",
@@ -31,5 +32,3 @@ export const paper = definePattern({
     };
   },
 });
-
-export default { gradientBox, paper };

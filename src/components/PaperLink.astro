@@ -1,26 +1,32 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { css, cx } from "../../styled-system/css";
 import { paper } from "../../styled-system/patterns";
 import useLink from "../utils/useLink";
+import type { PropertyTypes } from "../../styled-system/types/prop-type";
 
 interface Props extends HTMLAttributes<"a"> {
   disablePrefix?: boolean;
+  colorPalette?: PropertyTypes["colorPalette"];
 }
 
-const { href, disablePrefix, ...attrs } = Astro.props;
+const { href, disablePrefix, colorPalette = "primary", ...attrs } = Astro.props;
 const link = useLink(href, { disablePrefix });
 ---
 
 <a
-  class={paper({
-    hover: true,
-    display: "inline-flex",
-    minHeight: "48px",
-    fontWeight: "bold",
-    justifyContent: "center",
-    alignItems: "center",
-    height: 10,
-  })}
+  class={cx(
+    css({ colorPalette }),
+    paper({
+      hover: true,
+      display: "inline-flex",
+      minHeight: "48px",
+      fontWeight: "bold",
+      justifyContent: "center",
+      alignItems: "center",
+      height: 10,
+    }),
+  )}
   role="button"
   {...link}
   {...attrs}

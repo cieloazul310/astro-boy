@@ -1,0 +1,66 @@
+---
+import Layout from "../../../layout/index.astro";
+import Paper from "../../../components/Paper.astro";
+import PaperLink from "../../../components/PaperLink.astro";
+import PostListItem from "../../../components/PostListItem.astro";
+import MicrocmsCategories from "../../../components/MicrocmsCategories.astro";
+import { getBlogs, getCategories } from "../../../utils/microcms";
+import parseDate from "../../../utils/parseDate";
+import { slugify, pubDateToYYMM } from "../../../utils/slugify";
+import type { MicrocmsBlogs } from "../../../types";
+
+// 詳細記事ページの全パスを取得
+export async function getStaticPaths() {
+  const categories = await getCategories({ fields: ["id", "name"] });
+  const blogs = await getBlogs({
+    fields: ["id", "title", "publishedAt", "category"],
+  });
+
+  return categories.contents.map(({ id, name }) => ({
+    params: {
+      id,
+    },
+    props: {
+      id,
+      name,
+      posts: blogs.contents.filter(({ category }) => category?.id === id),
+    },
+  }));
+}
+
+interface Props {
+  id: string;
+  name: string;
+  posts: Pick<MicrocmsBlogs, "id" | "title" | "publishedAt" | "category">[];
+}
+
+const { name, posts } = Astro.props;
+---
+
+<Layout title={name}>
+  {
+    posts.length ? (
+      posts
+        .sort(
+          (a, b) =>
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime(),
+        )
+        .map(({ id, title, publishedAt }) => (
+          <PostListItem
+            href={`/microcms/${slugify({ id, ...pubDateToYYMM(publishedAt) })}`}
+            title={title}
+            author={id}
+            date={parseDate(publishedAt)}
+          />
+        ))
+    ) : (
+      <Paper>
+        <p>このカテゴリーは記事がありません。</p>
+      </Paper>
+    )
+  }
+  <PaperLink href="/microcms/">CMS Posts Top</PaperLink>
+  <MicrocmsCategories slot="sidebar-top" />
+  <MicrocmsCategories slot="drawer-top" />
+</Layout>

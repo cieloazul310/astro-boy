@@ -1,14 +1,16 @@
 ---
-import { cx } from "../../styled-system/css";
+import { css, cx } from "../../styled-system/css";
 import { paper } from "../../styled-system/patterns";
+import type { PropertyTypes } from "../../styled-system/types/prop-type";
 
 export interface Props {
   className?: string;
+  colorPalette?: PropertyTypes["colorPalette"];
 }
 
-const { className } = Astro.props;
+const { className, colorPalette = "primary" } = Astro.props;
 ---
 
-<div class={cx(paper(), className)}>
+<div class={cx(css({ colorPalette }), paper(), className)}>
   <slot />
 </div>

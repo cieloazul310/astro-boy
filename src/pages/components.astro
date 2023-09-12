@@ -3,6 +3,7 @@ import Layout from "../layout/index.astro";
 import Paper from "../components/Paper.astro";
 import PaperLink from "../components/PaperLink.astro";
 import Button from "../components/Button.astro";
+import IconButton from "../components/IconButton.astro";
 import { vstack } from "../../styled-system/patterns";
 import rehypeClassNamesOptions from "../styles/rehypeClassNames";
 
@@ -25,12 +26,21 @@ const viewerStyle = vstack({
       <Paper>
         <Paper><p>Nested</p></Paper>
       </Paper>
+      <Paper colorPalette="secondary">
+        <p>Secondary</p>
+      </Paper>
+      <Paper colorPalette="teal">
+        <p>Teal</p>
+      </Paper>
     </div>
   </Paper>
   <Paper>
     <h2 class={rehypeClassNamesOptions.h2}>PaperLink</h2>
     <div class={viewerStyle}>
       <PaperLink href="/components/">PaperLink</PaperLink>
+      <PaperLink href="/components/" colorPalette="secondary">
+        Secondary
+      </PaperLink>
     </div>
   </Paper>
   <Paper>
@@ -75,6 +85,64 @@ const viewerStyle = vstack({
         <Button size="xl" colorPalette="primary" icon="mdi:alert-circle">
           Button xl
         </Button>
+      </div>
+    </div>
+  </Paper>
+  <Paper>
+    <h2 class={rehypeClassNamesOptions.h2}>Icon Button</h2>
+    <div class={viewerStyle}>
+      <div class={vstack({ gap: 2, alignItems: "start" })}>
+        <h3 class={rehypeClassNamesOptions.h3}>Button</h3>
+        <IconButton size="sm" colorPalette="primary" icon="mdi:download" />
+        <IconButton size="md" colorPalette="secondary" icon="mdi:download" />
+        <IconButton size="lg" icon="mdi:download" />
+        <IconButton size="xl" colorPalette="primary" icon="mdi:download" />
+      </div>
+      <div class={vstack({ gap: 2, alignItems: "start" })}>
+        <h3 class={rehypeClassNamesOptions.h3}>Outline</h3>
+        <IconButton
+          size="sm"
+          colorPalette="primary"
+          visual="outline"
+          icon="mdi:download"
+        />
+        <IconButton
+          size="md"
+          colorPalette="secondary"
+          visual="outline"
+          icon="mdi:download"
+        />
+        <IconButton size="lg" visual="outline" icon="mdi:download" />
+        <IconButton
+          size="xl"
+          visual="outline"
+          colorPalette="primary"
+          icon="mdi:download"
+        />
+      </div>
+      <div class={vstack({ gap: 2, alignItems: "start" })}>
+        <h3 class={rehypeClassNamesOptions.h3}>Circle</h3>
+        <IconButton
+          size="sm"
+          colorPalette="primary"
+          shape="circle"
+          icon="mdi:download"
+        />
+        <IconButton
+          size="md"
+          colorPalette="secondary"
+          shape="circle"
+          visual="outline"
+          icon="mdi:download"
+        />
+        <IconButton size="lg" shape="circle" icon="mdi:download" />
+        <IconButton
+          size="xl"
+          shape="circle"
+          visual="outline"
+          colorPalette="primary"
+          icon="mdi:download"
+        />
       </div>
     </div>
   </Paper>
