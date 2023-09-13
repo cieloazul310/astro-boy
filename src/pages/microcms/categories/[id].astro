@@ -3,11 +3,17 @@ import Layout from "../../../layout/index.astro";
 import Paper from "../../../components/Paper.astro";
 import PaperLink from "../../../components/PaperLink.astro";
 import PostListItem from "../../../components/PostListItem.astro";
+import Navigation from "../../../components/Navigation.astro";
 import MicrocmsCategories from "../../../components/MicrocmsCategories.astro";
-import { getBlogs, getCategories } from "../../../utils/microcms";
-import parseDate from "../../../utils/parseDate";
-import { slugify, pubDateToYYMM } from "../../../utils/slugify";
-import type { MicrocmsBlogs } from "../../../types";
+import {
+  getBlogs,
+  getCategories,
+  parseDate,
+  slugify,
+  pubDateToYYMM,
+  useNavigation,
+} from "../../../utils";
+import type { MicrocmsBlogs, MicrocmsBlogsCategory } from "../../../types";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
@@ -16,25 +22,44 @@ export async function getStaticPaths() {
     fields: ["id", "title", "publishedAt", "category"],
   });
 
-  return categories.contents.map(({ id, name }) => ({
-    params: {
-      id,
-    },
-    props: {
-      id,
-      name,
-      posts: blogs.contents.filter(({ category }) => category?.id === id),
-    },
-  }));
+  return categories.contents.map(({ id, name }, index) => {
+    const previous = index !== 0 ? categories.contents[index - 1] : null;
+    const next =
+      index !== categories.contents.length - 1
+        ? categories.contents[index + 1]
+        : null;
+
+    return {
+      params: {
+        id,
+      },
+      props: {
+        id,
+        name,
+        posts: blogs.contents.filter(({ category }) => category?.id === id),
+        previous,
+        next,
+      },
+    };
+  });
 }
 
 interface Props {
   id: string;
   name: string;
   posts: Pick<MicrocmsBlogs, "id" | "title" | "publishedAt" | "category">[];
+  previous: Pick<MicrocmsBlogsCategory, "id" | "name"> | null;
+  next: Pick<MicrocmsBlogsCategory, "id" | "name"> | null;
 }
 
-const { name, posts } = Astro.props;
+const { name, posts, previous, next } = Astro.props;
+const navigation = useNavigation(
+  { left: previous, right: next },
+  {
+    href: (obj) => `/microcms/categories/${obj.id}`,
+    primaryText: (obj) => obj.name,
+  },
+);
 ---
 
 <Layout title={name}>
@@ -60,6 +85,8 @@ const { name, posts } = Astro.props;
       </Paper>
     )
   }
+
+  <Navigation {...navigation} />
   <PaperLink href="/microcms/">CMS Posts Top</PaperLink>
   <MicrocmsCategories slot="sidebar-top" />
   <MicrocmsCategories slot="drawer-top" />

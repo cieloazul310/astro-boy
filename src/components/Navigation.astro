@@ -1,0 +1,125 @@
+---
+import { Icon } from "astro-icon";
+import {
+  cx,
+  css,
+  cva,
+  sva,
+  type RecipeVariantProps,
+} from "../../styled-system/css";
+import { paper } from "../../styled-system/patterns";
+import { useLink } from "../utils";
+
+const navigationStyle = sva({
+  slots: ["container", "button"],
+  base: {
+    container: {
+      width: "100%",
+      display: "flex",
+      gap: 2,
+      colorPalette: "primary",
+      flexDirection: ["column", "row"],
+    },
+    button: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-start",
+      gap: 2,
+      width: ["100%", "50%"],
+    },
+  },
+  variants: {
+    direction: {
+      auto: {},
+      row: {
+        container: { flexDirection: "row" },
+        button: { width: "50%" },
+      },
+      column: {
+        container: { flexDirection: "column" },
+        button: { width: "100%" },
+      },
+    },
+  },
+  defaultVariants: {
+    direction: "auto",
+  },
+});
+const iconStyle = css({ width: 6, height: 6, flexShrink: 0 });
+const hgroupStyle = cva({
+  base: {
+    flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+  },
+  variants: {
+    type: {
+      left: {
+        alignItems: "start",
+      },
+      right: {
+        alignItems: "end",
+      },
+    },
+  },
+  defaultVariants: {
+    type: "left",
+  },
+});
+
+type Props = RecipeVariantProps<typeof navigationStyle> & {
+  left: {
+    href: string;
+    primaryText: string;
+    secondaryText?: string;
+  } | null;
+  right: {
+    href: string;
+    primaryText: string;
+    secondaryText?: string;
+  } | null;
+  disablePrefix?: boolean;
+};
+const { left, right, direction, disablePrefix = false } = Astro.props;
+const classes = navigationStyle({ direction });
+---
+
+<nav class={classes.container}>
+  {
+    left ? (
+      <a
+        href={useLink(left.href, { disablePrefix }).href}
+        class={cx(classes.button, paper({ hover: true }))}
+        role="button"
+      >
+        <Icon class={iconStyle} name="ic:baseline-arrow-back" />
+        <hgroup class={hgroupStyle()}>
+          <h1>{left.primaryText}</h1>
+          {left.secondaryText ? <p>{left.secondaryText}</p> : null}
+        </hgroup>
+      </a>
+    ) : (
+      <div class={classes.button} />
+    )
+  }
+  {
+    right ? (
+      <a
+        href={useLink(right.href, { disablePrefix }).href}
+        class={cx(
+          classes.button,
+          paper({ hover: true, flexDirection: "row-reverse" }),
+        )}
+        role="button"
+      >
+        <Icon class={iconStyle} name="ic:baseline-arrow-forward" />
+        <hgroup class={hgroupStyle({ type: "right" })}>
+          <h1>{right.primaryText}</h1>
+          {right.secondaryText ? <p>{right.secondaryText}</p> : null}
+        </hgroup>
+      </a>
+    ) : (
+      <div class={classes.button} />
+    )
+  }
+</nav>

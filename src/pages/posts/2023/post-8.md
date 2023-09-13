@@ -1,5 +1,5 @@
 ---
-layout: ../../templates/MarkdownPost.astro
+layout: ../../../templates/MarkdownPost.astro
 title: 夏の終わり
 date: 2023-07-19
 author: cieloazul310

@@ -2,9 +2,7 @@
 import Layout from "../../layout/index.astro";
 import PostListItem from "../../components/PostListItem.astro";
 import MicrocmsCategories from "../../components/MicrocmsCategories.astro";
-import { getBlogs } from "../../utils/microcms";
-import parseDate from "../../utils/parseDate";
-import { slugify, pubDateToYYMM } from "../../utils/slugify";
+import { getBlogs, parseDate, slugify, pubDateToYYMM } from "../../utils";
 import { vstack } from "../../../styled-system/patterns";
 
 const blogs = await getBlogs({ fields: ["id", "title", "publishedAt"] });

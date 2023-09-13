@@ -2,15 +2,22 @@
 import Layout from "../../layout/index.astro";
 import Paper from "../../components/Paper.astro";
 import PaperLink from "../../components/PaperLink.astro";
+import Navigation from "../../components/Navigation.astro";
 import MicrocmsCategories from "../../components/MicrocmsCategories.astro";
-import { getBlogs, getBlogDetail } from "../../utils/microcms";
-import parseDate from "../../utils/parseDate";
-import { rehypeIt } from "../../utils/rehype";
-import { slugify, pubDateToYYMM } from "../../utils/slugify";
+import {
+  getBlogs,
+  getBlogDetail,
+  parseDate,
+  rehypeIt,
+  useNavigation,
+  slugify,
+  pubDateToYYMM,
+} from "../../utils";
+import type { MicrocmsBlogs } from "../../types";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
-  const response = await getBlogs({ fields: ["id", "publishedAt"] });
+  const response = await getBlogs({ fields: ["id", "title", "publishedAt"] });
   return response.contents
     .sort(
       (a, b) =>
@@ -23,8 +30,8 @@ export async function getStaticPaths() {
       ...rest,
     }))
     .map(({ id, slug }, index, arr) => {
-      const prev = index !== 0 ? arr[index - 1] : null;
-      const next = index !== arr.length - 1 ? arr[index + 1] : null;
+      const newer = index !== 0 ? arr[index - 1] : null;
+      const older = index !== arr.length - 1 ? arr[index + 1] : null;
 
       return {
         params: {
@@ -32,18 +39,8 @@ export async function getStaticPaths() {
         },
         props: {
           blogId: id,
-          prev: prev
-            ? {
-                title: prev?.title,
-                slug: prev?.slug,
-              }
-            : null,
-          next: next
-            ? {
-                title: next?.title,
-                slug: next?.slug,
-              }
-            : null,
+          newer,
+          older,
         },
       };
     });
@@ -53,16 +50,38 @@ interface Props {
   year: string;
   month: string;
   blogId: string;
+  newer:
+    | (Pick<MicrocmsBlogs, "id" | "title" | "publishedAt"> & {
+        slug: string;
+      })
+    | null;
+  older:
+    | (Pick<MicrocmsBlogs, "id" | "title" | "publishedAt"> & {
+        slug: string;
+      })
+    | null;
 }
 
-const { blogId } = Astro.props;
+const { blogId, newer, older } = Astro.props;
 const { title, publishedAt, content } = await getBlogDetail(blogId as string);
 const html = await rehypeIt(content);
+const navigation = useNavigation(
+  { left: newer, right: older },
+  {
+    href: (obj) => `/microcms/${obj.slug}`,
+    primaryText: (obj) => obj.title,
+    secondaryText: (obj) => parseDate(obj.publishedAt),
+  },
+);
 ---
 
 <Layout title={title} description={parseDate(publishedAt)}>
   <Paper set:html={String(html)} />
+  <Navigation {...navigation} />
   <PaperLink href="/microcms/">CMS Posts Top</PaperLink>
-  <MicrocmsCategories slot="sidebar-top" />
+  <Fragment slot="sidebar-top">
+    <Navigation {...navigation} direction="column" />
+    <MicrocmsCategories />
+  </Fragment>
   <MicrocmsCategories slot="drawer-top" />
 </Layout>

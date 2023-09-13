@@ -1,5 +1,5 @@
 ---
-layout: ../../templates/MarkdownPost.astro
+layout: ../../../templates/MarkdownPost.astro
 title: Markdown preview
 date: 2023-09-08
 author: cieloazul310
