@@ -1,7 +1,7 @@
 ---
-layout: ../../templates/MarkdownPost.astro
+layout: ../../../templates/MarkdownPost.astro
 title: アストロへようこそ
-date: 2023-07-02
+date: 2022-07-02
 author: cieloazul310
 ---
 

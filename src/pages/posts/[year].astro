@@ -1,0 +1,76 @@
+---
+import type { MarkdownInstance } from "astro";
+import Layout from "../../layout/index.astro";
+import { vstack } from "../../../styled-system/patterns";
+import PaperLink from "../../components/PaperLink.astro";
+import PostListItem from "../../components/PostListItem.astro";
+import PostYears from "../../components/PostYears.astro";
+import Navigation from "../../components/Navigation.astro";
+import { parseDate, usePostsYears, useNavigation } from "../../utils";
+import type { MarkdownFrontmatter } from "../../types";
+
+export async function getStaticPaths() {
+  const allPosts = await Astro.glob<MarkdownFrontmatter>("./**/*.md");
+  const years = usePostsYears(allPosts);
+
+  return years.map((year, index) => {
+    const posts = allPosts.filter(({ frontmatter }) =>
+      frontmatter.date
+        ? new Date(frontmatter.date).getFullYear() === year
+        : false,
+    );
+    return {
+      params: { year },
+      props: {
+        year,
+        posts,
+        totalCount: posts.length,
+        newer: index !== 0 ? years[index - 1] : null,
+        older: index !== years.length - 1 ? years[index + 1] : null,
+      },
+    };
+  });
+}
+
+interface Props {
+  year: number;
+  posts: MarkdownInstance<MarkdownFrontmatter>[];
+  totalCount: number;
+  newer: number;
+  older: number;
+}
+const { posts, year, newer, older } = Astro.props;
+const navigation = useNavigation(
+  { left: newer, right: older },
+  {
+    href: (y) => `/posts/${y}/`,
+    primaryText: (y) => `${y}年`,
+  },
+);
+---
+
+<Layout title={`${year}年の記事`}>
+  <ul class={vstack({ gap: 2, alignItems: "stretch" })}>
+    {
+      posts
+        .sort(
+          (a, b) =>
+            new Date(b.frontmatter?.date ?? 0).getTime() -
+            new Date(a.frontmatter?.date ?? 0).getTime(),
+        )
+        .map((post) => (
+          <PostListItem
+            href={post.url}
+            title={post.frontmatter?.title}
+            author={post.frontmatter?.author}
+            date={parseDate(post.frontmatter?.date)}
+            disablePrefix
+          />
+        ))
+    }
+  </ul>
+  <Navigation {...navigation} />
+  <PaperLink href="/posts/">Markdown Posts Top</PaperLink>
+  <PostYears slot="sidebar-top" />
+  <PostYears slot="drawer-top" />
+</Layout>

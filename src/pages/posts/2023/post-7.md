@@ -1,5 +1,5 @@
 ---
-layout: ../../templates/MarkdownPost.astro
+layout: ../../../templates/MarkdownPost.astro
 title: 幕が開いていつものように
 date: 2023-07-15
 author: cieloazul310

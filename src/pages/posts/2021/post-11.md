@@ -1,7 +1,7 @@
 ---
-layout: ../../templates/MarkdownPost.astro
+layout: ../../../templates/MarkdownPost.astro
 title: 壁塗り女のスルバ
-date: 2023-09-07
+date: 2021-09-07
 author: cieloazul310
 ---
 

@@ -2,11 +2,9 @@
 import Layout from "../layout/index.astro";
 import Paper from "../components/Paper.astro";
 import PaperLink from "../components/PaperLink.astro";
-import Link from "../components/Link.astro";
-import parseDate from "../utils/parseDate";
+import PostYears from "../components/PostYears.astro";
+import { parseDate } from "../utils";
 import type { MarkdownFrontmatter } from "../types";
-
-const allPosts = await Astro.glob<MarkdownFrontmatter>("../pages/posts/*.md");
 
 interface Props {
   frontmatter?: MarkdownFrontmatter;
@@ -22,25 +20,7 @@ const { frontmatter } = Astro.props;
   <Paper>
     <slot />
   </Paper>
-  <Paper slot="sidebar-bottom">
-    <h6>記事一覧</h6>
-    <ul>
-      {
-        allPosts
-          .sort(
-            (a, b) =>
-              new Date(b.frontmatter?.date ?? 0).getTime() -
-              new Date(a.frontmatter?.date ?? 0).getTime(),
-          )
-          .map((post) => (
-            <li>
-              <Link href={post.url} disablePrefix>
-                {post.frontmatter.title}
-              </Link>
-            </li>
-          ))
-      }
-    </ul>
-  </Paper>
   <PaperLink href="/posts/">Markdown Posts Top</PaperLink>
+  <PostYears slot="sidebar-top" />
+  <PostYears slot="drawer-top" />
 </Layout>

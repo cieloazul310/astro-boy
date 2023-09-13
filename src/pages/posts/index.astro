@@ -2,10 +2,11 @@
 import { vstack } from "../../../styled-system/patterns";
 import Layout from "../../layout/index.astro";
 import PostListItem from "../../components/PostListItem.astro";
-import parseDate from "../../utils/parseDate";
+import PostYears from "../../components/PostYears.astro";
+import { parseDate } from "../../utils";
 import type { MarkdownFrontmatter } from "../../types";
 
-const allPosts = await Astro.glob<MarkdownFrontmatter>("./*.md");
+const allPosts = await Astro.glob<MarkdownFrontmatter>("./**/*.md");
 ---
 
 <Layout title="Markdown Posts">
@@ -28,4 +29,6 @@ const allPosts = await Astro.glob<MarkdownFrontmatter>("./*.md");
         ))
     }
   </ul>
+  <PostYears slot="sidebar-top" />
+  <PostYears slot="drawer-top" />
 </Layout>
