@@ -1,0 +1,25 @@
+---
+import { css, cx } from "../../styled-system/css";
+import type { PropertyTypes } from "../../styled-system/types/prop-type";
+
+interface Props {
+  colorPalette: PropertyTypes["colorPalette"];
+}
+const { colorPalette } = Astro.props;
+---
+
+<span
+  class={cx(
+    css({ colorPalette }),
+    css({
+      rounded: "md",
+      px: 2,
+      py: 1,
+      fontWeight: "bolder",
+      color: { base: "colorPalette.800", _dark: "colorPalette.100" },
+      bg: { base: "colorPalette.100", _dark: "colorPalette.900" },
+    }),
+  )}
+>
+  <slot />
+</span>

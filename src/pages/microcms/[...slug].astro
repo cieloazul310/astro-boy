@@ -4,6 +4,10 @@ import Paper from "../../components/Paper.astro";
 import PaperLink from "../../components/PaperLink.astro";
 import Navigation from "../../components/Navigation.astro";
 import MicrocmsCategories from "../../components/MicrocmsCategories.astro";
+import Link from "../../components/Link.astro";
+import Badge from "../../components/Badge.astro";
+import { css } from "../../../styled-system/css";
+import { hstack } from "../../../styled-system/patterns";
 import {
   getBlogs,
   getBlogDetail,
@@ -59,8 +63,10 @@ interface Props {
     | null;
 }
 
-const { blogId, newer, older } = Astro.props;
-const { title, publishedAt, content } = await getBlogDetail(blogId as string);
+const { blogId, newer, older } = Astro.props as Props;
+const { title, publishedAt, content, category } = await getBlogDetail(
+  blogId as string,
+);
 const html = await rehypeIt(content);
 const navigation = useNavigation(
   { left: newer, right: older },
@@ -74,6 +80,25 @@ const navigation = useNavigation(
 
 <Layout title={title} description={parseDate(publishedAt)}>
   <Paper set:html={String(html)} />
+  <Paper>
+    <footer>
+      <h2>{title}</h2>
+      <p class={hstack({ gap: 2 })}>
+        <time datetime={parseDate(publishedAt)}>{parseDate(publishedAt)}</time>
+      </p>
+      {
+        category && (
+          <p class={css({ mt: 1 })}>
+            <Link
+              href={`/microcms/categories/${encodeURIComponent(category.id)}`}
+            >
+              <Badge colorPalette="primary">{category.name}</Badge>
+            </Link>
+          </p>
+        )
+      }
+    </footer>
+  </Paper>
   <Navigation {...navigation} />
   <PaperLink href="/microcms/">CMS Posts Top</PaperLink>
   <Fragment slot="sidebar-top">
