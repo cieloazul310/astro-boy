@@ -1,12 +1,13 @@
 ---
+/* eslint-disable-next-line import/no-unresolved */
+import { getCollection } from "astro:content";
 import { vstack } from "../../../styled-system/patterns";
 import Layout from "../../layout/index.astro";
 import PostListItem from "../../components/PostListItem.astro";
 import PostYears from "../../components/PostYears.astro";
 import { parseDate } from "../../utils";
-import type { MarkdownFrontmatter } from "../../types";
 
-const allPosts = await Astro.glob<MarkdownFrontmatter>("./**/*.md");
+const allPosts = await getCollection("posts");
 ---
 
 <Layout title="Markdown Posts">
@@ -15,17 +16,23 @@ const allPosts = await Astro.glob<MarkdownFrontmatter>("./**/*.md");
       allPosts
         .sort(
           (a, b) =>
-            new Date(b.frontmatter?.date ?? 0).getTime() -
-            new Date(a.frontmatter?.date ?? 0).getTime(),
+            new Date(b.data.date ?? 0).getTime() -
+            new Date(a.data.date ?? 0).getTime(),
         )
         .map((post) => (
           <PostListItem
-            href={post.url}
-            title={post.frontmatter?.title}
-            author={post.frontmatter?.author}
-            date={parseDate(post.frontmatter?.date)}
-            disablePrefix
-          />
+            href={`/posts/${post.slug}`}
+            primaryText={post.data.title}
+          >
+            <Fragment slot="secondaryText">
+              <span>
+                <time datetime={post.data.date.toISOString()}>
+                  {parseDate(post.data.date)}
+                </time>
+              </span>
+              {post.data.author ? <span>by {post.data.author}</span> : null}
+            </Fragment>
+          </PostListItem>
         ))
     }
   </ul>

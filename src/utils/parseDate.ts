@@ -1,4 +1,4 @@
-function parseDate(datestring: string | undefined) {
+function parseDate(datestring: Date | string | undefined) {
   if (!datestring) return undefined;
   const date = new Date(datestring);
   const yyyy = date.getFullYear().toString();

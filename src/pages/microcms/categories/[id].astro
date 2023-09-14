@@ -74,9 +74,8 @@ const navigation = useNavigation(
         .map(({ id, title, publishedAt }) => (
           <PostListItem
             href={`/microcms/${slugify({ id, ...pubDateToYYMM(publishedAt) })}`}
-            title={title}
-            author={id}
-            date={parseDate(publishedAt)}
+            primaryText={title}
+            secondaryText={parseDate(publishedAt)}
           />
         ))
     ) : (

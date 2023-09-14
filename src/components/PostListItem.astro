@@ -5,13 +5,12 @@ import { css } from "../../styled-system/css";
 import { linkBox, linkOverlay, hstack } from "../../styled-system/patterns";
 
 interface Props extends HTMLAttributes<"a"> {
-  title?: string;
-  author?: string;
-  date?: string;
+  primaryText?: string;
+  secondaryText?: string;
   disablePrefix?: boolean;
 }
 
-const { href, title, author, date, disablePrefix } = Astro.props;
+const { href, primaryText, secondaryText, disablePrefix } = Astro.props;
 ---
 
 <li
@@ -27,11 +26,14 @@ const { href, title, author, date, disablePrefix } = Astro.props;
 >
   <article class={css({ display: "flex", flexDirection: "column" })}>
     <Link className={linkOverlay()} href={href} disablePrefix={disablePrefix}>
-      <h1 class={css({ fontSize: "lg" })}>{title}</h1>
+      <slot name="primaryText">
+        <h1 class={css({ fontSize: "lg" })}>{primaryText}</h1>
+      </slot>
     </Link>
     <div class={hstack({ gap: 2 })}>
-      <span><time datetime={date}>{date}</time></span>
-      <span>by {author}</span>
+      <slot name="secondaryText">
+        <span>{secondaryText}</span>
+      </slot>
     </div>
   </article>
 </li>

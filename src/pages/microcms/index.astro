@@ -20,9 +20,8 @@ const blogs = await getBlogs({ fields: ["id", "title", "publishedAt"] });
         .map(({ id, title, publishedAt }) => (
           <PostListItem
             href={`/microcms/${slugify({ id, ...pubDateToYYMM(publishedAt) })}`}
-            title={title}
-            author={id}
-            date={parseDate(publishedAt)}
+            primaryText={title}
+            secondaryText={parseDate(publishedAt)}
           />
         ))
     }

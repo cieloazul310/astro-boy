@@ -1,12 +1,11 @@
 ---
+/* eslint-disable-next-line import/no-unresolved */
+import { getCollection } from "astro:content";
 import PaperLink from "./PaperLink.astro";
 import { vstack } from "../../styled-system/patterns";
 import usePostsYears from "../utils/usePostsYears";
-import type { MarkdownFrontmatter } from "../types";
 
-const allPosts = await Astro.glob<MarkdownFrontmatter>(
-  "../pages/posts/**/*.md",
-);
+const allPosts = await getCollection("posts");
 const years = usePostsYears(allPosts);
 ---
 

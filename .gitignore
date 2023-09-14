@@ -23,3 +23,5 @@ pnpm-debug.log*
 # Panda
 styled-system
 styled-system-static
+
+.astro

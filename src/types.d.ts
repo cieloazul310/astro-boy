@@ -5,6 +5,12 @@ export type MarkdownFrontmatter = {
   author?: string;
 };
 
+export type PostData = {
+  title: string;
+  date: Date;
+  author?: string;
+};
+
 // 型定義
 /**
  * コンテンツ(API)に自動付与される値
