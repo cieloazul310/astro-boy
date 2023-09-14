@@ -1,17 +1,17 @@
 ---
 /* eslint-disable-next-line import/no-unresolved */
 import { getCollection } from "astro:content";
-import { vstack } from "../../../styled-system/patterns";
 import Layout from "../../layout/index.astro";
 import ArticleListItem from "../../components/ArticleListItem.astro";
 import PostYears from "../../components/posts/PostYears.astro";
 import { parseDate, slugify } from "../../utils";
+import ArticleList from "../../components/ArticleList.astro";
 
 const allPosts = await getCollection("posts");
 ---
 
 <Layout title="Markdown Posts">
-  <ul class={vstack({ gap: 2, alignItems: "stretch" })}>
+  <ArticleList>
     {
       allPosts
         .sort(
@@ -35,7 +35,7 @@ const allPosts = await getCollection("posts");
           </ArticleListItem>
         ))
     }
-  </ul>
+  </ArticleList>
   <PostYears slot="sidebar-top" />
   <PostYears slot="drawer-top" />
 </Layout>

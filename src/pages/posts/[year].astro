@@ -2,8 +2,8 @@
 /* eslint-disable-next-line import/no-unresolved */
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../layout/index.astro";
-import { vstack } from "../../../styled-system/patterns";
 import PaperLink from "../../components/PaperLink.astro";
+import ArticleList from "../../components/ArticleList.astro";
 import ArticleListItem from "../../components/ArticleListItem.astro";
 import PostYears from "../../components/posts/PostYears.astro";
 import Navigation from "../../components/Navigation.astro";
@@ -48,7 +48,7 @@ const navigation = useNavigation(
 ---
 
 <Layout title={`${year}年の記事`}>
-  <ul class={vstack({ gap: 2, alignItems: "stretch" })}>
+  <ArticleList>
     {
       posts
         .sort(
@@ -72,7 +72,7 @@ const navigation = useNavigation(
           </ArticleListItem>
         ))
     }
-  </ul>
+  </ArticleList>
   <Navigation {...navigation} />
   <PaperLink href="/posts/">Markdown Posts Top</PaperLink>
   <PostYears slot="sidebar-top" />
