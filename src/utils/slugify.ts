@@ -1,3 +1,5 @@
+import type { MicrocmsBlogs, PostData } from "../types";
+
 export function pubDateToYYMM(publishedAt: string) {
   const pubDate = new Date(publishedAt);
   const year = pubDate.getFullYear().toString();
@@ -5,7 +7,8 @@ export function pubDateToYYMM(publishedAt: string) {
   return { year, month };
 }
 
-export function slugify({
+/** @deprecated */
+export function slugifyDEPRECATED({
   year,
   month,
   id,
@@ -15,4 +18,30 @@ export function slugify({
   id: string;
 }) {
   return `${year}/${month}/${id}`;
+}
+
+function isMicrocmsBlogs(
+  obj: any,
+  type: "microcms" | "posts",
+): obj is Pick<MicrocmsBlogs, "id" | "publishedAt"> {
+  return type === "microcms";
+}
+
+export function slugify<T extends "microcms" | "posts">(
+  type: T,
+  obj: T extends "microcms"
+    ? Pick<MicrocmsBlogs, "id" | "publishedAt">
+    : { slug: string; data: PostData },
+  disablePrefix: boolean = false,
+) {
+  if (isMicrocmsBlogs(obj, type)) {
+    const { year, month } = pubDateToYYMM(obj.publishedAt);
+    const slug = `${encodeURIComponent(year)}/${encodeURIComponent(
+      month,
+    )}/${encodeURIComponent(obj.id)}`;
+    if (disablePrefix) return slug;
+    return `/microcms/${slug}`;
+  }
+  if (disablePrefix) return obj.slug;
+  return `/posts/${obj.slug}`;
 }

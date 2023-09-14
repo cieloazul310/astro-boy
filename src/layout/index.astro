@@ -1,5 +1,5 @@
 ---
-import { container, vstack } from "../../styled-system/patterns";
+import Seo, { type Props as SeoProps } from "./Seo.astro";
 import Header from "./Header.astro";
 import Drawer from "./Drawer/index.astro";
 import Footer from "./Footer.astro";
@@ -8,13 +8,21 @@ import Fab from "./Fab.astro";
 import Menu from "./Menu.astro";
 import PaperLink from "../components/PaperLink.astro";
 import Divider from "../components/Divider.astro";
+import { container, vstack } from "../../styled-system/patterns";
+import { css } from "../../styled-system/css";
 
-interface Props {
+export interface Props extends Omit<SeoProps, "siteTitle"> {
   title?: string;
   description?: string;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  siteType = "website",
+  twitterCardType = "summary",
+} = Astro.props;
 const siteTitle = "Astro Boy";
 ---
 
@@ -22,11 +30,19 @@ const siteTitle = "Astro Boy";
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title ? `${title} - ${siteTitle}` : siteTitle}</title>
+    <Seo
+      title={title}
+      siteTitle={siteTitle}
+      description={description}
+      image={image}
+      siteType={siteType}
+      twitterCardType={twitterCardType}
+    >
+      <slot name="meta" />
+    </Seo>
   </head>
   <body>
     <Header siteTitle={siteTitle} />
@@ -52,13 +68,18 @@ const siteTitle = "Astro Boy";
             })}
           >
             <slot />
-            <PaperLink href="/">Top</PaperLink>
+            <div class={css({ hideFrom: "md" })}>
+              <Menu />
+            </div>
+            <PaperLink className={css({ hideBelow: "md" })} href="/">
+              Top
+            </PaperLink>
           </div>
           <div
             class={vstack({
               width: "sidebarWidth",
               gap: 4,
-              display: ["none", "none", "flex"],
+              hideBelow: "md",
               flexShrink: 0,
               px: 2,
               pb: 8,
@@ -81,29 +102,29 @@ const siteTitle = "Astro Boy";
       <Menu />
       <slot name="drawer-bottom" slot="drawer-bottom" />
     </Drawer>
+    <script>
+      import "../scripts/toggleColorMode.ts";
+    </script>
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage === "undefined") return "light";
+
+        const localStorageItem = localStorage.getItem("astro-color-mode");
+        if (
+          localStorageItem &&
+          (localStorageItem === "light" || localStorageItem === "dark")
+        ) {
+          return localStorageItem;
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      })();
+
+      document.documentElement?.setAttribute("data-color-mode", theme);
+
+      window.localStorage.setItem("astro-color-mode", theme);
+    </script>
   </body>
-  <script>
-    import "../scripts/toggleColorMode.ts";
-  </script>
-  <script is:inline>
-    const theme = (() => {
-      if (typeof localStorage === "undefined") return "light";
-
-      const localStorageItem = localStorage.getItem("astro-color-mode");
-      if (
-        localStorageItem &&
-        (localStorageItem === "light" || localStorageItem === "dark")
-      ) {
-        return localStorageItem;
-      }
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        return "dark";
-      }
-      return "light";
-    })();
-
-    document.documentElement?.setAttribute("data-color-mode", theme);
-
-    window.localStorage.setItem("astro-color-mode", theme);
-  </script>
 </html>

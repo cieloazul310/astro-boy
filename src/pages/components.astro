@@ -5,7 +5,7 @@ import PaperLink from "../components/PaperLink.astro";
 import Button from "../components/Button.astro";
 import IconButton from "../components/IconButton.astro";
 import { vstack } from "../../styled-system/patterns";
-import rehypeClassNamesOptions from "../styles/rehypeClassNames";
+import { heading2, heading3 } from "../utils";
 
 const viewerStyle = vstack({
   bg: { base: "bg", _dark: "bg.dark" },
@@ -18,7 +18,7 @@ const viewerStyle = vstack({
 
 <Layout title="Components">
   <Paper>
-    <h2 class={rehypeClassNamesOptions.h2}>Paper</h2>
+    <h2 class={heading2}>Paper</h2>
     <div class={viewerStyle}>
       <Paper>
         <p>Paper</p>
@@ -35,7 +35,7 @@ const viewerStyle = vstack({
     </div>
   </Paper>
   <Paper>
-    <h2 class={rehypeClassNamesOptions.h2}>PaperLink</h2>
+    <h2 class={heading2}>PaperLink</h2>
     <div class={viewerStyle}>
       <PaperLink href="/components/">PaperLink</PaperLink>
       <PaperLink href="/components/" colorPalette="secondary">
@@ -44,17 +44,17 @@ const viewerStyle = vstack({
     </div>
   </Paper>
   <Paper>
-    <h2 class={rehypeClassNamesOptions.h2}>Button</h2>
+    <h2 class={heading2}>Button</h2>
     <div class={viewerStyle}>
       <div class={vstack({ gap: 2, alignItems: "start" })}>
-        <h3 class={rehypeClassNamesOptions.h3}>Button</h3>
+        <h3 class={heading3}>Button</h3>
         <Button size="sm" colorPalette="primary">Button sm</Button>
         <Button size="md" colorPalette="secondary">Button md</Button>
         <Button size="lg">Button lg</Button>
         <Button size="xl" colorPalette="primary">Button xl</Button>
       </div>
       <div class={vstack({ gap: 2, alignItems: "start" })}>
-        <h3 class={rehypeClassNamesOptions.h3}>Outline</h3>
+        <h3 class={heading3}>Outline</h3>
         <Button size="sm" colorPalette="primary" visual="outline">
           Button sm
         </Button>
@@ -67,7 +67,7 @@ const viewerStyle = vstack({
         </Button>
       </div>
       <div class={vstack({ gap: 2, alignItems: "start" })}>
-        <h3 class={rehypeClassNamesOptions.h3}>With Icon</h3>
+        <h3 class={heading3}>With Icon</h3>
         <Button size="sm" colorPalette="primary" icon="mdi:plus-circle">
           Button sm
         </Button>
@@ -89,17 +89,17 @@ const viewerStyle = vstack({
     </div>
   </Paper>
   <Paper>
-    <h2 class={rehypeClassNamesOptions.h2}>Icon Button</h2>
+    <h2 class={heading2}>Icon Button</h2>
     <div class={viewerStyle}>
       <div class={vstack({ gap: 2, alignItems: "start" })}>
-        <h3 class={rehypeClassNamesOptions.h3}>Button</h3>
+        <h3 class={heading3}>Button</h3>
         <IconButton size="sm" colorPalette="primary" icon="mdi:download" />
         <IconButton size="md" colorPalette="secondary" icon="mdi:download" />
         <IconButton size="lg" icon="mdi:download" />
         <IconButton size="xl" colorPalette="primary" icon="mdi:download" />
       </div>
       <div class={vstack({ gap: 2, alignItems: "start" })}>
-        <h3 class={rehypeClassNamesOptions.h3}>Outline</h3>
+        <h3 class={heading3}>Outline</h3>
         <IconButton
           size="sm"
           colorPalette="primary"
@@ -121,7 +121,7 @@ const viewerStyle = vstack({
         />
       </div>
       <div class={vstack({ gap: 2, alignItems: "start" })}>
-        <h3 class={rehypeClassNamesOptions.h3}>Circle</h3>
+        <h3 class={heading3}>Circle</h3>
         <IconButton
           size="sm"
           colorPalette="primary"

@@ -4,8 +4,9 @@ import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 import Layout from "../../layout/index.astro";
 import Paper from "../../components/Paper.astro";
 import PaperLink from "../../components/PaperLink.astro";
-import PostYears from "../../components/PostYears.astro";
+import PostYears from "../../components/posts/PostYears.astro";
 import Navigation from "../../components/Navigation.astro";
+import { hstack } from "../../../styled-system/patterns";
 import { parseDate, useNavigation } from "../../utils";
 
 export async function getStaticPaths() {
@@ -52,6 +53,17 @@ const { Content } = await entry.render();
 <Layout title={post.data.title} description={parseDate(post.data.date)}>
   <Paper>
     <Content />
+  </Paper>
+  <Paper>
+    <footer>
+      <h2>{post.data.title}</h2>
+      <p class={hstack({ gap: 2 })}>
+        <time datetime={post.data.date.toISOString()}
+          >{parseDate(post.data.date)}</time
+        >
+        {post.data.author && <span>by {post.data.author}</span>}
+      </p>
+    </footer>
   </Paper>
   <Navigation {...navigation} />
   <PaperLink href="/posts/">Markdown Posts Top</PaperLink>

@@ -29,6 +29,7 @@ export type MicrocmsDefaultFields = {
   sortIndex: number;
 };
 export type MicrocmsCategories = {
+  id: string;
   name: string;
   categoriesId: string;
 } & MicrocmsDefaultFields;

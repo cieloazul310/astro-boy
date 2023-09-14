@@ -4,7 +4,7 @@ import { gradientBox } from "../../styled-system/patterns";
 import ColorModeButton from "../components/ColorModeButton.astro";
 import Link from "../components/Link.astro";
 
-interface Props {
+export interface Props {
   siteTitle: string;
 }
 
@@ -36,8 +36,8 @@ const { siteTitle } = Astro.props;
     >
       <h1 class={css({ fontSize: "xl" })}>{siteTitle}</h1>
     </Link>
-    <div class={css({ flexGrow: 1, display: ["none", "none", "block"] })}></div>
-    <div class={css({ display: ["none", "none", "block"] })}>
+    <div class={css({ flexGrow: 1, hideBelow: "sm" })}></div>
+    <div class={css({ hideBelow: "sm" })}>
       <ColorModeButton />
     </div>
   </slot>

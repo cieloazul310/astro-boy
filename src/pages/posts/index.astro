@@ -3,9 +3,9 @@
 import { getCollection } from "astro:content";
 import { vstack } from "../../../styled-system/patterns";
 import Layout from "../../layout/index.astro";
-import PostListItem from "../../components/PostListItem.astro";
-import PostYears from "../../components/PostYears.astro";
-import { parseDate } from "../../utils";
+import ArticleListItem from "../../components/ArticleListItem.astro";
+import PostYears from "../../components/posts/PostYears.astro";
+import { parseDate, slugify } from "../../utils";
 
 const allPosts = await getCollection("posts");
 ---
@@ -20,8 +20,8 @@ const allPosts = await getCollection("posts");
             new Date(a.data.date ?? 0).getTime(),
         )
         .map((post) => (
-          <PostListItem
-            href={`/posts/${post.slug}`}
+          <ArticleListItem
+            href={slugify("posts", post)}
             primaryText={post.data.title}
           >
             <Fragment slot="secondaryText">
@@ -32,7 +32,7 @@ const allPosts = await getCollection("posts");
               </span>
               {post.data.author ? <span>by {post.data.author}</span> : null}
             </Fragment>
-          </PostListItem>
+          </ArticleListItem>
         ))
     }
   </ul>

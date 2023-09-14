@@ -2,9 +2,9 @@
 // import { defineRecipe } from "@pandacss/dev";
 import { cva } from "../../styled-system/css";
 /*
-const buttonBaseOptions = {
+export const buttonBaseRecipe = defineRecipe({
   className: "buttonbase",
-  base: {
+    base: {
     rounded: "md",
     display: "flex",
     alignItems: "center",
@@ -29,18 +29,17 @@ const buttonBaseOptions = {
       },
     },
     size: {
-      sm: { fontSize: "xs" },
-      md: { fontSize: "md" },
-      lg: { fontSize: "xl" },
-      xl: { fontSize: "4xl" },
+      sm: { fontSize: "xs", gap: 1 },
+      md: { fontSize: "md", gap: 1 },
+      lg: { fontSize: "xl", gap: 1 },
+      xl: { fontSize: "4xl", gap: 2 },
     },
   },
   defaultVariants: {
     visual: "solid",
     size: "md",
   },
-};
-export const buttonBaseRecipe = defineRecipe(buttonBaseOptions);
+});
 */
 export const buttonBase = cva({
   base: {
