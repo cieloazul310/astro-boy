@@ -6,11 +6,18 @@ import { useLink } from "../utils";
 import type { PropertyTypes } from "../../styled-system/types/prop-type";
 
 interface Props extends HTMLAttributes<"a"> {
+  className?: string;
   disablePrefix?: boolean;
   colorPalette?: PropertyTypes["colorPalette"];
 }
 
-const { href, disablePrefix, colorPalette = "primary", ...attrs } = Astro.props;
+const {
+  className,
+  href,
+  disablePrefix,
+  colorPalette = "primary",
+  ...attrs
+} = Astro.props;
 const link = useLink(href, { disablePrefix });
 ---
 
@@ -26,6 +33,7 @@ const link = useLink(href, { disablePrefix });
       alignItems: "center",
       height: 10,
     }),
+    className,
   )}
   role="button"
   {...link}

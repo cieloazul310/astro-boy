@@ -1,8 +1,13 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import Link from "./Link.astro";
-import { css } from "../../styled-system/css";
-import { linkBox, linkOverlay, hstack } from "../../styled-system/patterns";
+import { css, cx } from "../../styled-system/css";
+import {
+  linkBox,
+  linkOverlay,
+  hstack,
+  paper,
+} from "../../styled-system/patterns";
 
 interface Props extends HTMLAttributes<"a"> {
   primaryText?: string;
@@ -13,27 +18,17 @@ interface Props extends HTMLAttributes<"a"> {
 const { href, primaryText, secondaryText, disablePrefix } = Astro.props;
 ---
 
-<li
-  class={linkBox({
-    p: [4, 8],
-    borderWidth: "1px",
-    borderColor: { base: "primary.200", _dark: "primary.900" },
-    rounded: "xl",
-    listStyleType: "none",
-    background: { base: "bg", _hover: "primary.50" },
-    _dark: { background: { base: "bg.dark", _hover: "primary.950" } },
-  })}
->
+<li class={cx(linkBox({ colorPalette: "primary" }), paper({ hover: true }))}>
   <article class={css({ display: "flex", flexDirection: "column" })}>
     <Link className={linkOverlay()} href={href} disablePrefix={disablePrefix}>
       <slot name="primaryText">
-        <h1 class={css({ fontSize: "lg" })}>{primaryText}</h1>
+        <h1 class={css({ fontSize: ["md", "lg"] })}>{primaryText}</h1>
       </slot>
     </Link>
-    <div class={hstack({ gap: 2 })}>
+    <footer class={hstack({ gap: 2, fontSize: ["sm", "md"] })}>
       <slot name="secondaryText">
         <span>{secondaryText}</span>
       </slot>
-    </div>
+    </footer>
   </article>
 </li>
