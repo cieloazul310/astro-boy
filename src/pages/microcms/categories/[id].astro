@@ -2,9 +2,9 @@
 import Layout from "../../../layout/index.astro";
 import Paper from "../../../components/Paper.astro";
 import PaperLink from "../../../components/PaperLink.astro";
-import PostListItem from "../../../components/PostListItem.astro";
+import ArticleListItem from "../../../components/ArticleListItem.astro";
 import Navigation from "../../../components/Navigation.astro";
-import MicrocmsCategories from "../../../components/MicrocmsCategories.astro";
+import MicrocmsCategories from "../../../components/microcms/MicrocmsCategories.astro";
 import {
   getBlogs,
   getCategories,
@@ -71,7 +71,7 @@ const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
             new Date(a.publishedAt).getTime(),
         )
         .map((blog) => (
-          <PostListItem
+          <ArticleListItem
             href={slugify("microcms", blog)}
             primaryText={blog.title}
             secondaryText={parseDate(blog.publishedAt)}

@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layout/index.astro";
-import PostListItem from "../../components/PostListItem.astro";
-import MicrocmsCategories from "../../components/MicrocmsCategories.astro";
+import ArticleListItem from "../../components/ArticleListItem.astro";
+import MicrocmsCategories from "../../components/microcms/MicrocmsCategories.astro";
 import { getBlogs, parseDate, slugify } from "../../utils";
 import { vstack } from "../../../styled-system/patterns";
 
@@ -18,7 +18,7 @@ const blogs = await getBlogs({ fields: ["id", "title", "publishedAt"] });
             new Date(a.publishedAt).getTime(),
         )
         .map((blog) => (
-          <PostListItem
+          <ArticleListItem
             href={slugify("microcms", blog)}
             primaryText={blog.title}
             secondaryText={parseDate(blog.publishedAt)}

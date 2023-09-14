@@ -1,3 +1,4 @@
+export * from "./componentClasses";
 export * from "./microcms";
 export { default as parseDate } from "./parseDate";
 export * from "./rehype";

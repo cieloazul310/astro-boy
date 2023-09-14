@@ -4,8 +4,8 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../layout/index.astro";
 import { vstack } from "../../../styled-system/patterns";
 import PaperLink from "../../components/PaperLink.astro";
-import PostListItem from "../../components/PostListItem.astro";
-import PostYears from "../../components/PostYears.astro";
+import ArticleListItem from "../../components/ArticleListItem.astro";
+import PostYears from "../../components/posts/PostYears.astro";
 import Navigation from "../../components/Navigation.astro";
 import { parseDate, usePostsYears, useNavigation, slugify } from "../../utils";
 
@@ -57,7 +57,7 @@ const navigation = useNavigation(
             new Date(a.data.date ?? 0).getTime(),
         )
         .map((post) => (
-          <PostListItem
+          <ArticleListItem
             href={slugify("posts", post)}
             primaryText={post.data.title}
           >
@@ -69,7 +69,7 @@ const navigation = useNavigation(
               </span>
               {post.data.author ? <span>by {post.data.author}</span> : null}
             </Fragment>
-          </PostListItem>
+          </ArticleListItem>
         ))
     }
   </ul>
