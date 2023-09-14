@@ -7,7 +7,7 @@ import PaperLink from "../../components/PaperLink.astro";
 import PostListItem from "../../components/PostListItem.astro";
 import PostYears from "../../components/PostYears.astro";
 import Navigation from "../../components/Navigation.astro";
-import { parseDate, usePostsYears, useNavigation } from "../../utils";
+import { parseDate, usePostsYears, useNavigation, slugify } from "../../utils";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -58,7 +58,7 @@ const navigation = useNavigation(
         )
         .map((post) => (
           <PostListItem
-            href={`/posts/${post.slug}`}
+            href={slugify("posts", post)}
             primaryText={post.data.title}
           >
             <Fragment slot="secondaryText">
