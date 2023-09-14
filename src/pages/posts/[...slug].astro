@@ -8,6 +8,7 @@ import PostYears from "../../components/posts/PostYears.astro";
 import Navigation from "../../components/Navigation.astro";
 import { hstack } from "../../../styled-system/patterns";
 import { parseDate, useNavigation } from "../../utils";
+import { css } from "../../../styled-system/css";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -56,7 +57,7 @@ const { Content } = await entry.render();
   </Paper>
   <Paper>
     <footer>
-      <h2>{post.data.title}</h2>
+      <h2 class={css({ fontSize: ["lg", "lg", "xl"] })}>{post.data.title}</h2>
       <p class={hstack({ gap: 2 })}>
         <time datetime={post.data.date.toISOString()}
           >{parseDate(post.data.date)}</time
