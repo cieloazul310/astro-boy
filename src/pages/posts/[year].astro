@@ -1,5 +1,6 @@
 ---
-import type { MarkdownInstance } from "astro";
+/* eslint-disable-next-line import/no-unresolved */
+import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../layout/index.astro";
 import { vstack } from "../../../styled-system/patterns";
 import PaperLink from "../../components/PaperLink.astro";
@@ -7,17 +8,14 @@ import PostListItem from "../../components/PostListItem.astro";
 import PostYears from "../../components/PostYears.astro";
 import Navigation from "../../components/Navigation.astro";
 import { parseDate, usePostsYears, useNavigation } from "../../utils";
-import type { MarkdownFrontmatter } from "../../types";
 
 export async function getStaticPaths() {
-  const allPosts = await Astro.glob<MarkdownFrontmatter>("./**/*.md");
+  const allPosts = await getCollection("posts");
   const years = usePostsYears(allPosts);
 
   return years.map((year, index) => {
-    const posts = allPosts.filter(({ frontmatter }) =>
-      frontmatter.date
-        ? new Date(frontmatter.date).getFullYear() === year
-        : false,
+    const posts = allPosts.filter(
+      ({ data }) => new Date(data.date).getFullYear() === year,
     );
     return {
       params: { year },
@@ -34,7 +32,7 @@ export async function getStaticPaths() {
 
 interface Props {
   year: number;
-  posts: MarkdownInstance<MarkdownFrontmatter>[];
+  posts: CollectionEntry<"posts">[];
   totalCount: number;
   newer: number;
   older: number;
@@ -55,17 +53,23 @@ const navigation = useNavigation(
       posts
         .sort(
           (a, b) =>
-            new Date(b.frontmatter?.date ?? 0).getTime() -
-            new Date(a.frontmatter?.date ?? 0).getTime(),
+            new Date(b.data.date ?? 0).getTime() -
+            new Date(a.data.date ?? 0).getTime(),
         )
         .map((post) => (
           <PostListItem
-            href={post.url}
-            title={post.frontmatter?.title}
-            author={post.frontmatter?.author}
-            date={parseDate(post.frontmatter?.date)}
-            disablePrefix
-          />
+            href={`/posts/${post.slug}`}
+            primaryText={post.data.title}
+          >
+            <Fragment slot="secondaryText">
+              <span>
+                <time datetime={post.data.date.toISOString()}>
+                  {parseDate(post.data.date)}
+                </time>
+              </span>
+              {post.data.author ? <span>by {post.data.author}</span> : null}
+            </Fragment>
+          </PostListItem>
         ))
     }
   </ul>
