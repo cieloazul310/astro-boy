@@ -1,5 +1,6 @@
 export * from "./componentClasses";
 export * from "./microcms";
+export * from "./pagination";
 export { default as parseDate } from "./parseDate";
 export * from "./rehype";
 export * from "./slugify";

@@ -25,6 +25,11 @@ export const paper = definePattern({
         _dark: "colorPalette.600/90",
         _hover: hover ? "colorPalette.600/84" : undefined,
       },
+      "&[data-selected]": {
+        bgct: { base: "colorPalette.600/84", _dark: "colorPalette.600/84" },
+        color: { base: "colorPalette.800", _dark: "colorPalette.300" },
+        pointerEvents: "none",
+      },
       p: [4, 8],
       rounded: "xl",
       transition: "background .25s",
