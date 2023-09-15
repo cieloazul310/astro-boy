@@ -25,7 +25,8 @@ const { siteTitle } = Astro.props;
         left: 0,
         bgct: "bg.dark/40",
         zIndex: "drawerBackdrop",
-        ".drawer-open > &": {
+        backdropFilter: "blur(2px)",
+        "body[data-drawer-open=true] &": {
           display: "block",
           opacity: 1,
         },
@@ -48,7 +49,7 @@ const { siteTitle } = Astro.props;
       transition: "bottom .25s",
       direction: "column",
       alignItems: "stretch",
-      ".drawer-open > &": {
+      "body[data-drawer-open=true] &": {
         bottom: 0,
       },
     })}
