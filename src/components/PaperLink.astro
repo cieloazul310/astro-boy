@@ -9,12 +9,14 @@ interface Props extends HTMLAttributes<"a"> {
   className?: string;
   disablePrefix?: boolean;
   colorPalette?: PropertyTypes["colorPalette"];
+  selected?: boolean;
 }
 
 const {
   className,
   href,
   disablePrefix,
+  selected = false,
   colorPalette = "primary",
   ...attrs
 } = Astro.props;
@@ -36,6 +38,7 @@ const link = useLink(href, { disablePrefix });
     className,
   )}
   role="button"
+  data-selected={selected}
   {...link}
   {...attrs}
 >

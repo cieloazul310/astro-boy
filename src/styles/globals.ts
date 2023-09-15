@@ -7,6 +7,9 @@ const body = {
     backgroundColor: "bg.dark",
     color: "white",
   },
+  "&[data-drawer-open=true]": {
+    overflowY: "hidden",
+  },
 };
 
 const headingStyle = {
