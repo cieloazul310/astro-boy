@@ -1,4 +1,5 @@
 export * from "./componentClasses";
+export { default as excerpt } from "./excerpt";
 export * from "./microcms";
 export * from "./pagination";
 export { default as parseDate } from "./parseDate";
