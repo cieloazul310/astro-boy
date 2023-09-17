@@ -21,13 +21,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   );
 
   // Return a paginated collection of paths for all posts
-  return paginate(posts, { pageSize }).map(({ params, ...rest }) => ({
-    params: {
-      ...params,
-      page: params.page === "1" ? "index" : params.page,
-    },
-    ...rest,
-  }));
+  return paginate(posts, { pageSize });
 }
 
 interface Props {
