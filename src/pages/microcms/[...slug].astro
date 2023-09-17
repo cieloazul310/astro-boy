@@ -67,6 +67,7 @@ const { blogId, newer, older } = Astro.props as Props;
 const { title, publishedAt, content, category } = await getBlogDetail(
   blogId as string,
 );
+
 const html = await rehypeIt(content);
 const navigation = useNavigation(
   { left: newer, right: older },
@@ -78,7 +79,10 @@ const navigation = useNavigation(
 );
 ---
 
-<Layout title={title} description={parseDate(publishedAt)}>
+<Layout title={title}>
+  <Fragment slot="jumbotron-footer">
+    <time datetime={parseDate(publishedAt)}>{parseDate(publishedAt)}</time>
+  </Fragment>
   <Paper set:html={String(html)} />
   <Paper>
     <footer>

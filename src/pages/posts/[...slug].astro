@@ -51,7 +51,13 @@ const entry = await getEntry("posts", post.slug);
 const { Content } = await entry.render();
 ---
 
-<Layout title={post.data.title} description={parseDate(post.data.date)}>
+<Layout title={post.data.title}>
+  <Fragment slot="jumbotron-footer">
+    <time datetime={post.data.date.toISOString()}
+      >{parseDate(post.data.date)}</time
+    >
+    {post.data.author && <span>by {post.data.author}</span>}
+  </Fragment>
   <Paper>
     <Content />
   </Paper>
