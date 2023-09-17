@@ -87,9 +87,9 @@ const siteTitle = "Astro Boy";
             })}
           >
             <slot name="sidebar-top" />
-            {Astro.slots.has("sidebar-top") ? <Divider /> : null}
+            {Astro.slots.has("sidebar-top") && <Divider />}
             <Menu />
-            {Astro.slots.has("sidebar-bottom") ? <Divider /> : null}
+            {Astro.slots.has("sidebar-bottom") && <Divider />}
             <slot name="sidebar-bottom" />
           </div>
         </div>

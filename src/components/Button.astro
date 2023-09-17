@@ -73,6 +73,6 @@ const classes = buttonStyle({ iconPlace });
   )}
   {...buttonProps}
 >
-  {icon ? <Icon name={icon} class={classes.icon} /> : null}
+  {icon && <Icon name={icon} class={classes.icon} />}
   <slot />
 </button>

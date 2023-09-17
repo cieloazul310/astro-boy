@@ -45,7 +45,7 @@ const { page } = Astro.props;
                 {parseDate(post.data.date)}
               </time>
             </span>
-            {post.data.author ? <span>by {post.data.author}</span> : null}
+            {post.data.author && <span>by {post.data.author}</span>}
           </Fragment>
         </ArticleListItem>
       ))

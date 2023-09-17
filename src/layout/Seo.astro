@@ -40,7 +40,7 @@ const contentTitle = title ? `${title} - ${siteTitle}` : siteTitle;
     )
   }
   <meta name="twitter:card" content={twitterCardType} />
-  {siteTitle ? <meta name="twitter:site" content={siteTitle} /> : null}
+  {siteTitle && <meta name="twitter:site" content={siteTitle} />}
   {
     image && (
       <>
