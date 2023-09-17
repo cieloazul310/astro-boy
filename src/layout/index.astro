@@ -8,10 +8,11 @@ import Fab from "./Fab.astro";
 import Menu from "./Menu.astro";
 import PaperLink from "../components/PaperLink.astro";
 import Divider from "../components/Divider.astro";
+import { siteTitle } from "../data";
 import { container, vstack } from "../../styled-system/patterns";
 import { css } from "../../styled-system/css";
 
-export interface Props extends Omit<SeoProps, "siteTitle"> {
+export interface Props extends SeoProps {
   title?: string;
   description?: string;
 }
@@ -23,7 +24,6 @@ const {
   siteType = "website",
   twitterCardType = "summary",
 } = Astro.props;
-const siteTitle = "Astro Boy";
 ---
 
 <!doctype html>
@@ -35,7 +35,6 @@ const siteTitle = "Astro Boy";
     <meta name="generator" content={Astro.generator} />
     <Seo
       title={title}
-      siteTitle={siteTitle}
       description={description}
       image={image}
       siteType={siteType}
@@ -48,7 +47,10 @@ const siteTitle = "Astro Boy";
     <Header siteTitle={siteTitle} />
     <main>
       <article>
-        <Jumbotron title={title || siteTitle} description={description} />
+        <Jumbotron title={title || siteTitle}>
+          <slot name="jumbotron-header" slot="jumbotron-header" />
+          <slot name="jumbotron-footer" slot="jumbotron-footer" />
+        </Jumbotron>
         <div
           class={container({
             maxWidth: "contentMaxWidth",
@@ -87,9 +89,9 @@ const siteTitle = "Astro Boy";
             })}
           >
             <slot name="sidebar-top" />
-            {Astro.slots.has("sidebar-top") ? <Divider /> : null}
+            {Astro.slots.has("sidebar-top") && <Divider />}
             <Menu />
-            {Astro.slots.has("sidebar-bottom") ? <Divider /> : null}
+            {Astro.slots.has("sidebar-bottom") && <Divider />}
             <slot name="sidebar-bottom" />
           </div>
         </div>

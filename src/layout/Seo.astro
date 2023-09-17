@@ -1,6 +1,7 @@
 ---
+import { siteTitle, description as siteDescription } from "../data";
+
 export interface Props {
-  siteTitle: string;
   title?: string;
   description?: string;
   image?: string;
@@ -9,14 +10,15 @@ export interface Props {
 }
 
 const {
-  siteTitle,
   title,
   description,
   image,
   siteType = "website",
   twitterCardType,
 } = Astro.props;
+
 const contentTitle = title ? `${title} - ${siteTitle}` : siteTitle;
+const seoDescription = description || siteDescription;
 ---
 
 <>
@@ -31,16 +33,16 @@ const contentTitle = title ? `${title} - ${siteTitle}` : siteTitle;
   }
   <meta name="og:type" content={siteType} />
   {
-    description && (
+    seoDescription && (
       <>
-        <meta name="description" content={description} />
-        <meta name="og:description" content={description} />
-        <meta name="twitter:description" content={description} />
+        <meta name="description" content={seoDescription} />
+        <meta name="og:description" content={seoDescription} />
+        <meta name="twitter:description" content={seoDescription} />
       </>
     )
   }
   <meta name="twitter:card" content={twitterCardType} />
-  {siteTitle ? <meta name="twitter:site" content={siteTitle} /> : null}
+  {siteTitle && <meta name="twitter:site" content={siteTitle} />}
   {
     image && (
       <>

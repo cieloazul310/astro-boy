@@ -1,13 +1,12 @@
 ---
 import { css } from "../../styled-system/css";
-import { gradientBox, container } from "../../styled-system/patterns";
+import { hstack, gradientBox, container } from "../../styled-system/patterns";
 
 export interface Props {
   title?: string;
-  description?: string;
 }
 
-const { title, description } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <header
@@ -27,17 +26,28 @@ const { title, description } = Astro.props;
       flexDirection: "column",
     })}
   >
-    <slot>
-      <h1
-        class={css({
-          fontSize: ["2xl", "4xl", "4xl", "5xl"],
-        })}
-      >
-        {title}
-      </h1>
-      <p class={css({ fontSize: "md", fontWeight: "bold" })}>
-        {description}
-      </p>
-    </slot>
+    {
+      Astro.slots.has("jumbotron-header") && (
+        <p class={hstack({ gap: 2, fontSize: ["md", "lg"] })}>
+          <slot name="jumbotron-header" />
+        </p>
+      )
+    }
+    <h1
+      class={css({
+        fontSize: ["2xl", "4xl", "4xl", "5xl"],
+      })}
+    >
+      {title}
+    </h1>
+    {
+      Astro.slots.has("jumbotron-footer") && (
+        <p
+          class={hstack({ gap: 2, fontSize: ["md", "lg"], fontWeight: "bold" })}
+        >
+          <slot name="jumbotron-footer" />
+        </p>
+      )
+    }
   </div>
 </header>

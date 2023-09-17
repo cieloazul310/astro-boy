@@ -21,13 +21,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   );
 
   // Return a paginated collection of paths for all posts
-  return paginate(posts, { pageSize }).map(({ params, ...rest }) => ({
-    params: {
-      ...params,
-      page: params.page === "1" ? "index" : params.page,
-    },
-    ...rest,
-  }));
+  return paginate(posts, { pageSize });
 }
 
 interface Props {
@@ -38,6 +32,9 @@ const { page } = Astro.props;
 ---
 
 <Layout title="Markdown Posts">
+  <Fragment slot="jumbotron-footer">
+    {page.currentPage !== 1 && `(${page.currentPage}/${page.lastPage})`}
+  </Fragment>
   <ArticleList>
     {
       page.data.map((post) => (
@@ -51,7 +48,7 @@ const { page } = Astro.props;
                 {parseDate(post.data.date)}
               </time>
             </span>
-            {post.data.author ? <span>by {post.data.author}</span> : null}
+            {post.data.author && <span>by {post.data.author}</span>}
           </Fragment>
         </ArticleListItem>
       ))

@@ -7,6 +7,8 @@ import { rehypeClassNamesOptions } from "./src/utils";
 export default defineConfig({
   integrations: [pandacss()],
   markdown: {
-    rehypePlugins: [[rehypeClassNames, rehypeClassNamesOptions]],
+    rehypePlugins: [
+      [rehypeClassNames, rehypeClassNamesOptions],
+    ],
   },
 });

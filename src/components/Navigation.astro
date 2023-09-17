@@ -95,7 +95,7 @@ const classes = navigationStyle({ direction });
         <Icon class={iconStyle} name="ic:baseline-arrow-back" />
         <hgroup class={hgroupStyle()}>
           <h1>{left.primaryText}</h1>
-          {left.secondaryText ? <p>{left.secondaryText}</p> : null}
+          {left.secondaryText && <p>{left.secondaryText}</p>}
         </hgroup>
       </a>
     ) : (
@@ -115,7 +115,7 @@ const classes = navigationStyle({ direction });
         <Icon class={iconStyle} name="ic:baseline-arrow-forward" />
         <hgroup class={hgroupStyle({ type: "right" })}>
           <h1>{right.primaryText}</h1>
-          {right.secondaryText ? <p>{right.secondaryText}</p> : null}
+          {right.secondaryText && <p>{right.secondaryText}</p>}
         </hgroup>
       </a>
     ) : (

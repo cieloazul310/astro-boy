@@ -1,2 +1,2 @@
-const pageSize = 20;
+const pageSize = 25;
 export default pageSize;

@@ -58,9 +58,9 @@ const { siteTitle } = Astro.props;
     <div class={css({ flexGrow: 1, overflowY: "auto", px: 4 })}>
       <div class={vstack({ gap: 4, alignItems: "stretch" })}>
         <slot name="drawer-top" />
-        {Astro.slots.has("drawer-top") ? <Divider /> : null}
+        {Astro.slots.has("drawer-top") && <Divider />}
         <slot />
-        {Astro.slots.has("drawer-bottom") ? <Divider /> : null}
+        {Astro.slots.has("drawer-bottom") && <Divider />}
         <slot name="drawer-bottom" />
       </div>
     </div>
