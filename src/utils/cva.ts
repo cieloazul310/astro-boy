@@ -1,7 +1,7 @@
-import { defineRecipe } from "@pandacss/dev";
+/* eslint import/prefer-default-export: off */
+import { cva } from "../../styled-system/css";
 
-export const buttonBase = defineRecipe({
-  className: "buttonbase",
+export const buttonBase = cva({
   base: {
     rounded: "md",
     display: "flex",
@@ -39,4 +39,4 @@ export const buttonBase = defineRecipe({
   },
 });
 
-export default {};
+// export default { buttonBase };

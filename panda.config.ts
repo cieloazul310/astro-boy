@@ -1,12 +1,12 @@
 import { defineConfig } from "@pandacss/dev";
 import {
-  gradientBox,
-  paper,
-  backgroundColorTransparentize,
-  definePalette,
-  bg,
   globalCss,
+  patterns,
+  recipes,
+  semanticTokens,
   textStyles,
+  tokens,
+  utilities,
 } from "./src/styles";
 
 export default defineConfig({
@@ -28,52 +28,13 @@ export default defineConfig({
   theme: {
     extend: {
       textStyles,
-      tokens: {
-        sizes: {
-          headerHeight: { value: "56px" },
-          contentMaxWidth: { value: "1280px" },
-          sidebarWidth: { value: "320px" },
-        },
-        zIndex: {
-          fab: { value: 100 },
-          drawer: { value: 200 },
-          drawerBackdrop: { value: 199 },
-          header: { value: 10 },
-        },
-      },
-      semanticTokens: {
-        fontWeights: {
-          heading: { value: "{fontWeights.bold}" },
-        },
-        colors: {
-          bg,
-          ...definePalette({ primary: "sky", secondary: "orange" }),
-        },
-      },
-      /**
-       * @todo
-       */
-      /*
-      recipes: {
-        buttonBase: buttonBaseRecipe,
-      },
-      */
+      tokens,
+      semanticTokens,
+      recipes,
     },
   },
-  patterns: {
-    extend: {
-      gradientBox,
-      /* @ts-ignore */
-      paper,
-    },
-  },
-
-  utilities: {
-    extend: {
-      backgroundColorTransparentize,
-    },
-  },
-
+  patterns,
+  utilities,
   // The output directory for your css system
   outdir: "styled-system",
 });
