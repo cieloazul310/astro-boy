@@ -1,5 +1,6 @@
 ---
-import { siteTitle, description as siteDescription } from "../data";
+import { siteMetadata } from "../data";
+import { useAbsoluteUrl } from "../utils";
 
 export interface Props {
   title?: string;
@@ -17,8 +18,11 @@ const {
   twitterCardType,
 } = Astro.props;
 
-const contentTitle = title ? `${title} - ${siteTitle}` : siteTitle;
-const seoDescription = description || siteDescription;
+const contentTitle = title
+  ? `${title} - ${siteMetadata.title}`
+  : siteMetadata.title;
+const seoDescription = description || siteMetadata.description;
+const imageUrl = useAbsoluteUrl(image ?? "/ogimage.jpeg");
 ---
 
 <>
@@ -42,13 +46,17 @@ const seoDescription = description || siteDescription;
     )
   }
   <meta name="twitter:card" content={twitterCardType} />
-  {siteTitle && <meta name="twitter:site" content={siteTitle} />}
   {
-    image && (
+    siteMetadata.title && (
+      <meta name="twitter:site" content={siteMetadata.title} />
+    )
+  }
+  {
+    imageUrl && (
       <>
-        <meta name="image" content={image} />
-        <meta name="og:image" content={image} />
-        <meta name="twitter:image" content={image} />
+        <meta name="image" content={imageUrl} />
+        <meta name="og:image" content={imageUrl} />
+        <meta name="twitter:image" content={imageUrl} />
       </>
     )
   }

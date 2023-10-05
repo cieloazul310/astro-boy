@@ -8,7 +8,7 @@ import Fab from "./Fab.astro";
 import Menu from "./Menu.astro";
 import PaperLink from "../components/PaperLink.astro";
 import Divider from "../components/Divider.astro";
-import { siteTitle } from "../data";
+import { siteMetadata } from "../data";
 import { container, vstack } from "../../styled-system/patterns";
 import { css } from "../../styled-system/css";
 
@@ -44,10 +44,10 @@ const {
     </Seo>
   </head>
   <body>
-    <Header siteTitle={siteTitle} />
+    <Header siteTitle={siteMetadata.title} />
     <main>
       <article>
-        <Jumbotron title={title || siteTitle}>
+        <Jumbotron title={title ?? siteMetadata.title}>
           <slot name="jumbotron-header" slot="jumbotron-header" />
           <slot name="jumbotron-footer" slot="jumbotron-footer" />
         </Jumbotron>
@@ -97,9 +97,9 @@ const {
         </div>
       </article>
     </main>
-    <Footer siteTitle={siteTitle} />
+    <Footer siteTitle={siteMetadata.title} />
     <Fab />
-    <Drawer siteTitle={siteTitle}>
+    <Drawer siteTitle={siteMetadata.title}>
       <slot name="drawer-top" slot="drawer-top" />
       <Menu />
       <slot name="drawer-bottom" slot="drawer-bottom" />

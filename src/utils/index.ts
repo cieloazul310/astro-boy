@@ -7,6 +7,7 @@ export { default as parseDate } from "./parseDate";
 export * from "./rehype";
 export * from "./remark-plugins";
 export * from "./slugify";
+export { default as useAbsoluteUrl } from "./useAbsoluteUrl";
 export { default as useLink } from "./useLink";
 export { default as useNavigation } from "./useNavigation";
 export { default as usePostsYears } from "./usePostsYears";
