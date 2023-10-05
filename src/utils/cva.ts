@@ -1,4 +1,3 @@
-/* eslint import/prefer-default-export: off */
 import { cva } from "../../styled-system/css";
 
 export const buttonBase = cva({
@@ -39,4 +38,24 @@ export const buttonBase = cva({
   },
 });
 
-// export default { buttonBase };
+export const badge = cva({
+  base: {
+    rounded: "md",
+    px: 2,
+    py: 1,
+    fontWeight: "bolder",
+    color: { base: "colorPalette.800", _dark: "colorPalette.100" },
+    bg: { base: "colorPalette.100", _dark: "colorPalette.900" },
+  },
+  variants: {
+    size: {
+      xs: { fontSize: "xs" },
+      sm: { fontSize: "sm" },
+      md: { fontSize: "md" },
+      lg: { fontSize: "lg" },
+    },
+  },
+  defaultVariants: {
+    size: "sm",
+  },
+});

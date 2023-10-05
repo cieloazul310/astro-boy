@@ -12,6 +12,7 @@ export const zIndex = {
   drawer: { value: 200 },
   drawerBackdrop: { value: 199 },
   header: { value: 10 },
+  docked: { value: 7 },
 };
 
 export default defineTokens({

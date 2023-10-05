@@ -1,14 +1,13 @@
 ---
 /* eslint-disable-next-line import/no-unresolved */
 import { getCollection, getEntry, type CollectionEntry } from "astro:content";
-import { renderMarkdown } from "@astrojs/markdown-remark";
 import Layout from "../../layout/index.astro";
 import Paper from "../../components/Paper.astro";
 import PaperLink from "../../components/PaperLink.astro";
 import PostYears from "../../components/posts/PostYears.astro";
 import Navigation from "../../components/Navigation.astro";
 import { hstack } from "../../../styled-system/patterns";
-import { parseDate, useNavigation, excerpt } from "../../utils";
+import { parseDate, useNavigation } from "../../utils";
 import { css } from "../../../styled-system/css";
 
 export async function getStaticPaths() {
@@ -49,9 +48,8 @@ const navigation = useNavigation(
   },
 );
 const entry = await getEntry("posts", post.slug);
-const { Content } = await entry.render();
-const md = await renderMarkdown(entry.body, {});
-const description = excerpt(String(md.vfile));
+const { Content, remarkPluginFrontmatter } = await entry.render();
+const description = remarkPluginFrontmatter.excerpt;
 ---
 
 <Layout title={post.data.title} description={description}>
