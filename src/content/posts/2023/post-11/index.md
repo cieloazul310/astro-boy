@@ -2,6 +2,8 @@
 title: 壁塗り女のスルバ
 date: 2023-09-07
 author: cieloazul310
+featuredImg: "./IMG_8478.jpeg"
+featuredImgAlt: "暗渠"
 ---
 
 ## Markdown example
@@ -49,3 +51,7 @@ function hoge(input: Hoge): Hoge {
 ---
 
 ところがゴーシュはもう弾いて「楽長、あかりやのかっこはばたばたくわえてでしぞ。」と見たまし。子はいっもただまげてきれましないし重舞台が野ねずみお父さんへ五ぺん来るちゃ下をしおれをかっこうを一本あけるから「なかなか仲間。
+
+### Image
+
+![暗渠](./IMG_8478.jpeg)

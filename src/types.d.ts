@@ -1,3 +1,5 @@
+import type { LocalImageProps } from "astro/assets";
+
 export type MarkdownFrontmatter = {
   layout?: string;
   title?: string;
@@ -9,6 +11,8 @@ export type PostData = {
   title: string;
   date: Date;
   author?: string;
+  featuredImg?: LocalImageProps;
+  featuredImgAlt?: string;
 };
 
 // 型定義
