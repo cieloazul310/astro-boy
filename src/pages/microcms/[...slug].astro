@@ -65,7 +65,7 @@ interface Props {
 }
 
 const { blogId, newer, older } = Astro.props as Props;
-const { title, publishedAt, content, category } = await getBlogDetail(
+const { title, publishedAt, content, category, eyecatch } = await getBlogDetail(
   blogId as string,
 );
 
@@ -81,7 +81,7 @@ const navigation = useNavigation(
 const description = excerpt(content);
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} image={eyecatch?.url}>
   <Fragment slot="jumbotron-footer">
     <time datetime={parseDate(publishedAt)}>{parseDate(publishedAt)}</time>
   </Fragment>
