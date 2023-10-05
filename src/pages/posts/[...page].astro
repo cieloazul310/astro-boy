@@ -40,9 +40,11 @@ const { page } = Astro.props;
       page.data.map((post) => (
         <ArticleListItem
           href={slugify("posts", post)}
-          primaryText={post.data.title}
+          title={post.data.title}
+          image={post.data.featuredImg?.src}
+          imageAlt={post.data.featuredImgAlt}
         >
-          <Fragment slot="secondaryText">
+          <Fragment slot="headerText">
             <span>
               <time datetime={post.data.date.toISOString()}>
                 {parseDate(post.data.date)}

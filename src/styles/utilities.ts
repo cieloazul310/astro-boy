@@ -24,11 +24,14 @@ export const backgroundColorTransparentize = defineUtility({
     const amount = value.split("/").at(-1);
     const colorValue = token(`colors.${color}`);
 
-    const amountValue = token(`opacity.${amount}`)
-      ? token(`opacity.${amount}`) * 100
+    const tokenOpacity = token(`opacity.${amount}`);
+    const amountValue = tokenOpacity
+      ? parseFloat(tokenOpacity) * 100
       : `${amount}%`;
     return {
       backgroundColor: `color-mix(in srgb, transparent ${amountValue}, ${colorValue})`,
     };
   },
 });
+
+export default { backgroundColorTransparentize };

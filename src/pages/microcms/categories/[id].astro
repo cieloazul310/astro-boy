@@ -4,6 +4,7 @@ import Paper from "../../../components/Paper.astro";
 import PaperLink from "../../../components/PaperLink.astro";
 import ArticleList from "../../../components/ArticleList.astro";
 import ArticleListItem from "../../../components/ArticleListItem.astro";
+import Badge from "../../../components/Badge.astro";
 import Navigation from "../../../components/Navigation.astro";
 import MicrocmsCategories from "../../../components/microcms/MicrocmsCategories.astro";
 import {
@@ -19,7 +20,7 @@ import type { MicrocmsBlogs, MicrocmsBlogsCategory } from "../../../types";
 export async function getStaticPaths() {
   const categories = await getCategories({ fields: ["id", "name"] });
   const blogs = await getBlogs({
-    fields: ["id", "title", "publishedAt", "category"],
+    fields: ["id", "title", "publishedAt", "category", "eyecatch"],
   });
 
   return categories.contents.map(({ id, name }, index) => {
@@ -47,7 +48,10 @@ export async function getStaticPaths() {
 interface Props {
   id: string;
   name: string;
-  posts: Pick<MicrocmsBlogs, "id" | "title" | "publishedAt" | "category">[];
+  posts: Pick<
+    MicrocmsBlogs,
+    "id" | "title" | "publishedAt" | "category" | "eyecatch"
+  >[];
   previous: Pick<MicrocmsBlogsCategory, "id" | "name"> | null;
   next: Pick<MicrocmsBlogsCategory, "id" | "name"> | null;
 }
@@ -75,9 +79,15 @@ const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
           .map((blog) => (
             <ArticleListItem
               href={slugify("microcms", blog)}
-              primaryText={blog.title}
-              secondaryText={parseDate(blog.publishedAt)}
-            />
+              title={blog.title}
+              headerText={parseDate(blog.publishedAt)}
+            >
+              {blog.category && (
+                <Badge slot="badge" size="xs">
+                  {blog.category.name}
+                </Badge>
+              )}
+            </ArticleListItem>
           ))}
       </ArticleList>
     ) : (

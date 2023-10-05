@@ -2,6 +2,8 @@
 title: Markdown preview
 date: 2023-09-08
 author: cieloazul310
+featuredImg: https://i.ytimg.com/vi/LatorN4P9aA/0.jpg
+featuredImgAlt: Separate Ways
 ---
 
 ## Headers
