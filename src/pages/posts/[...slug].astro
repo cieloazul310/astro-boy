@@ -52,7 +52,11 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
 const description = remarkPluginFrontmatter.excerpt;
 ---
 
-<Layout title={post.data.title} description={description}>
+<Layout
+  title={post.data.title}
+  description={description}
+  image={post.data.featuredImg?.src}
+>
   <Fragment slot="jumbotron-footer">
     <time datetime={post.data.date.toISOString()}
       >{parseDate(post.data.date)}</time

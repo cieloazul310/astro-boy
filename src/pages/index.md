@@ -4,7 +4,7 @@ title: Astro Boy
 author: cieloazul310
 ---
 
-このページはAstro, Panda CSS, そしてmicroCMSによって作成されています。
+このページはAstro, Panda CSS, そしてmicroCMSによって作成されたサンプルページです。
 
 ## Astro
 
