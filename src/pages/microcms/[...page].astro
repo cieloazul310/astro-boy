@@ -1,14 +1,17 @@
 ---
-import type { GetStaticPathsOptions, Page } from "astro";
-import Layout from "../../layout/index.astro";
-import ArticleList from "../../components/ArticleList.astro";
-import ArticleListItem from "../../components/ArticleListItem.astro";
+import type { GetStaticPathsOptions, InferGetStaticPropsType } from "astro";
+import {
+  SarkaraLayout,
+  ArticleList,
+  Pagination,
+} from "@cieloazul310/astro-sarkara";
+import Analytics from "../../components/Analytics.astro";
+import ListItem from "../../components/microcms/ListItem.astro";
 import MicrocmsCategories from "../../components/microcms/MicrocmsCategories.astro";
-import Pagination from "../../components/Pagination.astro";
-import Badge from "../../components/Badge.astro";
-import { pageSize } from "../../data";
-import { getBlogs, parseDate, slugify } from "../../utils";
-import type { MicrocmsBlogs } from "../../types";
+import Ad from "../../components/ads/ad.astro";
+import AdScript from "../../components/ads/script.astro";
+import { menu, siteMetadata, pageSize } from "../../data";
+import { getBlogs } from "../../utils";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const allBlogs = await getBlogs({
@@ -22,47 +25,32 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   return paginate(blogs, { pageSize });
 }
 
-interface Props {
-  page: Page<
-    Pick<
-      MicrocmsBlogs,
-      "id" | "title" | "publishedAt" | "category" | "eyecatch"
-    >
-  >;
-}
-
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page } = Astro.props;
 ---
 
-<Layout title="microCMS Posts">
+<SarkaraLayout menu={menu} siteMetadata={siteMetadata} title="microCMS Posts">
+  <Analytics slot="top-of-head" />
   <Fragment slot="jumbotron-footer">
     {page.currentPage !== 1 && `(${page.currentPage}/${page.lastPage})`}
   </Fragment>
   <ArticleList>
     {
       page.data
+        /*
         .sort(
           (a, b) =>
             new Date(b.publishedAt).getTime() -
             new Date(a.publishedAt).getTime(),
         )
-        .map((blog) => (
-          <ArticleListItem
-            href={slugify("microcms", blog)}
-            title={blog.title}
-            headerText={parseDate(blog.publishedAt)}
-            image={blog.eyecatch?.url}
-          >
-            {blog.category && (
-              <Badge slot="badge" size="xs">
-                {blog.category.name}
-              </Badge>
-            )}
-          </ArticleListItem>
-        ))
+        */
+        .map((blog) => <ListItem blog={blog} />)
     }
+    <Ad variant="infeed" />
   </ArticleList>
   <Pagination page={page} basePath="/microcms" />
   <MicrocmsCategories slot="sidebar-top" />
+  <Ad variant="display-2" slot="sidebar-bottom" />
   <MicrocmsCategories slot="drawer-top" />
-</Layout>
+  <AdScript slot="bottom-of-body" />
+</SarkaraLayout>

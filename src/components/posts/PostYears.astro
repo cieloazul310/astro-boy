@@ -1,8 +1,8 @@
 ---
 /* eslint-disable-next-line import/no-unresolved */
 import { getCollection } from "astro:content";
-import PaperLink from "../PaperLink.astro";
-import { vstack } from "../../../styled-system/patterns";
+import { PaperLink } from "@cieloazul310/astro-sarkara";
+import { vstack } from "@cieloazul310/sarkara-css/patterns";
 import usePostsYears from "../../utils/usePostsYears";
 
 const allPosts = await getCollection("posts");

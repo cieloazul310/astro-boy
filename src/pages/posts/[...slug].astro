@@ -1,14 +1,23 @@
 ---
 /* eslint-disable-next-line import/no-unresolved */
-import { getCollection, getEntry, type CollectionEntry } from "astro:content";
-import Layout from "../../layout/index.astro";
-import Paper from "../../components/Paper.astro";
-import PaperLink from "../../components/PaperLink.astro";
+import { getCollection, getEntry } from "astro:content";
+import type { InferGetStaticPropsType } from "astro";
+import {
+  SarkaraLayout,
+  Paper,
+  PaperLink,
+  Navigation,
+  useNavigation,
+} from "@cieloazul310/astro-sarkara";
+import { hstack } from "@cieloazul310/sarkara-css/patterns";
+import { css } from "@cieloazul310/sarkara-css/css";
+import Analytics from "../../components/Analytics.astro";
+import shortcodes from "../../components/shortcodes";
 import PostYears from "../../components/posts/PostYears.astro";
-import Navigation from "../../components/Navigation.astro";
-import { hstack } from "../../../styled-system/patterns";
-import { parseDate, useNavigation } from "../../utils";
-import { css } from "../../../styled-system/css";
+import Ad from "../../components/ads/ad.astro";
+import AdScript from "../../components/ads/script.astro";
+import { parseDate } from "../../utils";
+import { menu, siteMetadata } from "../../data";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -32,11 +41,7 @@ export async function getStaticPaths() {
     });
 }
 
-interface Props {
-  post: CollectionEntry<"posts">;
-  newer: CollectionEntry<"posts">;
-  older: CollectionEntry<"posts">;
-}
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post, newer, older } = Astro.props;
 const navigation = useNavigation(
@@ -52,11 +57,14 @@ const { Content, remarkPluginFrontmatter } = await entry.render();
 const description = remarkPluginFrontmatter.excerpt;
 ---
 
-<Layout
+<SarkaraLayout
+  menu={menu}
+  siteMetadata={siteMetadata}
   title={post.data.title}
   description={description}
   image={post.data.featuredImg?.src}
 >
+  <Analytics slot="top-of-head" />
   <Fragment slot="jumbotron-footer">
     <time datetime={post.data.date.toISOString()}
       >{parseDate(post.data.date)}</time
@@ -64,11 +72,13 @@ const description = remarkPluginFrontmatter.excerpt;
     {post.data.author && <span>by {post.data.author}</span>}
   </Fragment>
   <Paper>
-    <Content />
+    <Content components={shortcodes} />
   </Paper>
   <Paper>
     <footer>
-      <h2 class={css({ fontSize: ["lg", "lg", "xl"] })}>{post.data.title}</h2>
+      <h2 class={css({ textStyle: "headings", fontSize: ["lg", "lg", "xl"] })}>
+        {post.data.title}
+      </h2>
       <p class={hstack({ gap: 2 })}>
         <time datetime={post.data.date.toISOString()}
           >{parseDate(post.data.date)}</time
@@ -78,10 +88,13 @@ const description = remarkPluginFrontmatter.excerpt;
     </footer>
   </Paper>
   <Navigation {...navigation} />
+  <Ad />
   <PaperLink href="/posts/">Markdown Posts Top</PaperLink>
   <Fragment slot="sidebar-top">
     <Navigation {...navigation} direction="column" />
     <PostYears />
   </Fragment>
+  <Ad variant="display-2" slot="sidebar-bottom" />
   <PostYears slot="drawer-top" />
-</Layout>
+  <AdScript slot="bottom-of-body" />
+</SarkaraLayout>

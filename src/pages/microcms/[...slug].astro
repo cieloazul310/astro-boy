@@ -1,23 +1,29 @@
 ---
-import Layout from "../../layout/index.astro";
-import Paper from "../../components/Paper.astro";
-import PaperLink from "../../components/PaperLink.astro";
-import Navigation from "../../components/Navigation.astro";
+import type { InferGetStaticPropsType } from "astro";
+import {
+  SarkaraLayout,
+  Paper,
+  PaperLink,
+  Navigation,
+  Link,
+  Badge,
+  useNavigation,
+} from "@cieloazul310/astro-sarkara";
+import { css } from "@cieloazul310/sarkara-css/css";
+import { hstack } from "@cieloazul310/sarkara-css/patterns";
+import Analytics from "../../components/Analytics.astro";
 import MicrocmsCategories from "../../components/microcms/MicrocmsCategories.astro";
-import Link from "../../components/Link.astro";
-import Badge from "../../components/Badge.astro";
-import { css } from "../../../styled-system/css";
-import { hstack } from "../../../styled-system/patterns";
+import Ad from "../../components/ads/ad.astro";
+import AdScript from "../../components/ads/script.astro";
+import { siteMetadata, menu } from "../../data";
 import {
   getBlogs,
   getBlogDetail,
   parseDate,
   rehypeIt,
-  useNavigation,
   slugify,
   excerpt,
 } from "../../utils";
-import type { MicrocmsBlogs } from "../../types";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
@@ -48,26 +54,10 @@ export async function getStaticPaths() {
     });
 }
 
-interface Props {
-  year: string;
-  month: string;
-  blogId: string;
-  newer:
-    | (Pick<MicrocmsBlogs, "id" | "title" | "publishedAt"> & {
-        slug: string;
-      })
-    | null;
-  older:
-    | (Pick<MicrocmsBlogs, "id" | "title" | "publishedAt"> & {
-        slug: string;
-      })
-    | null;
-}
-
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { blogId, newer, older } = Astro.props as Props;
-const { title, publishedAt, content, category, eyecatch } = await getBlogDetail(
-  blogId as string,
-);
+const { title, publishedAt, content, category, eyecatch } =
+  await getBlogDetail(blogId);
 
 const html = await rehypeIt(content);
 const navigation = useNavigation(
@@ -81,7 +71,14 @@ const navigation = useNavigation(
 const description = excerpt(content);
 ---
 
-<Layout title={title} description={description} image={eyecatch?.url}>
+<SarkaraLayout
+  menu={menu}
+  siteMetadata={siteMetadata}
+  title={title}
+  description={description}
+  image={eyecatch?.url}
+>
+  <Analytics slot="top-of-head" />
   <Fragment slot="jumbotron-footer">
     <time datetime={parseDate(publishedAt)}>{parseDate(publishedAt)}</time>
   </Fragment>
@@ -106,10 +103,13 @@ const description = excerpt(content);
     </footer>
   </Paper>
   <Navigation {...navigation} />
+  <Ad />
   <PaperLink href="/microcms/">CMS Posts Top</PaperLink>
   <Fragment slot="sidebar-top">
     <Navigation {...navigation} direction="column" />
     <MicrocmsCategories />
   </Fragment>
+  <Ad variant="display-2" slot="sidebar-bottom" />
   <MicrocmsCategories slot="drawer-top" />
-</Layout>
+  <AdScript slot="bottom-of-body" />
+</SarkaraLayout>

@@ -1,6 +1,6 @@
 ---
-import PaperLink from "../PaperLink.astro";
-import { vstack } from "../../../styled-system/patterns";
+import { PaperLink } from "@cieloazul310/astro-sarkara";
+import { vstack } from "@cieloazul310/sarkara-css/patterns";
 import { getCategories } from "../../utils";
 
 const categories = await getCategories({ fields: ["id", "name"] });

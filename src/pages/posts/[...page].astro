@@ -1,15 +1,18 @@
 ---
 /* eslint-disable-next-line import/no-unresolved */
 import { getCollection } from "astro:content";
-import type { GetStaticPathsOptions, Page } from "astro";
-import Layout from "../../layout/index.astro";
-import ArticleListItem from "../../components/ArticleListItem.astro";
+import type { InferGetStaticPropsType, GetStaticPathsOptions } from "astro";
+import {
+  SarkaraLayout,
+  ArticleList,
+  Pagination,
+} from "@cieloazul310/astro-sarkara";
+import Analytics from "../../components/Analytics.astro";
+import ListItem from "../../components/posts/ListItem.astro";
 import PostYears from "../../components/posts/PostYears.astro";
-import ArticleList from "../../components/ArticleList.astro";
-import Pagination from "../../components/Pagination.astro";
-import { pageSize } from "../../data";
-import { parseDate, slugify } from "../../utils";
-import type { PostData } from "../../types";
+import Ad from "../../components/ads/ad.astro";
+import AdScript from "../../components/ads/script.astro";
+import { pageSize, menu, siteMetadata } from "../../data";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   // Load your data with fetch(), Astro.glob(), etc.
@@ -24,39 +27,22 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   return paginate(posts, { pageSize });
 }
 
-interface Props {
-  page: Page<{ slug: string; data: PostData }>;
-}
-
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page } = Astro.props;
 ---
 
-<Layout title="Markdown Posts">
+<SarkaraLayout menu={menu} siteMetadata={siteMetadata} title="Markdown Posts">
+  <Analytics slot="top-of-head" />
   <Fragment slot="jumbotron-footer">
     {page.currentPage !== 1 && `(${page.currentPage}/${page.lastPage})`}
   </Fragment>
   <ArticleList>
-    {
-      page.data.map((post) => (
-        <ArticleListItem
-          href={slugify("posts", post)}
-          title={post.data.title}
-          image={post.data.featuredImg?.src}
-          imageAlt={post.data.featuredImgAlt}
-        >
-          <Fragment slot="headerText">
-            <span>
-              <time datetime={post.data.date.toISOString()}>
-                {parseDate(post.data.date)}
-              </time>
-            </span>
-            {post.data.author && <span>by {post.data.author}</span>}
-          </Fragment>
-        </ArticleListItem>
-      ))
-    }
+    {page.data.map((post) => <ListItem post={post} />)}
+    <Ad variant="infeed" />
   </ArticleList>
   <Pagination page={page} basePath="/posts" />
   <PostYears slot="sidebar-top" />
+  <Ad variant="display-2" slot="sidebar-bottom" />
   <PostYears slot="drawer-top" />
-</Layout>
+  <AdScript slot="bottom-of-body" />
+</SarkaraLayout>
