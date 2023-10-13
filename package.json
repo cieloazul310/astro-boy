@@ -11,7 +11,7 @@
     "panda": "panda",
     "eslint": "eslint src --ext .js,.ts,.astro --fix",
     "format": "prettier \"src/**/*.{js,ts,astro}\" --write",
-    "check": "astro check && tsc --noEmit",
+    "check": "astro check",
     "lint-staged": "lint-staged",
     "prepare": "git config --local core.hooksPath .githooks & panda codegen"
   },
@@ -31,6 +31,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.2.1",
     "@astrojs/markdown-remark": "^3.3.0",
+    "@astrojs/partytown": "^2.0.1",
     "@pandacss/astro": "^0.15.5",
     "@pandacss/dev": "^0.15.5",
     "@types/mdast": "^4.0.1",

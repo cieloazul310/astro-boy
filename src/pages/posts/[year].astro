@@ -9,8 +9,11 @@ import {
   Navigation,
   useNavigation,
 } from "@cieloazul310/astro-sarkara";
+import Analytics from "../../components/Analytics.astro";
 import ListItem from "../../components/posts/ListItem.astro";
 import PostYears from "../../components/posts/PostYears.astro";
+import Ad from "../../components/ads/ad.astro";
+import AdScript from "../../components/ads/script.astro";
 import { usePostsYears } from "../../utils";
 import { menu, siteMetadata } from "../../data";
 
@@ -51,19 +54,15 @@ const navigation = useNavigation(
   siteMetadata={siteMetadata}
   title={`${year}年の記事`}
 >
+  <Analytics slot="top-of-head" />
   <ArticleList>
-    {
-      posts
-        .sort(
-          (a, b) =>
-            new Date(b.data.date ?? 0).getTime() -
-            new Date(a.data.date ?? 0).getTime(),
-        )
-        .map((post) => <ListItem post={post} />)
-    }
+    {posts.map((post) => <ListItem post={post} />)}
+    <Ad variant="infeed" />
   </ArticleList>
   <Navigation {...navigation} />
   <PaperLink href="/posts/">Markdown Posts Top</PaperLink>
   <PostYears slot="sidebar-top" />
+  <Ad variant="display-2" slot="sidebar-bottom" />
   <PostYears slot="drawer-top" />
+  <AdScript slot="bottom-of-body" />
 </SarkaraLayout>

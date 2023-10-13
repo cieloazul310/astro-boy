@@ -11,7 +11,10 @@ import {
 } from "@cieloazul310/astro-sarkara";
 import { css } from "@cieloazul310/sarkara-css/css";
 import { hstack } from "@cieloazul310/sarkara-css/patterns";
+import Analytics from "../../components/Analytics.astro";
 import MicrocmsCategories from "../../components/microcms/MicrocmsCategories.astro";
+import Ad from "../../components/ads/ad.astro";
+import AdScript from "../../components/ads/script.astro";
 import { siteMetadata, menu } from "../../data";
 import {
   getBlogs,
@@ -75,6 +78,7 @@ const description = excerpt(content);
   description={description}
   image={eyecatch?.url}
 >
+  <Analytics slot="top-of-head" />
   <Fragment slot="jumbotron-footer">
     <time datetime={parseDate(publishedAt)}>{parseDate(publishedAt)}</time>
   </Fragment>
@@ -99,10 +103,13 @@ const description = excerpt(content);
     </footer>
   </Paper>
   <Navigation {...navigation} />
+  <Ad />
   <PaperLink href="/microcms/">CMS Posts Top</PaperLink>
   <Fragment slot="sidebar-top">
     <Navigation {...navigation} direction="column" />
     <MicrocmsCategories />
   </Fragment>
+  <Ad variant="display-2" slot="sidebar-bottom" />
   <MicrocmsCategories slot="drawer-top" />
+  <AdScript slot="bottom-of-body" />
 </SarkaraLayout>

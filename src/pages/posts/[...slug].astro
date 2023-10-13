@@ -11,7 +11,11 @@ import {
 } from "@cieloazul310/astro-sarkara";
 import { hstack } from "@cieloazul310/sarkara-css/patterns";
 import { css } from "@cieloazul310/sarkara-css/css";
+import Analytics from "../../components/Analytics.astro";
+import shortcodes from "../../components/shortcodes";
 import PostYears from "../../components/posts/PostYears.astro";
+import Ad from "../../components/ads/ad.astro";
+import AdScript from "../../components/ads/script.astro";
 import { parseDate } from "../../utils";
 import { menu, siteMetadata } from "../../data";
 
@@ -60,6 +64,7 @@ const description = remarkPluginFrontmatter.excerpt;
   description={description}
   image={post.data.featuredImg?.src}
 >
+  <Analytics slot="top-of-head" />
   <Fragment slot="jumbotron-footer">
     <time datetime={post.data.date.toISOString()}
       >{parseDate(post.data.date)}</time
@@ -67,7 +72,7 @@ const description = remarkPluginFrontmatter.excerpt;
     {post.data.author && <span>by {post.data.author}</span>}
   </Fragment>
   <Paper>
-    <Content />
+    <Content components={shortcodes} />
   </Paper>
   <Paper>
     <footer>
@@ -83,10 +88,13 @@ const description = remarkPluginFrontmatter.excerpt;
     </footer>
   </Paper>
   <Navigation {...navigation} />
+  <Ad />
   <PaperLink href="/posts/">Markdown Posts Top</PaperLink>
   <Fragment slot="sidebar-top">
     <Navigation {...navigation} direction="column" />
     <PostYears />
   </Fragment>
+  <Ad variant="display-2" slot="sidebar-bottom" />
   <PostYears slot="drawer-top" />
+  <AdScript slot="bottom-of-body" />
 </SarkaraLayout>

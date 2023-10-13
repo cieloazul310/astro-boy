@@ -7,8 +7,11 @@ import {
   ArticleList,
   Pagination,
 } from "@cieloazul310/astro-sarkara";
+import Analytics from "../../components/Analytics.astro";
 import ListItem from "../../components/posts/ListItem.astro";
 import PostYears from "../../components/posts/PostYears.astro";
+import Ad from "../../components/ads/ad.astro";
+import AdScript from "../../components/ads/script.astro";
 import { pageSize, menu, siteMetadata } from "../../data";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
@@ -29,13 +32,17 @@ const { page } = Astro.props;
 ---
 
 <SarkaraLayout menu={menu} siteMetadata={siteMetadata} title="Markdown Posts">
+  <Analytics slot="top-of-head" />
   <Fragment slot="jumbotron-footer">
     {page.currentPage !== 1 && `(${page.currentPage}/${page.lastPage})`}
   </Fragment>
   <ArticleList>
     {page.data.map((post) => <ListItem post={post} />)}
+    <Ad variant="infeed" />
   </ArticleList>
   <Pagination page={page} basePath="/posts" />
   <PostYears slot="sidebar-top" />
+  <Ad variant="display-2" slot="sidebar-bottom" />
   <PostYears slot="drawer-top" />
+  <AdScript slot="bottom-of-body" />
 </SarkaraLayout>

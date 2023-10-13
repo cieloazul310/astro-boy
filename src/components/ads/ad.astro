@@ -1,0 +1,59 @@
+---
+import { cx, css } from "@cieloazul310/sarkara-css/css";
+
+interface Props {
+  variant?: "display-1" | "display-2" | "in-article" | "infeed";
+}
+const { variant = "display-1" } = Astro.props;
+---
+
+<div class={css({ maxWidth: "100%", overflow: "hidden" })}>
+  <span class={css({ display: "block", fontSize: "sm" })}>広告</span>
+  {
+    variant === "display-1" && (
+      <ins
+        class={cx("adsbygoogle", css({ display: "block" }))}
+        data-ad-client="ca-pub-7323207940463794"
+        data-ad-slot="9294647530"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+    )
+  }
+  {
+    variant === "display-2" && (
+      <ins
+        class={cx("adsbygoogle", css({ display: "block" }))}
+        data-ad-client="ca-pub-7323207940463794"
+        data-ad-slot="8436899423"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+    )
+  }
+  {
+    variant === "in-article" && (
+      <ins
+        class={cx(
+          "adsbygoogle",
+          css({ display: "block", textAlign: "center" }),
+        )}
+        data-ad-layout="in-article"
+        data-ad-format="fluid"
+        data-ad-client="ca-pub-7323207940463794"
+        data-ad-slot="5361526981"
+      />
+    )
+  }
+  {
+    variant === "infeed" && (
+      <ins
+        class={cx("adsbygoogle", css({ display: "block" }))}
+        data-ad-format="fluid"
+        data-ad-layout-key="-ge+15-5z-e5+1ck"
+        data-ad-client="ca-pub-7323207940463794"
+        data-ad-slot="2376270997"
+      />
+    )
+  }
+</div>
