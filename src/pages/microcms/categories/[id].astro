@@ -1,20 +1,18 @@
 ---
-import Layout from "../../../layout/index.astro";
-import Paper from "../../../components/Paper.astro";
-import PaperLink from "../../../components/PaperLink.astro";
-import ArticleList from "../../../components/ArticleList.astro";
-import ArticleListItem from "../../../components/ArticleListItem.astro";
-import Badge from "../../../components/Badge.astro";
-import Navigation from "../../../components/Navigation.astro";
-import MicrocmsCategories from "../../../components/microcms/MicrocmsCategories.astro";
+import type { InferGetStaticPropsType } from "astro";
 import {
-  getBlogs,
-  getCategories,
-  parseDate,
-  slugify,
+  SarkaraLayout,
+  Paper,
+  PaperLink,
+  ArticleList,
+  Navigation,
   useNavigation,
-} from "../../../utils";
-import type { MicrocmsBlogs, MicrocmsBlogsCategory } from "../../../types";
+} from "@cieloazul310/astro-sarkara";
+import ListItem from "../../../components/microcms/ListItem.astro";
+import MicrocmsCategories from "../../../components/microcms/MicrocmsCategories.astro";
+import { getBlogs, getCategories } from "../../../utils";
+import { menu, siteMetadata } from "../../../data";
+import type { MicrocmsBlogsCategory } from "../../../types";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
@@ -45,18 +43,8 @@ export async function getStaticPaths() {
   });
 }
 
-interface Props {
-  id: string;
-  name: string;
-  posts: Pick<
-    MicrocmsBlogs,
-    "id" | "title" | "publishedAt" | "category" | "eyecatch"
-  >[];
-  previous: Pick<MicrocmsBlogsCategory, "id" | "name"> | null;
-  next: Pick<MicrocmsBlogsCategory, "id" | "name"> | null;
-}
-
-const { name, posts, previous, next } = Astro.props as Props;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { name, posts, previous, next } = Astro.props;
 const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
   { left: previous, right: next },
   {
@@ -66,7 +54,7 @@ const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
 );
 ---
 
-<Layout title={name}>
+<SarkaraLayout menu={menu} siteMetadata={siteMetadata} title={name}>
   {
     posts.length ? (
       <ArticleList>
@@ -77,17 +65,7 @@ const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
               new Date(a.publishedAt).getTime(),
           )
           .map((blog) => (
-            <ArticleListItem
-              href={slugify("microcms", blog)}
-              title={blog.title}
-              headerText={parseDate(blog.publishedAt)}
-            >
-              {blog.category && (
-                <Badge slot="badge" size="xs">
-                  {blog.category.name}
-                </Badge>
-              )}
-            </ArticleListItem>
+            <ListItem blog={blog} />
           ))}
       </ArticleList>
     ) : (
@@ -96,9 +74,8 @@ const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
       </Paper>
     )
   }
-
   <Navigation {...navigation} />
   <PaperLink href="/microcms/">CMS Posts Top</PaperLink>
   <MicrocmsCategories slot="sidebar-top" />
   <MicrocmsCategories slot="drawer-top" />
-</Layout>
+</SarkaraLayout>

@@ -1,6 +1,6 @@
 ---
-import Layout from "../layout/index.astro";
-import Paper from "../components/Paper.astro";
+import { SarkaraLayout, Paper } from "@cieloazul310/astro-sarkara";
+import { siteMetadata, menu } from "../data";
 
 interface Props {
   frontmatter?: {
@@ -12,8 +12,13 @@ interface Props {
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter?.title} description={frontmatter?.description}>
+<SarkaraLayout
+  siteMetadata={siteMetadata}
+  menu={menu}
+  title={frontmatter?.title}
+  description={frontmatter?.description}
+>
   <Paper>
     <slot />
   </Paper>
-</Layout>
+</SarkaraLayout>

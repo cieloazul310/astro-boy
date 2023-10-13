@@ -1,9 +1,13 @@
 import { defineConfig } from "astro/config";
+import type { RehypePlugin } from "@astrojs/markdown-remark";
 import pandacss from "@pandacss/astro";
-import rehypeClassNames from "rehype-class-names";
-import rehypeExternalLinks, { type Options as RehypeExternalLinksOptions } from "rehype-external-links";
+import rehypeClassNames, { type Options as RehypeClassNamesOptions } from "rehype-class-names";
+import rehypeExternalLinks, {
+  type Options as RehypeExternalLinksOptions,
+} from "rehype-external-links";
 import mdx from "@astrojs/mdx";
-import { rehypeClassNamesOptions, remarkPluginExcerpt } from "./src/utils";
+import { rehypeClassNamesOptions } from "@cieloazul310/astro-sarkara/classes";
+import { remarkPluginExcerpt } from "./src/utils";
 
 const rehypeExternalLinksOptions: RehypeExternalLinksOptions = {
   target: "_blank",
@@ -14,15 +18,16 @@ const rehypeExternalLinksOptions: RehypeExternalLinksOptions = {
 export default defineConfig({
   integrations: [pandacss(), mdx()],
   markdown: {
-    remarkPlugins: [
-      // @ts-ignore
-      remarkPluginExcerpt,
-    ],
+    remarkPlugins: [remarkPluginExcerpt],
     rehypePlugins: [
-      // @ts-ignore
-      [rehypeClassNames, rehypeClassNamesOptions],
-      // @ts-ignore
-      [rehypeExternalLinks, rehypeExternalLinksOptions],
+      [
+        rehypeClassNames as RehypePlugin<[RehypeClassNamesOptions]>,
+        rehypeClassNamesOptions,
+      ],
+      [
+        rehypeExternalLinks as RehypePlugin<[RehypeExternalLinksOptions]>,
+        rehypeExternalLinksOptions,
+      ],
     ],
   },
 });

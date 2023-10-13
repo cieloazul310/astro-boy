@@ -1,13 +1,18 @@
 ---
 /* eslint-disable-next-line import/no-unresolved */
-import { getCollection, type CollectionEntry } from "astro:content";
-import Layout from "../../layout/index.astro";
-import PaperLink from "../../components/PaperLink.astro";
-import ArticleList from "../../components/ArticleList.astro";
-import ArticleListItem from "../../components/ArticleListItem.astro";
+import { getCollection } from "astro:content";
+import type { InferGetStaticPropsType } from "astro";
+import {
+  SarkaraLayout,
+  PaperLink,
+  ArticleList,
+  Navigation,
+  useNavigation,
+} from "@cieloazul310/astro-sarkara";
+import ListItem from "../../components/posts/ListItem.astro";
 import PostYears from "../../components/posts/PostYears.astro";
-import Navigation from "../../components/Navigation.astro";
-import { parseDate, usePostsYears, useNavigation, slugify } from "../../utils";
+import { usePostsYears } from "../../utils";
+import { menu, siteMetadata } from "../../data";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -30,13 +35,7 @@ export async function getStaticPaths() {
   });
 }
 
-interface Props {
-  year: number;
-  posts: CollectionEntry<"posts">[];
-  totalCount: number;
-  newer: number;
-  older: number;
-}
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { posts, year, newer, older } = Astro.props;
 const navigation = useNavigation(
   { left: newer, right: older },
@@ -47,7 +46,11 @@ const navigation = useNavigation(
 );
 ---
 
-<Layout title={`${year}年の記事`}>
+<SarkaraLayout
+  menu={menu}
+  siteMetadata={siteMetadata}
+  title={`${year}年の記事`}
+>
   <ArticleList>
     {
       posts
@@ -56,25 +59,11 @@ const navigation = useNavigation(
             new Date(b.data.date ?? 0).getTime() -
             new Date(a.data.date ?? 0).getTime(),
         )
-        .map((post) => (
-          <ArticleListItem
-            href={slugify("posts", post)}
-            title={post.data.title}
-          >
-            <Fragment slot="headerText">
-              <span>
-                <time datetime={post.data.date.toISOString()}>
-                  {parseDate(post.data.date)}
-                </time>
-              </span>
-              {post.data.author && <span>by {post.data.author}</span>}
-            </Fragment>
-          </ArticleListItem>
-        ))
+        .map((post) => <ListItem post={post} />)
     }
   </ArticleList>
   <Navigation {...navigation} />
   <PaperLink href="/posts/">Markdown Posts Top</PaperLink>
   <PostYears slot="sidebar-top" />
   <PostYears slot="drawer-top" />
-</Layout>
+</SarkaraLayout>

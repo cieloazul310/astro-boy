@@ -4,7 +4,7 @@ import addClasses from "rehype-class-names";
 import rehypeExternalLinks, {
   type Options as RehypeExternalLinksOptions,
 } from "rehype-external-links";
-import { rehypeClassNamesOptions } from "./componentClasses";
+import { rehypeClassNamesOptions } from "@cieloazul310/astro-sarkara/classes";
 
 const rehypeExternalLinksOptions: RehypeExternalLinksOptions = {
   target: "_blank",
