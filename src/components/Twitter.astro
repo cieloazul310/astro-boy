@@ -16,18 +16,19 @@ const tweet = await fetch(baseUrl.toString())
   .catch(() => null);
 ---
 
-<>
-  {
-    tweet && (
+{
+  tweet && (
+    <>
       <div
         class={css({ my: "lg", _first: { mt: 0 }, _last: { mb: 0 } })}
         set:html={tweet.html}
       />
-    )
-  }
-  <script
-    async
-    src="https://platform.twitter.com/widgets.js"
-    charset="utf-8"
-    crossorigin="anonymous"></script>
-</>
+      <script
+        async
+        src="https://platform.twitter.com/widgets.js"
+        charset="utf-8"
+        crossorigin="anonymous"
+      />
+    </>
+  )
+}
