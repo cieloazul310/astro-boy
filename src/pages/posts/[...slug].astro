@@ -14,8 +14,7 @@ import { css } from "@cieloazul310/sarkara-css/css";
 import Analytics from "../../components/Analytics.astro";
 import shortcodes from "../../components/shortcodes";
 import PostYears from "../../components/posts/PostYears.astro";
-import Ad from "../../components/ads/ad.astro";
-import AdScript from "../../components/ads/script.astro";
+import Ad from "../../components/Ad.astro";
 import { parseDate } from "../../utils";
 import { menu, siteMetadata } from "../../data";
 
@@ -94,7 +93,6 @@ const description = remarkPluginFrontmatter.excerpt;
     <Navigation {...navigation} direction="column" />
     <PostYears />
   </Fragment>
-  <Ad variant="display-2" slot="sidebar-bottom" />
+  <Ad variant="display-2" slot="sidebar-bottom" disableMargin />
   <PostYears slot="drawer-top" />
-  <AdScript slot="bottom-of-body" />
 </SarkaraLayout>

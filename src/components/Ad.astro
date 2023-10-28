@@ -3,11 +3,18 @@ import { cx, css } from "@cieloazul310/sarkara-css/css";
 
 interface Props {
   variant?: "display-1" | "display-2" | "in-article" | "infeed";
+  disableMargin?: boolean;
 }
-const { variant = "display-1" } = Astro.props;
+const { variant = "display-1", disableMargin = false } = Astro.props;
+const withMarginStyle = css({ my: "lg" });
 ---
 
-<div class={css({ maxWidth: "100%", overflow: "hidden" })}>
+<div
+  class:list={[
+    css({ maxWidth: "100%", overflow: "hidden" }),
+    { [withMarginStyle]: !disableMargin },
+  ]}
+>
   <span class={css({ display: "block", fontSize: "sm" })}>広告</span>
   {
     variant === "display-1" && (
@@ -57,3 +64,10 @@ const { variant = "display-1" } = Astro.props;
     )
   }
 </div>
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7323207940463794"
+  crossorigin="anonymous"></script>
+<script is:inline>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>

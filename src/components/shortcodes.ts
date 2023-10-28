@@ -7,7 +7,8 @@ import {
   PanelLink,
 } from "@cieloazul310/astro-sarkara";
 import YouTube from "./YouTube.astro";
-import Ad from "./ads/ad.astro";
+import Ad from "./Ad.astro";
+import Twitter from "./Twitter.astro";
 
 export default {
   a: Link,
@@ -18,4 +19,5 @@ export default {
   PanelLink,
   YouTube,
   Ad,
+  Twitter,
 };

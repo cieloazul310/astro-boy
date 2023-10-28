@@ -11,8 +11,7 @@ import {
 import Analytics from "../../../components/Analytics.astro";
 import ListItem from "../../../components/microcms/ListItem.astro";
 import MicrocmsCategories from "../../../components/microcms/MicrocmsCategories.astro";
-import Ad from "../../../components/ads/ad.astro";
-import AdScript from "../../../components/ads/script.astro";
+import Ad from "../../../components/Ad.astro";
 import { getBlogs, getCategories } from "../../../utils";
 import { menu, siteMetadata } from "../../../data";
 import type { MicrocmsBlogsCategory } from "../../../types";
@@ -82,7 +81,6 @@ const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
   <Navigation {...navigation} />
   <PaperLink href="/microcms/">CMS Posts Top</PaperLink>
   <MicrocmsCategories slot="sidebar-top" />
-  <Ad variant="display-2" slot="sidebar-bottom" />
+  <Ad variant="display-2" slot="sidebar-bottom" disableMargin />
   <MicrocmsCategories slot="drawer-top" />
-  <AdScript slot="bottom-of-body" />
 </SarkaraLayout>
