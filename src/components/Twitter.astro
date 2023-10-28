@@ -1,0 +1,34 @@
+---
+import { css } from "@cieloazul310/sarkara-css/css";
+
+interface Props {
+  url: string;
+}
+const { url } = Astro.props;
+
+const base = "https://publish.twitter.com/oembed";
+const baseUrl = new URL(base);
+baseUrl.searchParams.set("url", url);
+baseUrl.searchParams.set("omit_script", "true");
+
+const tweet = await fetch(baseUrl.toString())
+  .then<{ html: string }>((res) => res.json())
+  .catch(() => null);
+---
+
+{
+  tweet && (
+    <>
+      <div
+        class={css({ my: "lg", _first: { mt: 0 }, _last: { mb: 0 } })}
+        set:html={tweet.html}
+      />
+      <script
+        async
+        src="https://platform.twitter.com/widgets.js"
+        charset="utf-8"
+        crossorigin="anonymous"
+      />
+    </>
+  )
+}

@@ -1,8 +1,7 @@
 ---
 import { SarkaraLayout, Paper } from "@cieloazul310/astro-sarkara";
 import Analytics from "../components/Analytics.astro";
-import Ad from "../components/ads/ad.astro";
-import AdScript from "../components/ads/script.astro";
+import Ad from "../components/Ad.astro";
 import { siteMetadata, menu } from "../data";
 
 interface Props {
@@ -26,6 +25,5 @@ const { frontmatter } = Astro.props;
     <slot />
   </Paper>
   <Ad />
-  <Ad variant="display-2" slot="sidebar-bottom" />
-  <AdScript slot="bottom-of-body" />
+  <Ad variant="display-2" slot="sidebar-bottom" disableMargin />
 </SarkaraLayout>
