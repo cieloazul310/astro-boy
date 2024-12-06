@@ -22,16 +22,16 @@ export function slugifyDEPRECATED({
 
 function isMicrocmsBlogs(
   obj: any,
-  type: "microcms" | "posts",
+  type: "microcms" | "post",
 ): obj is Pick<MicrocmsBlogs, "id" | "publishedAt"> {
   return type === "microcms";
 }
 
-export function slugify<T extends "microcms" | "posts">(
+export function slugify<T extends "microcms" | "post">(
   type: T,
   obj: T extends "microcms"
     ? Pick<MicrocmsBlogs, "id" | "publishedAt">
-    : { slug: string; data: PostData },
+    : { id: string; data: PostData },
   disablePrefix: boolean = false,
 ) {
   if (isMicrocmsBlogs(obj, type)) {
@@ -42,6 +42,6 @@ export function slugify<T extends "microcms" | "posts">(
     if (disablePrefix) return slug;
     return `/microcms/${slug}`;
   }
-  if (disablePrefix) return obj.slug;
-  return `/posts/${obj.slug}`;
+  if (disablePrefix) return obj.id;
+  return `/post/${obj.id}`;
 }

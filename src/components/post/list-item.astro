@@ -2,16 +2,16 @@
 /* eslint-disable-next-line import/no-unresolved */
 import type { CollectionEntry } from "astro:content";
 import { ArticleListItem } from "@cieloazul310/astro-sarkara";
-import { slugify, parseDate } from "../../utils";
+import { slugify, parseDate } from "@/utils";
 
 interface Props {
-  post: CollectionEntry<"posts">;
+  post: CollectionEntry<"post">;
 }
 const { post } = Astro.props;
 ---
 
 <ArticleListItem
-  href={slugify("posts", post)}
+  href={slugify("post", post)}
   title={post.data.title}
   image={post.data.featuredImg?.src}
   imageAlt={post.data.featuredImgAlt}

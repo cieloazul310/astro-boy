@@ -1,6 +1,8 @@
 ---
 /* eslint-disable-next-line import/no-unresolved */
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
+/* eslint-disable-next-line import/no-unresolved */
+import { ClientRouter } from "astro:transitions";
 import type { InferGetStaticPropsType } from "astro";
 import {
   SarkaraLayout,
@@ -9,17 +11,19 @@ import {
   Navigation,
   useNavigation,
 } from "@cieloazul310/astro-sarkara";
-import { hstack } from "@cieloazul310/sarkara-css/patterns";
-import { css } from "@cieloazul310/sarkara-css/css";
-import Analytics from "../../components/Analytics.astro";
-import shortcodes from "../../components/shortcodes";
-import PostYears from "../../components/posts/PostYears.astro";
-import Ad from "../../components/Ad.astro";
-import { parseDate } from "../../utils";
-import { menu, siteMetadata } from "../../data";
+import { hstack } from "styled-system/patterns";
+import { css } from "styled-system/css";
+import Analytics from "@/components/analytics.astro";
+import shortcodes from "@/components/shortcodes";
+import PostYears from "@/components/post/post-years.astro";
+import Ad from "@/components/ad.astro";
+import { parseDate } from "@/utils";
+import { menu, siteMetadata } from "@/data";
+
+import "@/index.css";
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection("posts");
+  const allPosts = await getCollection("post");
 
   return allPosts
     .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
@@ -29,7 +33,7 @@ export async function getStaticPaths() {
 
       return {
         params: {
-          slug: post.slug,
+          slug: post.id,
         },
         props: {
           post,
@@ -46,13 +50,14 @@ const { post, newer, older } = Astro.props;
 const navigation = useNavigation(
   { left: newer, right: older },
   {
-    href: (obj) => `/posts/${obj.slug}`,
+    href: (obj) => `/post/${obj.id}`,
     primaryText: (obj) => obj.data.title,
     secondaryText: (obj) => parseDate(obj.data.date),
   },
 );
-const entry = await getEntry("posts", post.slug);
-const { Content, remarkPluginFrontmatter } = await entry.render();
+const entry = await getEntry("post", post.id);
+if (!entry) return;
+const { Content, remarkPluginFrontmatter } = await render(entry);
 const description = remarkPluginFrontmatter.excerpt;
 ---
 
@@ -64,6 +69,7 @@ const description = remarkPluginFrontmatter.excerpt;
   image={post.data.featuredImg?.src}
 >
   <Analytics slot="top-of-head" />
+  <ClientRouter slot="bottom-of-head" />
   <Fragment slot="jumbotron-footer">
     <time datetime={post.data.date.toISOString()}
       >{parseDate(post.data.date)}</time
@@ -88,7 +94,7 @@ const description = remarkPluginFrontmatter.excerpt;
   </Paper>
   <Navigation {...navigation} />
   <Ad />
-  <PaperLink href="/posts/">Markdown Posts Top</PaperLink>
+  <PaperLink href="/post/">Markdown Posts Top</PaperLink>
   <Fragment slot="sidebar-top">
     <Navigation {...navigation} direction="column" />
     <PostYears />

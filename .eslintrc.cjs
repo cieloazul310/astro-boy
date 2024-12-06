@@ -1,3 +1,6 @@
+const path = require("path");
+
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
   extends: [
     "airbnb-base",
@@ -14,6 +17,13 @@ module.exports = {
     browser: true,
     es6: true,
   },
+  settings: {
+    "import/resolver": {
+      typescript: {
+        project: path.resolve(__dirname, "./tsconfig.json"),
+      },
+    },
+  },
   overrides: [
     {
       files: ["*.astro"],
@@ -24,21 +34,25 @@ module.exports = {
       },
       rules: {
         "import/prefer-default-export": "off",
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": "off",
       },
     },
     {
-      files: ["astro.config.ts", "panda.config.ts"],
+      files: ["panda.config.ts", "postcss.config.cjs", "astro.config.ts"],
       rules: {
         "import/no-extraneous-dependencies": "off",
       },
     },
     {
-      files: ["src/styles/**/*"],
+      files: ["postcss.config.cjs"],
       rules: {
-        "import/no-extraneous-dependencies": "off",
-        "no-underscore-dangle": "warn",
-        "@typescript-eslint/naming-convention": "warn",
+        "global-require": "off",
+      },
+    },
+    {
+      files: ["src/content.config.ts"],
+      rules: {
+        "import/prefer-default-export": "off",
       },
     },
   ],

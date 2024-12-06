@@ -1,13 +1,12 @@
 import { defineConfig } from "astro/config";
-import type { RehypePlugin } from "@astrojs/markdown-remark";
-import pandacss from "@pandacss/astro";
+import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
-import rehypeClassNames, { type Options as RehypeClassNamesOptions } from "rehype-class-names";
-import { rehypeClassNamesOptions } from "@cieloazul310/astro-sarkara/classes";
+import rehypeClassNames from "rehype-class-names";
 import rehypeExternalLinks, {
   type Options as RehypeExternalLinksOptions,
 } from "rehype-external-links";
+import mdxClasses from "./src/mdx-classes";
 import { remarkPluginExcerpt } from "./src/utils";
 
 const rehypeExternalLinksOptions: RehypeExternalLinksOptions = {
@@ -18,7 +17,7 @@ const rehypeExternalLinksOptions: RehypeExternalLinksOptions = {
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    pandacss(),
+    icon(),
     mdx(),
     partytown({
       // Adds dataLayer.push as a forwarding-event.
@@ -30,12 +29,9 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkPluginExcerpt],
     rehypePlugins: [
+      [rehypeClassNames, mdxClasses],
       [
-        rehypeClassNames as RehypePlugin<[RehypeClassNamesOptions]>,
-        rehypeClassNamesOptions,
-      ],
-      [
-        rehypeExternalLinks as RehypePlugin<[RehypeExternalLinksOptions]>,
+        rehypeExternalLinks,
         rehypeExternalLinksOptions,
       ],
     ],
