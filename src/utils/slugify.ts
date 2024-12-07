@@ -21,7 +21,7 @@ export function slugifyDEPRECATED({
 }
 
 function isMicrocmsBlogs(
-  obj: any,
+  obj: unknown,
   type: "microcms" | "post",
 ): obj is Pick<MicrocmsBlogs, "id" | "publishedAt"> {
   return type === "microcms";

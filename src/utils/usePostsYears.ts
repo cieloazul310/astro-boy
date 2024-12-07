@@ -1,7 +1,7 @@
 import type { PostData } from "../types";
 
-function isNumber(value: any): value is number {
-  return value && typeof value === "number";
+function isNumber(value: number | string): value is number {
+  return typeof value === "number";
 }
 
 function usePostsYears(

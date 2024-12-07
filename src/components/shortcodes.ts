@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   Alert,
   Badge,
@@ -6,7 +5,7 @@ import {
   Link,
   PanelLink,
 } from "@cieloazul310/astro-sarkara";
-import YouTube from "./youTube.astro";
+import YouTube from "./youtube.astro";
 import Ad from "./ad.astro";
 import Twitter from "./twitter.astro";
 

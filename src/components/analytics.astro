@@ -10,8 +10,8 @@
     src="https://www.googletagmanager.com/gtag/js?id=G-VE0MVTCH7K"></script>
   <script is:inline type="text/partytown">
     window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
+    function gtag(...args) {
+      dataLayer.push(args);
     }
     gtag("js", new Date());
 

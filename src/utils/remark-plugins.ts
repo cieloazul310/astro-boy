@@ -17,6 +17,8 @@ export const remarkPluginExcerpt: RemarkPlugin<[RemarkPluginExcerptOptions]> =
       }
     });
     const excerpt = text.join("").slice(0, options.length);
-    // @ts-ignore
-    file.data.astro.frontmatter.excerpt = excerpt;
+
+    if (file.data.astro?.frontmatter) {
+      file.data.astro.frontmatter.excerpt = excerpt;
+    }
   };
