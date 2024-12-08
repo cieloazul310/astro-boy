@@ -4,7 +4,7 @@ import addClasses from "rehype-class-names";
 import rehypeExternalLinks, {
   type Options as RehypeExternalLinksOptions,
 } from "rehype-external-links";
-import { rehypeClassNamesOptions } from "@cieloazul310/astro-sarkara/classes";
+import rehypeClassNamesOptions from "../mdx-classes";
 
 const rehypeExternalLinksOptions: RehypeExternalLinksOptions = {
   target: "_blank",
@@ -13,7 +13,6 @@ const rehypeExternalLinksOptions: RehypeExternalLinksOptions = {
 
 export async function rehypeIt(input: string) {
   const output = await rehype()
-    // @ts-expect-error
     .use(addClasses, rehypeClassNamesOptions)
     .use(rehypeExternalLinks, rehypeExternalLinksOptions)
     .process(input);

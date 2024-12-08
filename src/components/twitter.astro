@@ -1,5 +1,5 @@
 ---
-import { css } from "@cieloazul310/sarkara-css/css";
+import { css } from "styled-system/css";
 
 interface Props {
   url: string;
@@ -25,6 +25,7 @@ const tweet = await fetch(baseUrl.toString())
       />
       <script
         async
+        is:inline
         src="https://platform.twitter.com/widgets.js"
         charset="utf-8"
         crossorigin="anonymous"

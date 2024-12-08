@@ -1,5 +1,7 @@
 ---
 import type { InferGetStaticPropsType } from "astro";
+/* eslint-disable-next-line import/no-unresolved */
+import { ClientRouter } from "astro:transitions";
 import {
   SarkaraLayout,
   Paper,
@@ -8,13 +10,15 @@ import {
   Navigation,
   useNavigation,
 } from "@cieloazul310/astro-sarkara";
-import Analytics from "../../../components/Analytics.astro";
-import ListItem from "../../../components/microcms/ListItem.astro";
-import MicrocmsCategories from "../../../components/microcms/MicrocmsCategories.astro";
-import Ad from "../../../components/Ad.astro";
-import { getBlogs, getCategories } from "../../../utils";
-import { menu, siteMetadata } from "../../../data";
-import type { MicrocmsBlogsCategory } from "../../../types";
+import Analytics from "@/components/analytics.astro";
+import ListItem from "@/components/microcms/list-item.astro";
+import MicrocmsCategories from "@/components/microcms/microcms-categories.astro";
+import Ad from "@/components/ad.astro";
+import { getBlogs, getCategories } from "@/utils";
+import { menu, siteMetadata } from "@/data";
+import type { MicrocmsBlogsCategory } from "@/types";
+
+import "@/index.css";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
@@ -37,7 +41,7 @@ export async function getStaticPaths() {
       props: {
         id,
         name,
-        posts: blogs.contents.filter(({ category }) => category?.id === id),
+        post: blogs.contents.filter(({ category }) => category?.id === id),
         previous,
         next,
       },
@@ -46,7 +50,7 @@ export async function getStaticPaths() {
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { name, posts, previous, next } = Astro.props;
+const { name, post, previous, next } = Astro.props;
 const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
   { left: previous, right: next },
   {
@@ -58,10 +62,11 @@ const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
 
 <SarkaraLayout menu={menu} siteMetadata={siteMetadata} title={name}>
   <Analytics slot="top-of-head" />
+  <ClientRouter slot="bottom-of-head" />
   {
-    posts.length ? (
+    post.length ? (
       <ArticleList>
-        {posts
+        {post
           .sort(
             (a, b) =>
               new Date(b.publishedAt).getTime() -

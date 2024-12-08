@@ -1,5 +1,7 @@
 ---
 import type { InferGetStaticPropsType } from "astro";
+/* eslint-disable-next-line import/no-unresolved */
+import { ClientRouter } from "astro:transitions";
 import {
   SarkaraLayout,
   Paper,
@@ -9,12 +11,12 @@ import {
   Badge,
   useNavigation,
 } from "@cieloazul310/astro-sarkara";
-import { css } from "@cieloazul310/sarkara-css/css";
-import { hstack } from "@cieloazul310/sarkara-css/patterns";
-import Analytics from "../../components/Analytics.astro";
-import MicrocmsCategories from "../../components/microcms/MicrocmsCategories.astro";
-import Ad from "../../components/Ad.astro";
-import { siteMetadata, menu } from "../../data";
+import { css } from "styled-system/css";
+import { hstack } from "styled-system/patterns";
+import Analytics from "@/components/analytics.astro";
+import MicrocmsCategories from "@/components/microcms/microcms-categories.astro";
+import Ad from "@/components/ad.astro";
+import { siteMetadata, menu } from "@/data";
 import {
   getBlogs,
   getBlogDetail,
@@ -22,7 +24,9 @@ import {
   rehypeIt,
   slugify,
   excerpt,
-} from "../../utils";
+} from "@/utils";
+
+import "@/index.css";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
@@ -78,6 +82,7 @@ const description = excerpt(content);
   image={eyecatch?.url}
 >
   <Analytics slot="top-of-head" />
+  <ClientRouter slot="bottom-of-head" />
   <Fragment slot="jumbotron-footer">
     <time datetime={parseDate(publishedAt)}>{parseDate(publishedAt)}</time>
   </Fragment>

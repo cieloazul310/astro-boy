@@ -1,5 +1,5 @@
 ---
-import { cx, css } from "@cieloazul310/sarkara-css/css";
+import { cx, css } from "styled-system/css";
 
 interface Props {
   variant?: "display-1" | "display-2" | "in-article" | "infeed";
@@ -15,6 +15,11 @@ const withMarginStyle = css({ my: "lg" });
     { [withMarginStyle]: !disableMargin },
   ]}
 >
+  <script
+    async
+    is:inline
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7323207940463794"
+    crossorigin="anonymous"></script>
   <span class={css({ display: "block", fontSize: "sm" })}>広告</span>
   {
     variant === "display-1" && (
@@ -64,10 +69,6 @@ const withMarginStyle = css({ my: "lg" });
     )
   }
 </div>
-<script
-  async
-  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7323207940463794"
-  crossorigin="anonymous"></script>
 <script is:inline>
   (adsbygoogle = window.adsbygoogle || []).push({});
 </script>

@@ -5,12 +5,13 @@
 <>
   <!-- Google tag (gtag.js) -->
   <script
+    is:inline
     type="text/partytown"
     src="https://www.googletagmanager.com/gtag/js?id=G-VE0MVTCH7K"></script>
-  <script type="text/partytown">
+  <script is:inline type="text/partytown">
     window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
+    function gtag(...args) {
+      dataLayer.push(args);
     }
     gtag("js", new Date());
 

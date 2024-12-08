@@ -1,8 +1,12 @@
-/* eslint import/prefer-default-export: off */
+/* eslint-disable-next-line import/no-unresolved */
 import { z, defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
 
-const postsCollection = defineCollection({
-  type: "content",
+const postCollection = defineCollection({
+  loader: glob({
+    pattern: ["**/*.md", "**/*.mdx"],
+    base: "./src/content/post",
+  }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -20,5 +24,5 @@ const postsCollection = defineCollection({
 });
 
 export const collections = {
-  posts: postsCollection,
+  post: postCollection,
 };
