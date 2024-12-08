@@ -3,16 +3,9 @@ import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import rehypeClassNames from "rehype-class-names";
-import rehypeExternalLinks, {
-  type Options as RehypeExternalLinksOptions,
-} from "rehype-external-links";
+import rehypeExternalLinks from "rehype-external-links";
 import mdxClasses from "./src/mdx-classes";
 import { remarkPluginExcerpt } from "./src/utils";
-
-const rehypeExternalLinksOptions: RehypeExternalLinksOptions = {
-  target: "_blank",
-  rel: "noopener noreferrer",
-};
 
 // https://astro.build/config
 export default defineConfig({
@@ -32,7 +25,10 @@ export default defineConfig({
       [rehypeClassNames, mdxClasses],
       [
         rehypeExternalLinks,
-        rehypeExternalLinksOptions,
+        {
+          target: "_blank",
+          rel: "noopener noreferrer",
+        },
       ],
     ],
   },
