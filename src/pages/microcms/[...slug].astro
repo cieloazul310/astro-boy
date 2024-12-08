@@ -1,5 +1,7 @@
 ---
 import type { InferGetStaticPropsType } from "astro";
+/* eslint-disable-next-line import/no-unresolved */
+import { ClientRouter } from "astro:transitions";
 import {
   SarkaraLayout,
   Paper,
@@ -80,6 +82,7 @@ const description = excerpt(content);
   image={eyecatch?.url}
 >
   <Analytics slot="top-of-head" />
+  <ClientRouter slot="bottom-of-head" />
   <Fragment slot="jumbotron-footer">
     <time datetime={parseDate(publishedAt)}>{parseDate(publishedAt)}</time>
   </Fragment>

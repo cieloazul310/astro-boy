@@ -1,5 +1,7 @@
 ---
 import type { InferGetStaticPropsType } from "astro";
+/* eslint-disable-next-line import/no-unresolved */
+import { ClientRouter } from "astro:transitions";
 import {
   SarkaraLayout,
   Paper,
@@ -60,6 +62,7 @@ const navigation = useNavigation<Pick<MicrocmsBlogsCategory, "id" | "name">>(
 
 <SarkaraLayout menu={menu} siteMetadata={siteMetadata} title={name}>
   <Analytics slot="top-of-head" />
+  <ClientRouter slot="bottom-of-head" />
   {
     post.length ? (
       <ArticleList>
