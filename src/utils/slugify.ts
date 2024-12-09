@@ -1,4 +1,5 @@
-import type { MicrocmsBlogs, PostData } from "../types";
+import type { CollectionEntry } from "astro:content";
+import type { PostData } from "@/types";
 
 export function pubDateToYYMM(publishedAt: string) {
   const pubDate = new Date(publishedAt);
@@ -23,19 +24,19 @@ export function slugifyDEPRECATED({
 function isMicrocmsBlogs(
   obj: unknown,
   type: "microcms" | "post",
-): obj is Pick<MicrocmsBlogs, "id" | "publishedAt"> {
+): obj is CollectionEntry<"microCMSPost"> {
   return type === "microcms";
 }
 
 export function slugify<T extends "microcms" | "post">(
   type: T,
   obj: T extends "microcms"
-    ? Pick<MicrocmsBlogs, "id" | "publishedAt">
+    ? CollectionEntry<"microCMSPost">
     : { id: string; data: PostData },
   disablePrefix: boolean = false,
 ) {
   if (isMicrocmsBlogs(obj, type)) {
-    const { year, month } = pubDateToYYMM(obj.publishedAt);
+    const { year, month } = pubDateToYYMM(obj.data.publishedAt);
     const slug = `${encodeURIComponent(year)}/${encodeURIComponent(
       month,
     )}/${encodeURIComponent(obj.id)}`;
