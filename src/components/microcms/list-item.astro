@@ -1,28 +1,26 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import { ArticleListItem, Badge } from "@cieloazul310/astro-sarkara";
 import { slugify, parseDate } from "@/utils";
-import type { MicrocmsBlogs } from "@/types";
 
 interface Props {
-  blog: Pick<
-    MicrocmsBlogs,
-    "title" | "category" | "eyecatch" | "publishedAt" | "id"
-  >;
+  post: CollectionEntry<"microCMSPost">;
 }
-const { blog } = Astro.props;
+const { post } = Astro.props;
+const { title, publishedAt, eyecatch, category } = post.data;
 ---
 
 <ArticleListItem
-  href={slugify("microcms", blog)}
-  title={blog.title}
-  headerText={parseDate(blog.publishedAt)}
-  image={blog.eyecatch?.url}
+  href={slugify("microcms", post)}
+  title={title}
+  headerText={parseDate(publishedAt)}
+  image={eyecatch?.url}
   imagePlaceholder="CMS"
 >
   {
-    blog.category && (
+    category && (
       <Badge slot="badge" size="xs">
-        {blog.category.name}
+        {category.name}
       </Badge>
     )
   }
