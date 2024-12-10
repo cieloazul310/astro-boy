@@ -4,6 +4,7 @@ import tseslint from "typescript-eslint";
 import importPlugin from "eslint-plugin-import";
 import eslintPluginAstro from "eslint-plugin-astro";
 import astroParser from "astro-eslint-parser";
+import typescriptEslintParser from "@typescript-eslint/parser";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 /** @type {import("eslint").Linter.Config[]} */
@@ -31,7 +32,7 @@ export default [
     languageOptions: {
       parser: astroParser,
       parserOptions: {
-        parser: "@typescript-eslint/parser",
+        parser: typescriptEslintParser,
         extraFileExtensions: [".astro"],
       },
     },
