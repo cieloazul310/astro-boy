@@ -13,7 +13,7 @@
     "format": "prettier \"src/**/*.{js,ts,astro}\" --write",
     "check": "astro check",
     "lint-staged": "lint-staged",
-    "prepare": "git config --local core.hooksPath .githooks && panda codegen && astro sync"
+    "prepare": "git config --local core.hooksPath .githooks && panda codegen"
   },
   "dependencies": {
     "@cieloazul310/astro-sarkara": "^2.1.0",
