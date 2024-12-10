@@ -13,7 +13,7 @@
     "format": "prettier \"src/**/*.{js,ts,astro}\" --write",
     "check": "astro check",
     "lint-staged": "lint-staged",
-    "prepare": "git config --local core.hooksPath .githooks && panda codegen && astro sync"
+    "prepare": "git config --local core.hooksPath .githooks && panda codegen"
   },
   "dependencies": {
     "@cieloazul310/astro-sarkara": "^2.1.0",
@@ -42,6 +42,7 @@
     "eslint-import-resolver-typescript": "^3.7.0",
     "eslint-plugin-astro": "^1.3.1",
     "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "globals": "^15.13.0",
     "lint-staged": "^15.2.10",
     "prettier": "^3.4.2",
